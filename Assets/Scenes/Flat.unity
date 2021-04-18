@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 466334996}
   - component: {fileID: 466334995}
   - component: {fileID: 466334994}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: North Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 1077246278}
   - component: {fileID: 1077246277}
   - component: {fileID: 1077246276}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: West Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 1415642952}
   - component: {fileID: 1415642951}
   - component: {fileID: 1415642950}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +565,7 @@ Transform:
   m_GameObject: {fileID: 1415642949}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -500, y: 0, z: -500}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -586,7 +586,7 @@ GameObject:
   - component: {fileID: 1706844167}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -624,7 +624,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e40de286a63bf5a46b1a9a27a5d35aa6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -677,7 +677,7 @@ Rigidbody:
   m_GameObject: {fileID: 1706844161}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0.3
+  m_Drag: 0.25
   m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -696,6 +696,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 360a889fea87f4946875d678fbe9fe4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
+  radius: 0
+  ballY: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1780762113
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,7 +714,7 @@ GameObject:
   - component: {fileID: 1780762116}
   - component: {fileID: 1780762115}
   - component: {fileID: 1780762114}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: South Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -805,7 +811,7 @@ GameObject:
   - component: {fileID: 1842835666}
   - component: {fileID: 1842835665}
   - component: {fileID: 1842835664}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'East Wall '
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,37 +6,47 @@ public class Movement : MonoBehaviour
 {
 
     private Rigidbody rb;
+    private Vector3 local;
     private float x;
     private float z;
-    private float speed = 5.0f;
+    public float speed = 5.0f;
     private Vector3 direction;
+    private Vector3 pos;
+    public float radius;
+    public float ballY;
+    public LayerMask groundLayer = new LayerMask();
+
     // Start is called before the first frame update
     void Start()
     {
-
         rb = GetComponent<Rigidbody>();
-        direction = new Vector3(0, 0, 0);
-
+        //cl = GetComponent<SphereCollider>();
+        direction = Vector3.zero;
     }
 
     // Update is called once per frame
-    //void Update()
-    //{
-        //horizontalInput = Input.GetAxis("Horizontal");
-        //erticalInput = Input.GetAxis("Vertical");
-        //Vector3 direction = new Vector3(0, 0, 0);
-        //direction.x = Input.GetAxis("Horizontal");
-        //direction.z = Input.GetAxis("Vertical");
-        //direction.Normalize();
-        //rb.AddForce(direction * speed);
-    //}
-
-    private void Update()
+    void Update()
     {
-        //rb.AddForce(new Vector3((horizontalInput/2), 0.0f, (verticalInput/2)) * speed);
-        direction.x = Input.GetAxis("Horizontal");
-        direction.z = Input.GetAxis("Vertical");
-        direction.Normalize();
-        rb.AddForce(direction * speed);
+        local = transform.localScale;
+        ballY = local.y;
+
+        radius = (ballY/2) * 1.2f;
+
+        pos = transform.position;
+
+        if (Physics.CheckSphere(pos, radius, groundLayer))
+        {
+            direction.x = Input.GetAxis("Horizontal");
+            direction.z = Input.GetAxis("Vertical");
+            direction.Normalize();
+        }
+     
     }
+
+    private void FixedUpdate()
+    {
+            rb.AddForce(direction * speed);
+    }
+
+
 }
