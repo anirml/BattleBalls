@@ -10,14 +10,14 @@ public class PlayerCollisionTrigger : MonoBehaviour
         if (other.gameObject.name == "Player")
         {
             Debug.Log("Hit other Player!");
-            OnPlayerCollisionTrigger(other.gameObject.GetInstanceID());
+            OnPlayerCollisionTrigger(other.gameObject.GetInstanceID(), other.gameObject.GetComponent<Rigidbody>().velocity.magnitude);
         }
     }
 
-    void OnPlayerCollisionTrigger(int otherId) {
+    void OnPlayerCollisionTrigger(int otherId, float velocity) {
         {
             Debug.Log("OnPlayerCollisionTrigger in PlayerCollisionTrigger - id: " + otherId);
-            PlayerSizeEvents.instance.OnPlayerCollision(otherId);
+            PlayerSizeEvents.instance.OnPlayerCollision(otherId, velocity);
         }
     }
 }

@@ -26,12 +26,19 @@ public class PlayerSizeEvents : MonoBehaviour
         }
     }
 
-    public event Action<int> PlayerCollision;
+    public event Action<int, float> PlayerCollision;
 
-    public void OnPlayerCollision(int instanceId)
+    public void OnPlayerCollision(int instanceId, float velocity)
     {
-        Debug.Log("OnPlayerCollision in PlayerSizeEvents - id: " + instanceId);
-        PlayerCollision?.Invoke(instanceId);
+        //Debug.Log("OnPlayerCollision in PlayerSizeEvents - id: " + instanceId);
+        PlayerCollision?.Invoke(instanceId, velocity);
+    }
+
+    public event Action<int> OrbAbsorb;
+
+    public void OnOrbAbsorb(int instanceId)
+    {
+        Debug.Log("OnOrbAbsorb in PlayerSizeEvents - id: " + instanceId);
     }
 
 }
