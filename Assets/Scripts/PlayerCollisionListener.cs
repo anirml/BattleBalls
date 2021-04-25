@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCollisionListener : MonoBehaviour
 {
     private int listenerId;
-    private float currentSize;
+    private float listenerCurrentScale;
     private float listenerVelocity;
     private float relativeVelocity = 0.2f;
     private Vector3 scaleIncrease;
@@ -14,7 +14,7 @@ public class PlayerCollisionListener : MonoBehaviour
     void Start()
     {
         //Debug.Log("Start in PlayerCollisionListener");
-        currentSize = this.gameObject.transform.localScale.x;
+        listenerCurrentScale = this.gameObject.transform.localScale.x;
         listenerVelocity = this.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
         listenerId = this.gameObject.GetInstanceID();
 

@@ -4,20 +4,30 @@ using UnityEngine;
 
 public class PlayerCollisionTrigger : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision other) {
-        
+
+    private float otherPlayerVelocity;
+    private int otherPlayerId;
+
+    private void OnCollisionEnter(Collision other)
+    {
+
         Debug.Log("OnTriggerEnter in PlayerCollisionTrigger");
         if (other.gameObject.name == "Player")
         {
             Debug.Log("Hit other Player!");
-            OnPlayerCollisionTrigger(other.gameObject.GetInstanceID(), other.gameObject.GetComponent<Rigidbody>().velocity.magnitude);
+
+            otherPlayerVelocity = other.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+            otherPlayerId = other.gameObject.GetInstanceID();
+
+            // alternatively make an "if" with a minimum velocity?
+            OnPlayerCollisionTrigger(otherPlayerId, otherPlayerVelocity);
         }
     }
 
-    void OnPlayerCollisionTrigger(int otherId, float velocity) {
-        {
-            Debug.Log("OnPlayerCollisionTrigger in PlayerCollisionTrigger - id: " + otherId);
-            PlayerSizeEvents.instance.OnPlayerCollision(otherId, velocity);
-        }
+    void OnPlayerCollisionTrigger(int otherId, float velocity)
+    {
+        Debug.Log("OnPlayerCollisionTrigger in PlayerCollisionTrigger - Player id: " + otherId);
+
+        PlayerSizeEvents.instance.OnPlayerCollision(otherId, velocity);
     }
 }
