@@ -5,41 +5,59 @@ using UnityEngine;
 public class PlayerCollisionListener : MonoBehaviour
 {
     private int listenerId;
+    private int speedModifier = 30;
     private float listenerCurrentScale;
-    private float listenerVelocity;
-    private float relativeVelocity = 0.2f;
+    private float triggerCurrentScale;
+    private float listenerSpeed;
+    private float relativeSpeed;
     private Vector3 scaleIncrease;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        //Debug.Log("Start in PlayerCollisionListener");
-        listenerCurrentScale = this.gameObject.transform.localScale.x;
-        listenerVelocity = this.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
         listenerId = this.gameObject.GetInstanceID();
+        listenerCurrentScale = this.gameObject.transform.localScale.x;
 
-        // calls Event from singleton
+        // Calls Event from singleton
         PlayerSizeEvents.instance.PlayerCollision += ChangeSize;
     }
 
-    void ChangeSize(int triggerId, float triggerVelocity)
+    void FixedUpdate()
     {
-        //Debug.Log("ChangeSize in CollisionListener - Listener id: " + listenerId + " - Trigger id: " + triggerId);
+        listenerSpeed = this.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+    }
 
+    void ChangeSize(int triggerId, float triggerSpeed, float triggerCurrentScale)
+    {
         // Makes sure only relevant objects reacts to the invoke by checking ids
-        if(triggerId == listenerId)
+        if (triggerId == listenerId)
         {
-            Debug.Log("TriggerVelocity for id: - " + triggerId + " = " + triggerVelocity);
-            Debug.Log("ListenerVelocity for id: - " + listenerId + " = " + listenerVelocity);
+            //Debug.Log("TriggerVelocity: " + triggerSpeed);
+            //Debug.Log("ListenerVelocity for id: " + listenerId + " = " + listenerSpeed);
 
-            // Probably needs a guard to make sure the value is usable; can be negative
-            //relativeVelocity = (listenerVelocity - triggerVelocity)/10; // doesn't work, they can be negative for both trigger and listener
-            
-            scaleIncrease = new Vector3(relativeVelocity, relativeVelocity, relativeVelocity); // temp value
+            scaleIncrease = CalculateScaleChange(listenerSpeed, triggerSpeed, listenerCurrentScale, triggerCurrentScale);
 
             this.gameObject.transform.localScale += scaleIncrease;
         }
     }
 
-    // add force based on the normalized relative positions
+    Vector3 CalculateScaleChange(float listenerSpeed, float triggerSpeed, float listenerScale, float triggerScale)
+    {
+        if (triggerSpeed < listenerSpeed)
+        {
+            Debug.Log("ListenerSpeed > TriggerSpeed for id: " + listenerId);
+            relativeSpeed = (listenerSpeed - triggerSpeed) / speedModifier; // Subject to change
+        }
+        else
+        {
+            Debug.Log("TriggerSpeed > ListenerSpeed for id: " + listenerId);
+            relativeSpeed = (triggerSpeed - listenerSpeed) / speedModifier; // Subject to change
+        }
+
+        float scale = 0.2f;
+        return new Vector3(scale, scale, scale);
+    }
+
+    // Add force based on the normalized relative positions
 }

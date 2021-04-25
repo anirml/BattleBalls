@@ -7,6 +7,18 @@ public class PlayerCollisionTrigger : MonoBehaviour
 
     private float otherPlayerVelocity;
     private int otherPlayerId;
+    private float ownSpeed;
+    private float ownScale;
+
+    void Start()
+    {
+        ownScale = this.transform.localScale.x;
+    }
+
+    void FixedUpdate()
+    {
+        ownSpeed = this.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+    }
 
     private void OnCollisionEnter(Collision other)
     {
@@ -16,18 +28,18 @@ public class PlayerCollisionTrigger : MonoBehaviour
         {
             Debug.Log("Hit other Player!");
 
-            otherPlayerVelocity = other.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+            //otherPlayerVelocity = other.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
             otherPlayerId = other.gameObject.GetInstanceID();
 
             // alternatively make an "if" with a minimum velocity?
-            OnPlayerCollisionTrigger(otherPlayerId, otherPlayerVelocity);
+            OnPlayerCollisionTrigger(otherPlayerId, ownSpeed, ownScale);
         }
     }
 
-    void OnPlayerCollisionTrigger(int otherId, float velocity)
+    void OnPlayerCollisionTrigger(int otherId, float ownVelocity, float ownScale)
     {
         Debug.Log("OnPlayerCollisionTrigger in PlayerCollisionTrigger - Player id: " + otherId);
 
-        PlayerSizeEvents.instance.OnPlayerCollision(otherId, velocity);
+        PlayerSizeEvents.instance.OnPlayerCollision(otherId, ownVelocity, ownScale);
     }
 }
