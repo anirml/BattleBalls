@@ -6,7 +6,7 @@ public class FoodOnSpawn : MonoBehaviour
 {
     Vector3 newScale;
     float minRandom = 0.25f;
-    float maxRandom = 2.5f;
+    float maxRandom = 1.5f;
 
     // Start is called before the first frame update, onEnable when the script is enabled for future object pooling implementation
     //void onEnable()
