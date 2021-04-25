@@ -31,4 +31,5 @@ public class FoodCollisionListener : MonoBehaviour
             this.gameObject.transform.localScale += scaleIncrease;
         }
     }
+
 }
