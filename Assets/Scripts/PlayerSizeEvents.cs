@@ -26,7 +26,11 @@ public class PlayerSizeEvents : MonoBehaviour
         }
     }
 
+    // first int is Id of object, float is velocity
     public event Action<int, float> PlayerCollision;
+    // first int is Id of object, float is averaged scale
+    public event Action<int, float> FoodAbsorb;
+
 
     public void OnPlayerCollision(int instanceId, float velocity)
     {
@@ -34,11 +38,10 @@ public class PlayerSizeEvents : MonoBehaviour
         PlayerCollision?.Invoke(instanceId, velocity);
     }
 
-    public event Action<int> OrbAbsorb;
-
-    public void OnOrbAbsorb(int instanceId)
+    public void OnFoodAbsorb(int instanceId, float scaleAverage)
     {
-        Debug.Log("OnOrbAbsorb in PlayerSizeEvents - id: " + instanceId);
+        Debug.Log("OnFoodAbsorb in PlayerSizeEvents - id: " + instanceId);
+        FoodAbsorb?.Invoke(instanceId, scaleAverage);
     }
 
 }
