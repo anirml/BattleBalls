@@ -4,49 +4,62 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-
     private Rigidbody rb;
-    private Vector3 local;
-    private float x;
-    private float z;
-    public float speed = 5.0f;
-    private Vector3 direction;
-    private Vector3 pos;
-    public float radius;
-    public float ballY;
-    public LayerMask groundLayer = new LayerMask();
 
+    public Transform camPivot;
+    float heading = 0;
+    public Transform cam;
+
+    public float speed = 5.0f;
+    private Vector3 force;
+    private Vector3 camF;
+    private Vector3 camR;
+
+    Vector2 input;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        //cl = GetComponent<SphereCollider>();
-        direction = Vector3.zero;
+
+        force = Vector3.zero;
     }
 
     // Update is called once per frame
     void Update()
     {
-        local = transform.localScale;
-        ballY = local.y;
+        heading += Input.GetAxis("Mouse X") * Time.deltaTime * 180;
 
-        radius = (ballY/2) * 1.2f;
+        camPivot.rotation = Quaternion.Euler(0, heading, 0);
+        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        //input = Vector2.ClampMagnitude(input, 1);
 
-        pos = transform.position;
+        camF = cam.forward;
+        camR = cam.right;
 
-        if (Physics.CheckSphere(pos, radius, groundLayer))
-        {
-            direction.x = Input.GetAxis("Horizontal");
-            direction.z = Input.GetAxis("Vertical");
-            direction.Normalize();
-        }
-     
+        camF.y = 0;
+        camR.y = 0;
+        camF = camF.normalized;
+        camR = camR.normalized;
+
+        //transform.position += new Vector3(input.x,0,input.y) *Time.deltaTime*5;
+
+        //transform.position += (camF * input.y + camR * input.x) * Time.deltaTime * 5;
+        Debug.Log(camF);
+        Debug.Log(camR);
+        force = new Vector3(camF.x, 0, camR.y);
+         //force.x = Input.GetAxis("Horizontal");
+         //force.z = Input.GetAxis("Vertical");
+        force.Normalize();
+
+        //input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        //input = Vector2.ClampMagnitude(input, 1);
+
+        //transform.position += new Vector3(input.x,0,input.y)*Time.deltaTime*5;
     }
 
     private void FixedUpdate()
     {
-            rb.AddForce(direction * speed);
+        //rb.AddForce(force * speed);
+        transform.position += (camF * input.y + camR * input.x) * Time.deltaTime * 5;
     }
-
-
 }
