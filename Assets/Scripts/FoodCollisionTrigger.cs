@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FoodCollisionTrigger : MonoBehaviour
+{
+
+    private int otherPlayerId;
+    private Vector3 scale;
+    private float scaleAverage;
+
+    private void OnCollisionEnter(Collision other)
+    {
+
+        Debug.Log("OnTriggerEnter in FoodCollisionTrigger");
+        if (other.gameObject.name == "Player")
+        {
+            Debug.Log("Collided with Food!");
+
+            otherPlayerId = other.gameObject.GetInstanceID();
+            scale = this.transform.localScale;
+            scaleAverage = (scale.x * scale.y * scale.z)/3;
+
+            OnFoodCollisionTrigger(otherPlayerId, scaleAverage);
+        }
+    }
+
+    void OnFoodCollisionTrigger(int otherId, float scaleAverage)
+    {
+        Debug.Log("OnFoodCollisionTrigger in FoodCollisionTrigger - Player id: " + otherId);
+
+        PlayerSizeEvents.instance.OnFoodAbsorb(otherId, scaleAverage);
+        DestroyFood();
+    }
+
+    void DestroyFood()
+    {
+        //this.gameObject.SetActive(false); // for later object pooling implementation?
+        Destroy(this.gameObject);
+    }
+}
