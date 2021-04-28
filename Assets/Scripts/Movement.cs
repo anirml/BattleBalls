@@ -44,8 +44,7 @@ public class Movement : MonoBehaviour
         //transform.position += new Vector3(input.x,0,input.y) *Time.deltaTime*5;
 
         //transform.position += (camF * input.y + camR * input.x) * Time.deltaTime * 5;
-        Debug.Log(camF);
-        Debug.Log(camR);
+        
         force = new Vector3(camF.x, 0, camR.y);
          //force.x = Input.GetAxis("Horizontal");
          //force.z = Input.GetAxis("Vertical");
