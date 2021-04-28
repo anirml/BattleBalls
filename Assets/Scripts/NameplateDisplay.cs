@@ -2,13 +2,14 @@ using TMPro;
 using Photon.Pun;
 using UnityEngine;
 
-public class NameplateDisplay2 : MonoBehaviourPun
+public class NameplateDisplay : MonoBehaviourPun
 {
     [SerializeField] private TextMeshProUGUI nameText;
 
     private void Start() 
     {
-        if (photonView.IsMine) {return;}    
+        // Uncomment line below for photon implementation
+        // if (photonView.IsMine) {return;}    
 
         SetName();
     }
