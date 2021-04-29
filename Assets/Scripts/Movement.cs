@@ -44,13 +44,12 @@ public class Movement : MonoBehaviour
         //transform.position += new Vector3(input.x,0,input.y) *Time.deltaTime*5;
 
         //transform.position += (camF * input.y + camR * input.x) * Time.deltaTime * 5;
-        Debug.Log(camF);
-        Debug.Log(camR);
-        //force = new Vector3(camF.x, 0, camR.y);
-        // force.x = Input.GetAxis("Horizontal");
-        // force.z = Input.GetAxis("Vertical");
-        //force.Normalize();
-        input = input.normalized;
+        
+        force = new Vector3(camF.x, 0, camR.y);
+         //force.x = Input.GetAxis("Horizontal");
+         //force.z = Input.GetAxis("Vertical");
+        force.Normalize();
+
         //input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         //input = Vector2.ClampMagnitude(input, 1);
 
@@ -59,7 +58,7 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.AddForce((camF * input.y + camR * input.x) * Time.deltaTime * speed * 100);
-        //transform.position += (camF * input.y + camR * input.x) * Time.deltaTime * 5;
+        //rb.AddForce(force * speed);
+        transform.position += (camF * input.y + camR * input.x) * Time.deltaTime * 5;
     }
 }
