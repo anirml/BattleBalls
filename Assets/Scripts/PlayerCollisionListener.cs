@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerCollisionListener : MonoBehaviour
 {
     private int listenerId;
+    [SerializeField]
     private int speedModifier = 30;
     private float listenerCurrentScale;
-    private float triggerCurrentScale;
     private float listenerSpeed;
     private float relativeSpeed;
-    private Vector3 scaleIncrease;
+    private Rigidbody listenerRigidBody;
 
 
     // Start is called before the first frame update
@@ -18,6 +18,7 @@ public class PlayerCollisionListener : MonoBehaviour
     {
         listenerId = this.gameObject.GetInstanceID();
         listenerCurrentScale = this.gameObject.transform.localScale.x;
+        listenerRigidBody = this.gameObject.GetComponent<Rigidbody>();
 
         // Calls Event from singleton
         PlayerSizeEvents.instance.PlayerCollision += ChangeSize;
@@ -36,9 +37,12 @@ public class PlayerCollisionListener : MonoBehaviour
             //Debug.Log("TriggerVelocity: " + triggerSpeed);
             //Debug.Log("ListenerVelocity for id: " + listenerId + " = " + listenerSpeed);
 
-            scaleIncrease = CalculateScaleChange(listenerSpeed, triggerSpeed, listenerCurrentScale, triggerCurrentScale);
-
+            Vector3 scaleIncrease = CalculateScaleChange(listenerSpeed, triggerSpeed, listenerCurrentScale, triggerCurrentScale);
+            
             this.gameObject.transform.localScale += scaleIncrease;
+            listenerCurrentScale = this.gameObject.transform.localScale.x;
+
+            listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
         }
     }
 
@@ -46,17 +50,25 @@ public class PlayerCollisionListener : MonoBehaviour
     {
         if (triggerSpeed < listenerSpeed)
         {
-            Debug.Log("ListenerSpeed > TriggerSpeed for id: " + listenerId);
+            Debug.Log("ListenerSpeed > TriggerSpeed for id: " + listenerId + " Speed: " + relativeSpeed/3);
             relativeSpeed = (listenerSpeed - triggerSpeed) / speedModifier; // Subject to change
         }
-        else
+        if (listenerSpeed < triggerSpeed)
         {
-            Debug.Log("TriggerSpeed > ListenerSpeed for id: " + listenerId);
+            Debug.Log("TriggerSpeed > ListenerSpeed for id: " + listenerId + " Speed: " + relativeSpeed/3);
             relativeSpeed = (triggerSpeed - listenerSpeed) / speedModifier; // Subject to change
         }
 
-        float scale = 0.2f;
+        // Needs brainstorming
+        float scale = listenerScale*relativeSpeed*triggerScale;
+
         return new Vector3(scale, scale, scale);
+    }
+
+    float CalculateMassChange(float currentScale)
+    {
+        float massChange = Mathf.Pow(currentScale,0.15f);
+        return massChange;
     }
 
     // Add force based on the normalized relative positions
