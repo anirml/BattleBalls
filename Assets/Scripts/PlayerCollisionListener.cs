@@ -16,11 +16,12 @@ public class PlayerCollisionListener : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        listenerId = GetInstanceID();
+        listenerId = this.gameObject.GetInstanceID();
         listenerCurrentScale = transform.localScale.x;
         listenerRigidBody = GetComponent<Rigidbody>();
 
-        // Calls Event from singleton
+        // Calls Events from singleton
+        PlayerEvents.instance.PlayerCollision += ApplyPushback;
         PlayerEvents.instance.PlayerCollision += ChangeSize;
     }
 
@@ -29,7 +30,22 @@ public class PlayerCollisionListener : MonoBehaviour
         listenerSpeed = GetComponent<Rigidbody>().velocity.magnitude;
     }
 
-    void ChangeSize(int triggerId, float triggerSpeed, float triggerCurrentScale)
+    void ApplyPushback(int passedListenerId, float triggerSpeed, Vector3 collisionDirection, Transform triggerTransform)
+    {
+        Debug.Log("ApplyPushback passedListenerId: " + passedListenerId + " listenerId: " + listenerId);
+        // Makes sure only relevant objects reacts to the invoke by checking ids
+        if (passedListenerId == listenerId)
+        {
+            Debug.Log("ApplyPushback direction: " + collisionDirection + " speed: " + triggerSpeed*100);
+
+            // triggerSpeed * 100 is an aribtary number; subject to change - needs testing
+            GetComponent<Rigidbody>().AddForce(collisionDirection * triggerSpeed * 100);
+            // Adds vertical force
+            GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * triggerSpeed * 30);
+        }
+    }
+
+    void ChangeSize(int triggerId, float triggerSpeed, Vector3 collisionDirection, Transform triggerTransform)
     {
         // Makes sure only relevant objects reacts to the invoke by checking ids
         if (triggerId == listenerId)
@@ -37,8 +53,9 @@ public class PlayerCollisionListener : MonoBehaviour
             //Debug.Log("TriggerVelocity: " + triggerSpeed);
             //Debug.Log("ListenerVelocity for id: " + listenerId + " = " + listenerSpeed);
 
-            Vector3 scaleIncrease = CalculateScaleChange(listenerSpeed, triggerSpeed, listenerCurrentScale, triggerCurrentScale);
-            
+            float triggerScale = triggerTransform.localScale.x;
+            Vector3 scaleIncrease = CalculateScaleChange(listenerSpeed, triggerSpeed, listenerCurrentScale, triggerScale);
+
             transform.localScale += scaleIncrease;
             listenerCurrentScale = transform.localScale.x;
 
@@ -50,24 +67,25 @@ public class PlayerCollisionListener : MonoBehaviour
     {
         if (triggerSpeed < listenerSpeed)
         {
-            Debug.Log("ListenerSpeed > TriggerSpeed for id: " + listenerId + " Speed: " + relativeSpeed/3);
+            Debug.Log("ListenerSpeed > TriggerSpeed for id: " + listenerId + " Speed: " + relativeSpeed / 3);
             relativeSpeed = (listenerSpeed - triggerSpeed) / speedModifier; // Subject to change
         }
         if (listenerSpeed < triggerSpeed)
         {
-            Debug.Log("TriggerSpeed > ListenerSpeed for id: " + listenerId + " Speed: " + relativeSpeed/3);
+            Debug.Log("TriggerSpeed > ListenerSpeed for id: " + listenerId + " Speed: " + relativeSpeed / 3);
             relativeSpeed = (triggerSpeed - listenerSpeed) / speedModifier; // Subject to change
         }
 
         // Needs brainstorming
-        float scale = listenerScale*relativeSpeed*triggerScale;
+        float scale = 0.2f;
+        //float scale = listenerScale * relativeSpeed * triggerScale;
 
         return new Vector3(scale, scale, scale);
     }
 
     float CalculateMassChange(float currentScale)
     {
-        float massChange = Mathf.Pow(currentScale,0.15f);
+        float massChange = Mathf.Pow(currentScale, 0.15f);
         return massChange;
     }
 
