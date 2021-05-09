@@ -24,7 +24,7 @@ public class PlayerCollisionTrigger : MonoBehaviour
     {
 
         Debug.Log("OnTriggerEnter in PlayerCollisionTrigger");
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.name == "Player" || other.gameObject.name == "PhotonPlayer(Clone)")
         {
             Debug.Log("Hit other Player!");
 

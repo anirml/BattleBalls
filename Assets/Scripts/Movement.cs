@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Movement : MonoBehaviour
+public class Movement : MonoBehaviourPunCallbacks
 {
-    private Rigidbody rb;
+    public Rigidbody rb;
 
     public Transform camPivot;
     float heading = 0;
@@ -15,16 +16,32 @@ public class Movement : MonoBehaviour
     private Vector3 camF;
     private Vector3 camR;
 
+    bool isFollowing;
+
     Vector2 input;
     // Start is called before the first frame update
+
+    public void OnStartFollowing()
+    {
+        cam = Camera.main.transform;
+        isFollowing = true;
+    }
+
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        if (photonView.IsMine)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
         heading += Input.GetAxis("Mouse X") * Time.deltaTime * 180;
 
         camPivot.rotation = Quaternion.Euler(0, heading, 0);
@@ -43,6 +60,7 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         rb.AddForce((camF * input.y + camR * input.x) * Time.deltaTime * speed * 100);
     }
 }
