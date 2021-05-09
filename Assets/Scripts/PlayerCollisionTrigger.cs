@@ -19,7 +19,7 @@ public class PlayerCollisionTrigger : MonoBehaviour
     {
 
         //Debug.Log("OnTriggerEnter in PlayerCollisionTrigger");
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.tag == "Player")
         {
             Debug.Log("Hit other Player!");
 
