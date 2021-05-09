@@ -17,7 +17,7 @@ public class PlayerCollisionTrigger : MonoBehaviour
 
     void FixedUpdate()
     {
-        ownSpeed = this.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+        ownSpeed = GetComponent<Rigidbody>().velocity.magnitude;
     }
 
     private void OnCollisionEnter(Collision other)
