@@ -12,7 +12,7 @@ public class PlayerCollisionTrigger : MonoBehaviour
 
     void Start()
     {
-        ownScale = this.transform.localScale.x;
+        ownScale = transform.localScale.x;
     }
 
     void FixedUpdate()
@@ -31,9 +31,21 @@ public class PlayerCollisionTrigger : MonoBehaviour
             //otherPlayerVelocity = other.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
             otherPlayerId = other.gameObject.GetInstanceID();
 
-            // alternatively make an "if" with a minimum velocity?
+            // Alternatively make an "if" with a minimum velocity?
             OnPlayerCollisionTrigger(otherPlayerId, ownSpeed, ownScale);
+
+            // Does localized pushback on trigger object
+            ApplyPushback(other.contacts[0].point, transform.position);
         }
+    }
+
+    void ApplyPushback(Vector3 listenerPosition, Vector3 triggerPosition)
+    {
+        // Calculate angle between the collision point and the player, then normalizes the opposite Vector3
+        Vector3 direction = listenerPosition - triggerPosition;
+        direction = -direction.normalized;
+
+        GetComponent<Rigidbody>().AddForce(direction*3);
     }
 
     void OnPlayerCollisionTrigger(int otherId, float ownVelocity, float ownScale)

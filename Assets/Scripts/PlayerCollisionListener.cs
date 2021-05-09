@@ -16,9 +16,9 @@ public class PlayerCollisionListener : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        listenerId = this.gameObject.GetInstanceID();
-        listenerCurrentScale = this.gameObject.transform.localScale.x;
-        listenerRigidBody = this.gameObject.GetComponent<Rigidbody>();
+        listenerId = GetInstanceID();
+        listenerCurrentScale = transform.localScale.x;
+        listenerRigidBody = GetComponent<Rigidbody>();
 
         // Calls Event from singleton
         PlayerEvents.instance.PlayerCollision += ChangeSize;
@@ -26,7 +26,7 @@ public class PlayerCollisionListener : MonoBehaviour
 
     void FixedUpdate()
     {
-        listenerSpeed = this.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+        listenerSpeed = GetComponent<Rigidbody>().velocity.magnitude;
     }
 
     void ChangeSize(int triggerId, float triggerSpeed, float triggerCurrentScale)
@@ -39,8 +39,8 @@ public class PlayerCollisionListener : MonoBehaviour
 
             Vector3 scaleIncrease = CalculateScaleChange(listenerSpeed, triggerSpeed, listenerCurrentScale, triggerCurrentScale);
             
-            this.gameObject.transform.localScale += scaleIncrease;
-            listenerCurrentScale = this.gameObject.transform.localScale.x;
+            transform.localScale += scaleIncrease;
+            listenerCurrentScale = transform.localScale.x;
 
             listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
         }
