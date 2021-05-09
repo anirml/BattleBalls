@@ -39,9 +39,9 @@ public class PlayerCollisionListener : MonoBehaviour
             Debug.Log("ApplyPushback direction: " + collisionDirection + " speed: " + triggerSpeed*100);
 
             // triggerSpeed * 100 is an aribtary number; subject to change - needs testing
-            GetComponent<Rigidbody>().AddForce(collisionDirection * triggerSpeed * 100);
+            GetComponent<Rigidbody>().AddForce(collisionDirection * triggerSpeed * 50);
             // Adds vertical force
-            GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * triggerSpeed * 30);
+            GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * 3);
         }
     }
 
@@ -68,16 +68,18 @@ public class PlayerCollisionListener : MonoBehaviour
         if (triggerSpeed < listenerSpeed)
         {
             Debug.Log("ListenerSpeed > TriggerSpeed for id: " + listenerId + " Speed: " + relativeSpeed / 3);
-            relativeSpeed = (listenerSpeed - triggerSpeed) / speedModifier; // Subject to change
+            //relativeSpeed = (listenerSpeed - triggerSpeed) / speedModifier; // Subject to change
+            relativeSpeed = 0.2f;
         }
         if (listenerSpeed < triggerSpeed)
         {
             Debug.Log("TriggerSpeed > ListenerSpeed for id: " + listenerId + " Speed: " + relativeSpeed / 3);
-            relativeSpeed = (triggerSpeed - listenerSpeed) / speedModifier; // Subject to change
+            //relativeSpeed = (triggerSpeed - listenerSpeed) / speedModifier; // Subject to change
+            relativeSpeed = -0.2f;
         }
 
         // Needs brainstorming
-        float scale = 0.2f;
+        float scale = relativeSpeed;
         //float scale = listenerScale * relativeSpeed * triggerScale;
 
         return new Vector3(scale, scale, scale);
