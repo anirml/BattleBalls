@@ -10,9 +10,9 @@ public class FoodOnSpawn : MonoBehaviour
 
     // Start is called before the first frame update, onEnable when the script is enabled for future object pooling implementation
     //void onEnable()
-    void Awake()
+    void OnEnable()
     {
-        newScale = new Vector3(1f,1f,0.25f);
+        newScale = new Vector3(1f, 1f, 0.25f);
         RandomizeScale();
         RandomizePositionRotation();
     }
@@ -23,7 +23,7 @@ public class FoodOnSpawn : MonoBehaviour
         float y = Random.Range(minRandom, maxRandom);
         float z = Random.Range(minRandom, maxRandom);
 
-        newScale = new Vector3(x,y,z);
+        newScale = new Vector3(x, y, z);
 
         this.transform.localScale = newScale;
     }
