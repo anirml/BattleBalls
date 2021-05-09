@@ -40,6 +40,6 @@ public class PlayerCollisionTrigger : MonoBehaviour
     {
         Debug.Log("OnPlayerCollisionTrigger in PlayerCollisionTrigger - Player id: " + otherId);
 
-        PlayerSizeEvents.instance.OnPlayerCollision(otherId, ownVelocity, ownScale);
+        PlayerEvents.instance.OnPlayerCollision(otherId, ownVelocity, ownScale);
     }
 }

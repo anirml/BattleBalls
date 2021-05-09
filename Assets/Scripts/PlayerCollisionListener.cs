@@ -21,7 +21,7 @@ public class PlayerCollisionListener : MonoBehaviour
         listenerRigidBody = this.gameObject.GetComponent<Rigidbody>();
 
         // Calls Event from singleton
-        PlayerSizeEvents.instance.PlayerCollision += ChangeSize;
+        PlayerEvents.instance.PlayerCollision += ChangeSize;
     }
 
     void FixedUpdate()

@@ -29,7 +29,7 @@ public class FoodCollisionTrigger : MonoBehaviour
     {
         Debug.Log("OnFoodCollisionTrigger in FoodCollisionTrigger - Player id: " + otherId);
 
-        PlayerSizeEvents.instance.OnFoodAbsorb(otherId, scaleAverage);
+        PlayerEvents.instance.OnFoodAbsorb(otherId, scaleAverage);
         DestroyFood();
     }
 

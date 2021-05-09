@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class PlayerSizeEvents : MonoBehaviour
+public class PlayerEvents : MonoBehaviour
 {
 
     // Singleton
@@ -17,7 +17,7 @@ public class PlayerSizeEvents : MonoBehaviour
         }
     } */
 
-    public static PlayerSizeEvents instance;
+    public static PlayerEvents instance;
     private void Awake()
     {
         if (instance == null) instance = this; else

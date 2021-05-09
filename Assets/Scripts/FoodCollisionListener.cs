@@ -16,7 +16,7 @@ public class FoodCollisionListener : MonoBehaviour
         listenerId = this.gameObject.GetInstanceID();
 
         // calls Event from singleton
-        PlayerSizeEvents.instance.FoodAbsorb += Grow;
+        PlayerEvents.instance.FoodAbsorb += Grow;
     }
 
     void Grow(int triggerId, float scaleAverage)
