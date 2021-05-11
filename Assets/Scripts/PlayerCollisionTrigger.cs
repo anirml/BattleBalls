@@ -10,36 +10,55 @@ public class PlayerCollisionTrigger : MonoBehaviour
     private float ownSpeed;
     private float ownScale;
 
-    void Start()
-    {
-        ownScale = this.transform.localScale.x;
-    }
-
     void FixedUpdate()
     {
-        ownSpeed = this.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+        ownSpeed = GetComponent<Rigidbody>().velocity.magnitude;
     }
 
     private void OnCollisionEnter(Collision other)
     {
 
-        Debug.Log("OnTriggerEnter in PlayerCollisionTrigger");
-        if (other.gameObject.name == "Player")
+        //Debug.Log("OnTriggerEnter in PlayerCollisionTrigger");
+        if (other.gameObject.tag == "Player")
         {
             Debug.Log("Hit other Player!");
 
             //otherPlayerVelocity = other.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
             otherPlayerId = other.gameObject.GetInstanceID();
 
-            // alternatively make an "if" with a minimum velocity?
-            OnPlayerCollisionTrigger(otherPlayerId, ownSpeed, ownScale);
+            Vector3 direction = other.contacts[0].point - transform.position;
+            direction = -direction.normalized;
+
+            // Alternatively make an "if" with a minimum velocity?
+            OnPlayerCollisionTrigger(otherPlayerId, ownSpeed, direction, transform);
         }
     }
 
-    void OnPlayerCollisionTrigger(int otherId, float ownVelocity, float ownScale)
+
+    void OnPlayerCollisionTrigger(int otherId, float ownVelocity, Vector3 collisionDirection, Transform ownTransform)
     {
         Debug.Log("OnPlayerCollisionTrigger in PlayerCollisionTrigger - Player id: " + otherId);
 
-        PlayerSizeEvents.instance.OnPlayerCollision(otherId, ownVelocity, ownScale);
+        PlayerEvents.instance.OnPlayerCollision(otherId, ownVelocity, collisionDirection, ownTransform);
+    }
+
+
+
+
+
+
+
+    // Not in use: depricated
+    void ApplyPushback(Collision listenerCollision)
+    {
+        // Calculate angle between the collision point and the player, then normalizes the opposite Vector3
+        Vector3 direction = listenerCollision.contacts[0].point - transform.position;
+        direction = -direction.normalized;
+
+        Debug.Log("ApplyPushback direction: " + direction);
+
+        GetComponent<Rigidbody>().AddForce(direction*500);
+        // Adds vertical force
+        GetComponent<Rigidbody>().AddForce(new Vector3(0,1,0)*300);
     }
 }

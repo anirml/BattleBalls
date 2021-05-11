@@ -5,30 +5,47 @@ using UnityEngine;
 public class PlayerCollisionListener : MonoBehaviour
 {
     private int listenerId;
+    [SerializeField]
     private int speedModifier = 30;
     private float listenerCurrentScale;
-    private float triggerCurrentScale;
     private float listenerSpeed;
     private float relativeSpeed;
-    private Vector3 scaleIncrease;
+    private Rigidbody listenerRigidBody;
 
 
     // Start is called before the first frame update
     void Start()
     {
         listenerId = this.gameObject.GetInstanceID();
-        listenerCurrentScale = this.gameObject.transform.localScale.x;
+        listenerCurrentScale = transform.localScale.x;
+        listenerRigidBody = GetComponent<Rigidbody>();
 
-        // Calls Event from singleton
-        PlayerSizeEvents.instance.PlayerCollision += ChangeSize;
+        // Calls Events from singleton
+        PlayerEvents.instance.PlayerCollision += ApplyPushback;
+        PlayerEvents.instance.PlayerCollision += ChangeSize;
     }
 
     void FixedUpdate()
     {
-        listenerSpeed = this.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+        listenerSpeed = GetComponent<Rigidbody>().velocity.magnitude;
     }
 
-    void ChangeSize(int triggerId, float triggerSpeed, float triggerCurrentScale)
+    void ApplyPushback(int passedListenerId, float triggerSpeed, Vector3 collisionDirection, Transform triggerTransform)
+    {
+        Debug.Log("ApplyPushback passedListenerId: " + passedListenerId + " listenerId: " + listenerId);
+        // Makes sure only relevant objects reacts to the invoke by checking ids
+        if (passedListenerId == listenerId)
+        {
+            Debug.Log("ApplyPushback direction: " + collisionDirection + " speed: " + triggerSpeed*100);
+
+            // triggerSpeed * 100 is an aribtary number; subject to change - needs testing
+            GetComponent<Rigidbody>().AddForce(collisionDirection * triggerSpeed * 50);
+            // Adds vertical force
+            GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * 3);
+        }
+    }
+
+    void ChangeSize(int triggerId, float triggerSpeed, Vector3 collisionDirection, Transform triggerTransform)
     {
         // Makes sure only relevant objects reacts to the invoke by checking ids
         if (triggerId == listenerId)
@@ -36,9 +53,13 @@ public class PlayerCollisionListener : MonoBehaviour
             //Debug.Log("TriggerVelocity: " + triggerSpeed);
             //Debug.Log("ListenerVelocity for id: " + listenerId + " = " + listenerSpeed);
 
-            scaleIncrease = CalculateScaleChange(listenerSpeed, triggerSpeed, listenerCurrentScale, triggerCurrentScale);
+            float triggerScale = triggerTransform.localScale.x;
+            Vector3 scaleIncrease = CalculateScaleChange(listenerSpeed, triggerSpeed, listenerCurrentScale, triggerScale);
 
-            this.gameObject.transform.localScale += scaleIncrease;
+            transform.localScale += scaleIncrease;
+            listenerCurrentScale = transform.localScale.x;
+
+            listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
         }
     }
 
@@ -46,17 +67,28 @@ public class PlayerCollisionListener : MonoBehaviour
     {
         if (triggerSpeed < listenerSpeed)
         {
-            Debug.Log("ListenerSpeed > TriggerSpeed for id: " + listenerId);
-            relativeSpeed = (listenerSpeed - triggerSpeed) / speedModifier; // Subject to change
+            Debug.Log("ListenerSpeed > TriggerSpeed for id: " + listenerId + " Speed: " + relativeSpeed / 3);
+            //relativeSpeed = (listenerSpeed - triggerSpeed) / speedModifier; // Subject to change
+            relativeSpeed = 0.2f;
         }
-        else
+        if (listenerSpeed < triggerSpeed)
         {
-            Debug.Log("TriggerSpeed > ListenerSpeed for id: " + listenerId);
-            relativeSpeed = (triggerSpeed - listenerSpeed) / speedModifier; // Subject to change
+            Debug.Log("TriggerSpeed > ListenerSpeed for id: " + listenerId + " Speed: " + relativeSpeed / 3);
+            //relativeSpeed = (triggerSpeed - listenerSpeed) / speedModifier; // Subject to change
+            relativeSpeed = -0.2f;
         }
 
-        float scale = 0.2f;
+        // Needs brainstorming
+        float scale = relativeSpeed;
+        //float scale = listenerScale * relativeSpeed * triggerScale;
+
         return new Vector3(scale, scale, scale);
+    }
+
+    float CalculateMassChange(float currentScale)
+    {
+        float massChange = Mathf.Pow(currentScale, 0.15f);
+        return massChange;
     }
 
     // Add force based on the normalized relative positions

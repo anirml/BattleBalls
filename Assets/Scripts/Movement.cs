@@ -11,7 +11,7 @@ public class Movement : MonoBehaviour
     public Transform cam;
 
     public float speed = 5.0f;
-    private Vector3 force;
+
     private Vector3 camF;
     private Vector3 camR;
 
@@ -20,8 +20,6 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        force = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -31,7 +29,6 @@ public class Movement : MonoBehaviour
 
         camPivot.rotation = Quaternion.Euler(0, heading, 0);
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        //input = Vector2.ClampMagnitude(input, 1);
 
         camF = cam.forward;
         camR = cam.right;
@@ -41,24 +38,11 @@ public class Movement : MonoBehaviour
         camF = camF.normalized;
         camR = camR.normalized;
 
-        //transform.position += new Vector3(input.x,0,input.y) *Time.deltaTime*5;
-
-        //transform.position += (camF * input.y + camR * input.x) * Time.deltaTime * 5;
-        
-        force = new Vector3(camF.x, 0, camR.y);
-         //force.x = Input.GetAxis("Horizontal");
-         //force.z = Input.GetAxis("Vertical");
-        force.Normalize();
-
-        //input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        //input = Vector2.ClampMagnitude(input, 1);
-
-        //transform.position += new Vector3(input.x,0,input.y)*Time.deltaTime*5;
+        input = input.normalized;
     }
 
     private void FixedUpdate()
     {
-        //rb.AddForce(force * speed);
-        transform.position += (camF * input.y + camR * input.x) * Time.deltaTime * 5;
+        rb.AddForce((camF * input.y + camR * input.x) * Time.deltaTime * speed * 100);
     }
 }
