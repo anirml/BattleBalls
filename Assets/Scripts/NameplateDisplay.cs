@@ -8,9 +8,6 @@ public class NameplateDisplay : MonoBehaviourPun
 
     private void Start() 
     {
-        // Uncomment line below for photon implementation
-         if (photonView.IsMine) {return;}    
-
         SetName();
     }
 
