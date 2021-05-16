@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class Movement : MonoBehaviourPunCallbacks
+public class Movement : MonoBehaviourPun
 {
     public Rigidbody rb;
 
@@ -28,20 +28,26 @@ public class Movement : MonoBehaviourPunCallbacks
     }
 
     void Start()
-    {
-        if (photonView.IsMine)
-        {
-            rb = GetComponent<Rigidbody>();
+    {    
+
+        var isMine = photonView.IsMine;        
+
+        if(cam.gameObject.activeSelf == false){
+            camPivot.gameObject.SetActive(isMine);
+            cam.gameObject.SetActive(isMine);
         }
+            rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!photonView.IsMine)
+
+
+        
+
+        if (photonView.IsMine)
         {
-            return;
-        }
         heading += Input.GetAxis("Mouse X") * Time.deltaTime * 180;
 
         camPivot.rotation = Quaternion.Euler(0, heading, 0);
@@ -56,11 +62,11 @@ public class Movement : MonoBehaviourPunCallbacks
         camR = camR.normalized;
 
         input = input.normalized;
+        }
     }
 
     private void FixedUpdate()
     {
-
         rb.AddForce((camF * input.y + camR * input.x) * Time.deltaTime * speed * 100);
     }
 }

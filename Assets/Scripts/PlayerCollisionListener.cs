@@ -39,7 +39,7 @@ public class PlayerCollisionListener : MonoBehaviour
             Debug.Log("ApplyPushback direction: " + collisionDirection + " speed: " + triggerSpeed*100);
 
             // triggerSpeed * 100 is an aribtary number; subject to change - needs testing
-            GetComponent<Rigidbody>().AddForce(collisionDirection * triggerSpeed * 50);
+            GetComponent<Rigidbody>().AddForce(collisionDirection * 1500);
             // Adds vertical force
             GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * 3);
         }
