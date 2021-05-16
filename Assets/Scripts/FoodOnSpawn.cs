@@ -5,8 +5,6 @@ using UnityEngine;
 public class FoodOnSpawn : MonoBehaviour
 {
     public GameObject foodPrefab;
-    public Vector3 center;
-    public Vector3 size;
 
     Vector3 newScale;
     float minRandom = 0.25f;
@@ -22,19 +20,9 @@ public class FoodOnSpawn : MonoBehaviour
 
     void onEnable()
     {
-        // newScale = new Vector3(1f,1f,0.25f);
-
-        /* if (globalNumberOfFoods <= maxFoods) 
-        {
-            for (int i = 0; i < maxFoods; i++)
-            {
-                // RandomizeFoodScale();
-                RandomizePositionRotation();
-            }
-        } */
-
         RandomizeFoodScale();
         RandomizePositionRotation();
+
     }
 
     void RandomizeFoodScale()
@@ -48,16 +36,16 @@ public class FoodOnSpawn : MonoBehaviour
         this.transform.localScale = newScale;
     }
 
-    void OnDrawGizmosSelected() 
-    {
-        Gizmos.color = new Color(1,0,0,0.5f);
-        Gizmos.DrawCube(center, size);
-    }
-
     void RandomizePositionRotation()
     {
+        // Should probably be put somewhere else...
+        GameObject gizmoObj = GameObject.Find("FoodSpawnGizmo");
+        OnDrawGizmoSelected gizmoScript = gizmoObj.GetComponent<OnDrawGizmoSelected>();
+
+        Vector3 center = gizmoScript.center;
+        Vector3 size = gizmoScript.size;
+
         Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(1, 1), Random.Range(-size.z / 2, size.z / 2));
 
-        /* Instantiate(foodPrefab, pos, Quaternion.identity); */
     }
 }
