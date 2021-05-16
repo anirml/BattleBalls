@@ -43,6 +43,6 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.AddForce((camF * input.y + camR * input.x) * Time.deltaTime * speed * 100);
+        rb.AddForce((camF * input.y + camR * input.x) * Time.deltaTime * speed * 100 * rb.mass);
     }
 }
