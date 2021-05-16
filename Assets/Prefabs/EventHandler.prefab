@@ -56,3 +56,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f198c9e4a2f0f9418be3c702a643975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  center: {x: 0, y: 0.5, z: 0}
+  size: {x: 999, y: 1, z: 999}
+  maxFoods: 500
+  foodRespawnDelay: 5
+  food: {fileID: 3283491534265499202, guid: df3d41a786aa13e43aceef1e87a5f083, type: 3}
