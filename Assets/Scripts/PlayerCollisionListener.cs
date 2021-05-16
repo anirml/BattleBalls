@@ -8,7 +8,7 @@ public class PlayerCollisionListener : MonoBehaviour
     [SerializeField]
     private int scaleModifier = 30; // higher means more speed needed to steal mass
     [SerializeField]
-    private int scaleChangeThreshold = 1; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
+    private float scaleChangeThreshold = 0.2f; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
     private float listenerCurrentScale;
     private float listenerSpeed;
     private Vector3 listenerVelocity; 
@@ -93,8 +93,8 @@ public class PlayerCollisionListener : MonoBehaviour
 
         if (triggerSpeed <= listenerSpeed)
         {
-            newListenerScaleIncrease = (1 - triggerScale * scaleChange);
-            newTriggerScaleIncrease = (1 - listenerScale * -scaleChange);
+            newListenerScaleIncrease = (triggerScale * scaleChange);
+            newTriggerScaleIncrease = (listenerScale * -scaleChange);
             PlayerEvents.instance.OnLoserCollision(newTriggerScaleIncrease, triggerId);
         }
 
