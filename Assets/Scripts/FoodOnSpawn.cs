@@ -18,23 +18,23 @@ public class FoodOnSpawn : MonoBehaviour
     // public int foodSpawnRate;
 
     // Start is called before the first frame update, onEnable when the script is enabled for future object pooling implementation
-    //void onEnable()
+    //void Awake()
 
-    void Awake()
+    void onEnable()
     {
         // newScale = new Vector3(1f,1f,0.25f);
 
-        if (globalNumberOfFoods <= maxFoods) 
+        /* if (globalNumberOfFoods <= maxFoods) 
         {
             for (int i = 0; i < maxFoods; i++)
             {
                 // RandomizeFoodScale();
                 RandomizePositionRotation();
             }
-        }
+        } */
 
-        // RandomizeFoodScale();
-        // RandomizePositionRotation();
+        RandomizeFoodScale();
+        RandomizePositionRotation();
     }
 
     void RandomizeFoodScale()
@@ -58,6 +58,6 @@ public class FoodOnSpawn : MonoBehaviour
     {
         Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(1, 1), Random.Range(-size.z / 2, size.z / 2));
 
-        Instantiate(foodPrefab, pos, Quaternion.identity);
+        /* Instantiate(foodPrefab, pos, Quaternion.identity); */
     }
 }

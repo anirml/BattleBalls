@@ -30,12 +30,12 @@ public class FoodCollisionTrigger : MonoBehaviour
         Debug.Log("OnFoodCollisionTrigger in FoodCollisionTrigger - Player id: " + otherId);
 
         PlayerEvents.instance.OnFoodAbsorb(otherId, scaleAverage);
-        DestroyFood();
+        DisableFood();
     }
 
-    void DestroyFood()
+    void DisableFood()
     {
-        //this.gameObject.SetActive(false); // for later object pooling implementation?
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false); // for later object pooling implementation?
+        //Destroy(this.gameObject);
     }
 }
