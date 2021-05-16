@@ -7,6 +7,8 @@ public class Movement : MonoBehaviourPun
 {
     public Rigidbody rb;
 
+    public int mouseSensivity = 360;
+
     public Transform camPivot;
     float heading = 0;
     public Transform cam;
@@ -48,7 +50,7 @@ public class Movement : MonoBehaviourPun
 
         if (photonView.IsMine)
         {
-        heading += Input.GetAxis("Mouse X") * Time.deltaTime * 180;
+        heading += Input.GetAxis("Mouse X") * Time.deltaTime * mouseSensivity;
 
         camPivot.rotation = Quaternion.Euler(0, heading, 0);
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
