@@ -12,7 +12,6 @@ public class FoodOnSpawn : MonoBehaviour
     //void onEnable()
     void OnEnable()
     {
-        newScale = new Vector3(1f, 1f, 0.25f);
         RandomizeScale();
         RandomizePositionRotation();
     }
