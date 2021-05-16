@@ -6,10 +6,14 @@ public class PlayerCollisionListener : MonoBehaviour
 {
     private int listenerId;
     [SerializeField]
-    private int speedModifier = 30;
+    private int scaleModifier = 30; // higher means more speed needed to steal mass
+    [SerializeField]
+    private float scaleChangeThreshold = 0.4f; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
+    [SerializeField]
+    private float speedModifier = 50; // changes the force applied to collision knockback
     private float listenerCurrentScale;
     private float listenerSpeed;
-    private float relativeSpeed;
+    private Vector3 listenerVelocity; 
     private Rigidbody listenerRigidBody;
 
 
@@ -19,77 +23,109 @@ public class PlayerCollisionListener : MonoBehaviour
         listenerId = this.gameObject.GetInstanceID();
         listenerCurrentScale = transform.localScale.x;
         listenerRigidBody = GetComponent<Rigidbody>();
+        listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
 
         // Calls Events from singleton
         PlayerEvents.instance.PlayerCollision += ApplyPushback;
         PlayerEvents.instance.PlayerCollision += ChangeSize;
+        PlayerEvents.instance.LoserCollision += ChangeCollisionLoserSize;
     }
 
     void FixedUpdate()
     {
         listenerSpeed = GetComponent<Rigidbody>().velocity.magnitude;
+        listenerVelocity = GetComponent<Rigidbody>().velocity;
     }
 
-    void ApplyPushback(int passedListenerId, float triggerSpeed, Vector3 collisionDirection, Transform triggerTransform)
+    void ApplyPushback(int passedListenerId, int triggerId, float triggerSpeed, Vector3 collisionDirection, 
+    Transform triggerTransform, Vector3 triggerVelocity)
     {
-        Debug.Log("ApplyPushback passedListenerId: " + passedListenerId + " listenerId: " + listenerId);
+        //Debug.Log("ApplyPushback passedListenerId: " + passedListenerId + " listenerId: " + listenerId);
         // Makes sure only relevant objects reacts to the invoke by checking ids
         if (passedListenerId == listenerId)
         {
-            Debug.Log("ApplyPushback direction: " + collisionDirection + " speed: " + triggerSpeed*100);
+            float relativeSpeed = CalculateRelativeVelocity(triggerVelocity, GetComponent<Rigidbody>().velocity);
+            //Debug.Log("RelativeSpeed manual: " + relativeSpeed);
 
-            // triggerSpeed * 100 is an aribtary number; subject to change - needs testing
-            GetComponent<Rigidbody>().AddForce(collisionDirection * triggerSpeed * 50);
+            GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * speedModifier);
             // Adds vertical force
-            GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * 3);
+            GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * relativeSpeed * listenerRigidBody.mass * 10);
         }
     }
 
-    void ChangeSize(int triggerId, float triggerSpeed, Vector3 collisionDirection, Transform triggerTransform)
+    void ChangeSize(int passedListenerId, int triggerId, float triggerSpeed, Vector3 collisionDirection, 
+    Transform triggerTransform, Vector3 triggerVelocity)
     {
         // Makes sure only relevant objects reacts to the invoke by checking ids
-        if (triggerId == listenerId)
+        if (passedListenerId == listenerId)
         {
-            //Debug.Log("TriggerVelocity: " + triggerSpeed);
-            //Debug.Log("ListenerVelocity for id: " + listenerId + " = " + listenerSpeed);
-
             float triggerScale = triggerTransform.localScale.x;
-            Vector3 scaleIncrease = CalculateScaleChange(listenerSpeed, triggerSpeed, listenerCurrentScale, triggerScale);
+            Vector3 scaleIncrease = CalculateScaleChange(listenerSpeed, triggerSpeed, listenerCurrentScale, 
+            triggerScale, triggerVelocity, triggerId);
 
             transform.localScale += scaleIncrease;
-            listenerCurrentScale = transform.localScale.x;
 
+            listenerCurrentScale = transform.localScale.x;
             listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
         }
     }
 
-    Vector3 CalculateScaleChange(float listenerSpeed, float triggerSpeed, float listenerScale, float triggerScale)
+    void ChangeCollisionLoserSize(float loserScaleChange, int loserId)
     {
-        if (triggerSpeed < listenerSpeed)
+        if (loserId == listenerId)
         {
-            Debug.Log("ListenerSpeed > TriggerSpeed for id: " + listenerId + " Speed: " + relativeSpeed / 3);
-            //relativeSpeed = (listenerSpeed - triggerSpeed) / speedModifier; // Subject to change
-            relativeSpeed = 0.2f;
+            Vector3 scaleDecrease = new Vector3(loserScaleChange, loserScaleChange, loserScaleChange);
+            transform.localScale += scaleDecrease;
+
+            listenerCurrentScale = transform.localScale.x;
+            listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
         }
-        if (listenerSpeed < triggerSpeed)
+    }
+
+    Vector3 CalculateScaleChange(float listenerSpeed, float triggerSpeed, float listenerScale,
+     float triggerScale, Vector3 triggerVelocity, int triggerId)
+    {
+        float relativeSpeed = CalculateRelativeVelocity(triggerVelocity, listenerVelocity);
+        float scaleChange = CalculateScaleChangeFactor(relativeSpeed);
+        float newListenerScaleIncrease = 0;
+        float newTriggerScaleIncrease = 0;
+
+        Debug.Log("TriggerScale: " + triggerScale + " ListenerScale: " + listenerScale);
+        Debug.Log("CalculateScaleChange: " + scaleChange);
+
+        if (triggerSpeed <= listenerSpeed)
         {
-            Debug.Log("TriggerSpeed > ListenerSpeed for id: " + listenerId + " Speed: " + relativeSpeed / 3);
-            //relativeSpeed = (triggerSpeed - listenerSpeed) / speedModifier; // Subject to change
-            relativeSpeed = -0.2f;
+            newListenerScaleIncrease = (triggerScale * scaleChange);
+            newTriggerScaleIncrease = (listenerScale * -scaleChange);
+            PlayerEvents.instance.OnLoserCollision(newTriggerScaleIncrease, triggerId);
         }
 
-        // Needs brainstorming
-        float scale = relativeSpeed;
-        //float scale = listenerScale * relativeSpeed * triggerScale;
+        return new Vector3(newListenerScaleIncrease, newListenerScaleIncrease, newListenerScaleIncrease);
+    }
 
-        return new Vector3(scale, scale, scale);
+    float CalculateScaleChangeFactor(float relativeSpeed)
+    {
+        // logistic growth of scale
+        float scaleChange = (2/(1+Mathf.Exp(-relativeSpeed/scaleModifier))-1)*scaleChangeThreshold;
+        return scaleChange;
     }
 
     float CalculateMassChange(float currentScale)
     {
-        float massChange = Mathf.Pow(currentScale, 0.15f);
+        //float massChange = Mathf.Pow(currentScale, 0.15f);
+        //float massChange = Mathf.Pow(currentScale, (1f/3f));
+        float massChange = Mathf.Pow(currentScale, 3f);
         return massChange;
     }
 
-    // Add force based on the normalized relative positions
+    float CalculateRelativeVelocity(Vector3 triggerVelocity, Vector3 listenerVelocity)
+    {
+        // pythagoras for 3d
+        float relativeVelocityX = Mathf.Pow((triggerVelocity.x - listenerVelocity.x), 2);
+        float relativeVelocityY = Mathf.Pow((triggerVelocity.y - listenerVelocity.y), 2);
+        float relativeVelocityZ = Mathf.Pow((triggerVelocity.z - listenerVelocity.z), 2);
+
+        float relativeSpeed = Mathf.Sqrt(relativeVelocityX + relativeVelocityY + relativeVelocityZ);
+        return relativeSpeed;
+    }
 }

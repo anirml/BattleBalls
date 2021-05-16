@@ -36,7 +36,7 @@ public class FoodOnSpawn : MonoBehaviour
         float y = Random.Range(minRandom, maxRandom);
         float z = Random.Range(minRandom, maxRandom);
 
-        newScale = new Vector3(x,y,z);
+        newScale = new Vector3(x, y, z);
 
         this.transform.localScale = newScale;
     }

@@ -6,18 +6,9 @@ using UnityEngine;
 public class PlayerEvents : MonoBehaviour
 {
 
-    // Singleton
-    /* public static PlayerSizeEvents instance;
-    private static PlayerSizeEvents i
-    {
-        get
-        {
-            if (instance == null) instance = new PlayerSizeEvents();
-            return instance;
-        }
-    } */
-
     public static PlayerEvents instance;
+    
+    // Singleton
     private void Awake()
     {
         if (instance == null) instance = this; else
@@ -26,16 +17,19 @@ public class PlayerEvents : MonoBehaviour
         }
     }
 
-    // first int is Id of object, first float is trigger speed, Vector3 is the collision direction, Transform is the trigger position & scale
-    public event Action<int, float, Vector3, Transform> PlayerCollision;
+    // first int is Id of collision object, second int is own Id, first float is trigger speed, Vector3 is the collision direction, 
+    // Transform is the trigger position & scale, the second Vector3 is the velocity
+    public event Action<int, int, float, Vector3, Transform, Vector3> PlayerCollision;
     // first int is Id of object, float is averaged scale
     public event Action<int, float> FoodAbsorb;
 
+    public event Action<float, int> LoserCollision;
 
-    public void OnPlayerCollision(int instanceId, float triggerSpeed, Vector3 collisionDirection, Transform triggerTransform)
+    public void OnPlayerCollision(int otherId, int ownId, float triggerSpeed, Vector3 collisionDirection, 
+    Transform triggerTransform, Vector3 triggerVelocity)
     {
         //Debug.Log("OnPlayerCollision in PlayerSizeEvents - id: " + instanceId);
-        PlayerCollision?.Invoke(instanceId, triggerSpeed, collisionDirection, triggerTransform);
+        PlayerCollision?.Invoke(otherId, ownId, triggerSpeed, collisionDirection, triggerTransform, triggerVelocity);
     }
 
     public void OnFoodAbsorb(int instanceId, float scaleAverage)
@@ -43,5 +37,10 @@ public class PlayerEvents : MonoBehaviour
         //Debug.Log("OnFoodAbsorb in PlayerSizeEvents - id: " + instanceId);
         FoodAbsorb?.Invoke(instanceId, scaleAverage);
     }
-    
+
+    public void OnLoserCollision(float loserScaleChange, int loserId)
+    {
+        LoserCollision?.Invoke(loserScaleChange, loserId);
+    }
+
 }

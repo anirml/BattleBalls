@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 5273901620626427027}
   - component: {fileID: 5273901620626427024}
   m_Layer: 0
-  m_Name: PlayerTemp
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -443,6 +443,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7defd7fc1d6d372409828064bdf86c8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleModifier: 30
+  scaleChangeThreshold: 0.4
+  speedModifier: 30
 --- !u!114 &5273901620626427021
 MonoBehaviour:
   m_ObjectHideFlags: 0
