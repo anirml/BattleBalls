@@ -8,7 +8,9 @@ public class PlayerCollisionListener : MonoBehaviour
     [SerializeField]
     private int scaleModifier = 30; // higher means more speed needed to steal mass
     [SerializeField]
-    private float scaleChangeThreshold = 0.2f; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
+    private float scaleChangeThreshold = 0.4f; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
+    [SerializeField]
+    private float speedModifier = 50; // changes the force applied to collision knockback
     private float listenerCurrentScale;
     private float listenerSpeed;
     private Vector3 listenerVelocity; 
@@ -45,7 +47,7 @@ public class PlayerCollisionListener : MonoBehaviour
             float relativeSpeed = CalculateRelativeVelocity(triggerVelocity, GetComponent<Rigidbody>().velocity);
             //Debug.Log("RelativeSpeed manual: " + relativeSpeed);
 
-            GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * 50);
+            GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * speedModifier);
             // Adds vertical force
             GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * relativeSpeed * listenerRigidBody.mass * 10);
         }
