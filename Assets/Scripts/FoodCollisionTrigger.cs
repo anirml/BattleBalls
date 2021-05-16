@@ -13,7 +13,7 @@ public class FoodCollisionTrigger : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
 
-        Debug.Log("OnTriggerEnter in FoodCollisionTrigger");
+        // Debug.Log("OnTriggerEnter in FoodCollisionTrigger");
         if (other.gameObject.tag == "Player")
         {
             // Debug.Log("Collided with Food!");

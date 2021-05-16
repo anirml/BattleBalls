@@ -25,7 +25,7 @@ public class PlayerCollisionTrigger : MonoBehaviour
         //Debug.Log("OnTriggerEnter in PlayerCollisionTrigger");
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Hit other Player!");
+            // Debug.Log("Hit other Player!");
 
             //otherPlayerVelocity = other.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
             otherPlayerId = other.gameObject.GetInstanceID();
@@ -60,7 +60,7 @@ public class PlayerCollisionTrigger : MonoBehaviour
         Vector3 direction = listenerCollision.contacts[0].point - transform.position;
         direction = -direction.normalized;
 
-        Debug.Log("ApplyPushback direction: " + direction);
+        // Debug.Log("ApplyPushback direction: " + direction);
 
         GetComponent<Rigidbody>().AddForce(direction*500);
         // Adds vertical force

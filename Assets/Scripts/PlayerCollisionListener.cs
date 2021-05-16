@@ -47,7 +47,7 @@ public class PlayerCollisionListener : MonoBehaviour
             float relativeSpeed = CalculateRelativeVelocity(triggerVelocity, GetComponent<Rigidbody>().velocity);
             //Debug.Log("RelativeSpeed manual: " + relativeSpeed);
 
-            GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * speedModifier);
+            GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * (30 + speedModifier));
             // Adds vertical force
             GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * relativeSpeed * listenerRigidBody.mass * 10);
         }
@@ -90,8 +90,8 @@ public class PlayerCollisionListener : MonoBehaviour
         float newListenerScaleIncrease = 0;
         float newTriggerScaleIncrease = 0;
 
-        Debug.Log("TriggerScale: " + triggerScale + " ListenerScale: " + listenerScale);
-        Debug.Log("CalculateScaleChange: " + scaleChange);
+        // Debug.Log("TriggerScale: " + triggerScale + " ListenerScale: " + listenerScale);
+        // Debug.Log("CalculateScaleChange: " + scaleChange);
 
         if (triggerSpeed <= listenerSpeed)
         {

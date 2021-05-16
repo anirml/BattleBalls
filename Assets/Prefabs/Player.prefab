@@ -445,7 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleModifier: 30
   scaleChangeThreshold: 0.4
-  speedModifier: 30
+  speedModifier: 10
 --- !u!114 &5273901620626427021
 MonoBehaviour:
   m_ObjectHideFlags: 0

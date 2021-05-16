@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2598652904123011097}
   - component: {fileID: 2598652904123011096}
   - component: {fileID: 2598652904123011099}
+  - component: {fileID: 4296855853882299849}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Player
@@ -64,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 978bbcf9abdfc404fa538fba9a668ccd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,7 +128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7defd7fc1d6d372409828064bdf86c8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedModifier: 30
+  scaleModifier: 30
+  scaleChangeThreshold: 0.4
+  speedModifier: 10
 --- !u!114 &2598652904123011099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,5 +141,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a406eda7ca63f44bbdbfed138b2fd29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4296855853882299849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2598652904123011098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 753334a3ee87e5c4f9027d889f2a52d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
