@@ -8,11 +8,15 @@ public class PlayerCollisionTrigger : MonoBehaviour
     private float otherPlayerVelocity;
     private int otherPlayerId;
     private float ownSpeed;
-    private float ownScale;
+    private Vector3 ownVelocity;
+    private Transform ownTransform;
 
     void FixedUpdate()
     {
         ownSpeed = GetComponent<Rigidbody>().velocity.magnitude;
+        ownVelocity = GetComponent<Rigidbody>().velocity;
+        ownTransform = transform;
+
     }
 
     private void OnCollisionEnter(Collision other)
@@ -26,20 +30,21 @@ public class PlayerCollisionTrigger : MonoBehaviour
             //otherPlayerVelocity = other.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
             otherPlayerId = other.gameObject.GetInstanceID();
 
-            Vector3 direction = other.contacts[0].point - transform.position;
-            direction = -direction.normalized;
+            Vector3 direction = other.contacts[0].point - ownTransform.position;
+            int ownId = this.gameObject.GetInstanceID();
+            //direction = -direction.normalized;
 
             // Alternatively make an "if" with a minimum velocity?
-            OnPlayerCollisionTrigger(otherPlayerId, ownSpeed, direction, transform);
+            OnPlayerCollisionTrigger(otherPlayerId, ownId, ownSpeed, direction, ownTransform, ownVelocity);
         }
     }
 
 
-    void OnPlayerCollisionTrigger(int otherId, float ownVelocity, Vector3 collisionDirection, Transform ownTransform)
+    void OnPlayerCollisionTrigger(int otherId, int ownId, float ownSpeed, Vector3 collisionDirection, Transform ownTransform, Vector3 ownVelocity)
     {
-        Debug.Log("OnPlayerCollisionTrigger in PlayerCollisionTrigger - Player id: " + otherId);
+        //Debug.Log("OnPlayerCollisionTrigger in PlayerCollisionTrigger - Player id: " + otherId);
 
-        PlayerEvents.instance.OnPlayerCollision(otherId, ownVelocity, collisionDirection, ownTransform);
+        PlayerEvents.instance.OnPlayerCollision(otherId, ownId, ownSpeed, collisionDirection, ownTransform, ownVelocity);
     }
 
 
