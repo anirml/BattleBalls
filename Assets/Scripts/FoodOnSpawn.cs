@@ -7,18 +7,23 @@ public class FoodOnSpawn : MonoBehaviour
     public GameObject foodPrefab;
 
     Vector3 newScale;
+
+    // Vector3 center = new Vector3(0,0.5f,0);
+    Vector3 center;
+    // Vector3 size = new Vector3(999,1,999);
+    Vector3 size;
+    
     float minRandom = 0.25f;
     float maxRandom = 1.5f;
 
-    public int maxFoods;
-    public static float globalNumberOfFoods;
     // Possible feature?
     // public int foodSpawnRate;
 
     // Start is called before the first frame update, onEnable when the script is enabled for future object pooling implementation
     //void Awake()
 
-    void onEnable()
+
+    void OnEnable()
     {
         RandomizeFoodScale();
         RandomizePositionRotation();
@@ -38,14 +43,11 @@ public class FoodOnSpawn : MonoBehaviour
 
     void RandomizePositionRotation()
     {
-        // Should probably be put somewhere else...
-        GameObject gizmoObj = GameObject.Find("FoodSpawnGizmo");
-        OnDrawGizmoSelected gizmoScript = gizmoObj.GetComponent<OnDrawGizmoSelected>();
-
-        Vector3 center = gizmoScript.center;
-        Vector3 size = gizmoScript.size;
+        center = FoodManager.Instance.center;
+        size = FoodManager.Instance.size;
 
         Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(1, 1), Random.Range(-size.z / 2, size.z / 2));
-
+        this.transform.localPosition = pos;
+        
     }
 }

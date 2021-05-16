@@ -8,6 +8,7 @@ public class FoodCollisionTrigger : MonoBehaviour
     private int otherPlayerId;
     private Vector3 scale;
     private float scaleAverage;
+    
 
     private void OnCollisionEnter(Collision other)
     {
@@ -36,6 +37,8 @@ public class FoodCollisionTrigger : MonoBehaviour
     void DisableFood()
     {
         this.gameObject.SetActive(false); // for later object pooling implementation?
+        FoodManager.Instance.StartRespawnTime(this.gameObject);
         //Destroy(this.gameObject);
+        
     }
 }
