@@ -254,6 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6776257441178286122}
+  mouseSensivity: 360
   camPivot: {fileID: 6776257441178286135}
   cam: {fileID: 6776257441178286134}
   speed: 15
