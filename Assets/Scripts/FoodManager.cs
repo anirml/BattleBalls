@@ -49,13 +49,6 @@ public class FoodManager : MonoBehaviour
         Gizmos.DrawCube(center, size);
     }
 
-    // public IEnumerator EnableFoodAfterTime(GameObject food, float foodRespawnDelay)
-    // {
-    //     yield return new WaitForSeconds(foodRespawnDelay);
-
-    //     food.SetActive(true);
-    // }
-
     public void StartRespawnTime(GameObject food)
     {
         StartCoroutine(EnableFood(food, foodRespawnDelay));

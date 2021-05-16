@@ -31,8 +31,6 @@ public class PlayerEvents : MonoBehaviour
     // first int is Id of object, float is averaged scale
     public event Action<int, float> FoodAbsorb;
 
-    public event Action<int> SpawnFood;
-
 
     public void OnPlayerCollision(int instanceId, float triggerSpeed, Vector3 collisionDirection, Transform triggerTransform)
     {
@@ -45,10 +43,5 @@ public class PlayerEvents : MonoBehaviour
         //Debug.Log("OnFoodAbsorb in PlayerSizeEvents - id: " + instanceId);
         FoodAbsorb?.Invoke(instanceId, scaleAverage);
     }
-
-    public void OnSpawnFood(int instanceId)
-    {
-        SpawnFood?.Invoke(instanceId);
-    }
-
+    
 }

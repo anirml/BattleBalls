@@ -14,9 +14,9 @@ public class FoodCollisionTrigger : MonoBehaviour
     {
 
         Debug.Log("OnTriggerEnter in FoodCollisionTrigger");
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Collided with Food!");
+            // Debug.Log("Collided with Food!");
 
             otherPlayerId = other.gameObject.GetInstanceID();
             scale = this.transform.localScale;
@@ -28,7 +28,7 @@ public class FoodCollisionTrigger : MonoBehaviour
 
     void OnFoodCollisionTrigger(int otherId, float scaleAverage)
     {
-        Debug.Log("OnFoodCollisionTrigger in FoodCollisionTrigger - Player id: " + otherId);
+        // Debug.Log("OnFoodCollisionTrigger in FoodCollisionTrigger - Player id: " + otherId);
 
         PlayerEvents.instance.OnFoodAbsorb(otherId, scaleAverage);
         DisableFood();
@@ -36,9 +36,8 @@ public class FoodCollisionTrigger : MonoBehaviour
 
     void DisableFood()
     {
-        this.gameObject.SetActive(false); // for later object pooling implementation?
+        this.gameObject.SetActive(false);
         FoodManager.Instance.StartRespawnTime(this.gameObject);
-        //Destroy(this.gameObject);
         
     }
 }
