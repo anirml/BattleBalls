@@ -66,16 +66,16 @@ public class PlayerCollisionListener : MonoBehaviour
             triggerScale, triggerVelocity, triggerId);
 
             // Checks for player death (no size)
-            if (listenerCurrentScale - scaleIncrease < 0.01)
+            if (listenerCurrentScale - scaleIncrease.x < 0.01)
             {
                 PlayerEvents.instance.OnPlayerDeath();
                 return;
             }
 
             // Checks for player max size
-            if (listenerCurrentScale + scaleIncrease > maxPlayerSize)
+            if (listenerCurrentScale + scaleIncrease.x > maxPlayerSize)
             {
-                ChangeScale(maxPlayerSize);
+                ChangeScale(new Vector3(maxPlayerSize, maxPlayerSize, maxPlayerSize));
                 return;
             }
 

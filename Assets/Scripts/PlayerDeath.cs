@@ -9,17 +9,19 @@ public class PlayerDeath : MonoBehaviour
     void Start()
     {
         // calls Event from singleton (subscribe)
-        PlayerEvents.instance.PlayerDeath += DestroyPlayer();
+        PlayerEvents.instance.PlayerDeath += DestroyPlayer;
     }
 
     void DestroyPlayer()
     {
-        PhotonNetwork.Destroy();
+        // TODO: FIX FOR MULTIPLAYER
+        // PhotonNetwork.Destroy();
+        Object.Destroy(this);
     }
 
-    void private void OnDestroy()
+    void OnDestroy()
     {
-        PlayerEvents.instance.PlayerDeath -= DestroyPlayer();
+        PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
     }
 
 }
