@@ -15,7 +15,7 @@ public class FoodCollisionListener : MonoBehaviour
         listenerCurrentScale = this.gameObject.transform.localScale.x;
         listenerId = this.gameObject.GetInstanceID();
 
-        // calls Event from singleton
+        // calls Event from singleton (subscribe)
         PlayerEvents.instance.FoodAbsorb += Grow;
     }
 
@@ -35,11 +35,11 @@ public class FoodCollisionListener : MonoBehaviour
             
         }
     }
+
     float CalculateMassChange(float currentScale)
     {
-        //float massChange = Mathf.Pow(currentScale, 0.15f);
-        //float massChange = Mathf.Pow(currentScale, (1f/3f));
-        float massChange = Mathf.Pow(currentScale, 3f);
+        //float massChange = Mathf.Pow(currentScale, 3f);
+        float massChange = 4/3 * Mathf.PI * Mathf.Pow((currentScale/2), 3f);
         return massChange;
     }
 

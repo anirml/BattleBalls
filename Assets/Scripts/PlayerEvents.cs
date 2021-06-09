@@ -24,6 +24,11 @@ public class PlayerEvents : MonoBehaviour
     public event Action<int, float> FoodAbsorb;
 
     public event Action<float, int> LoserCollision;
+    //
+    public event Action PlayerDeath;
+
+    public event Action PlayerRespawn;
+
 
     public void OnPlayerCollision(int otherId, int ownId, float triggerSpeed, Vector3 collisionDirection, 
     Transform triggerTransform, Vector3 triggerVelocity)
@@ -41,6 +46,12 @@ public class PlayerEvents : MonoBehaviour
     public void OnLoserCollision(float loserScaleChange, int loserId)
     {
         LoserCollision?.Invoke(loserScaleChange, loserId);
+    }
+
+    public void OnPlayerDeath()
+    {
+        PlayerDeath?.Invoke();
+        PlayerRespawn?.Invoke();
     }
 
 }
