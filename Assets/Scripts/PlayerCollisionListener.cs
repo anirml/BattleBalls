@@ -11,6 +11,8 @@ public class PlayerCollisionListener : MonoBehaviour
     private float scaleChangeThreshold = 0.4f; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
     [SerializeField]
     private float speedModifier = 50; // changes the force applied to collision knockback
+    [SerializeField]
+    private float maxPlayerSize = 10; // 3d scale in meters (diameter)
     private float listenerCurrentScale;
     private float listenerSpeed;
     private Vector3 listenerVelocity; 
@@ -25,7 +27,7 @@ public class PlayerCollisionListener : MonoBehaviour
         listenerRigidBody = GetComponent<Rigidbody>();
         listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
 
-        // Calls Events from singleton
+        // Calls Events from singleton (subscribe)
         PlayerEvents.instance.PlayerCollision += ApplyPushback;
         PlayerEvents.instance.PlayerCollision += ChangeSize;
         PlayerEvents.instance.LoserCollision += ChangeCollisionLoserSize;
@@ -63,10 +65,21 @@ public class PlayerCollisionListener : MonoBehaviour
             Vector3 scaleIncrease = CalculateScaleChange(listenerSpeed, triggerSpeed, listenerCurrentScale, 
             triggerScale, triggerVelocity, triggerId);
 
-            transform.localScale += scaleIncrease;
+            // Checks for player death (no size)
+            if (listenerCurrentScale - scaleIncrease < 0.01)
+            {
+                PlayerEvents.instance.OnPlayerDeath();
+                return;
+            }
 
-            listenerCurrentScale = transform.localScale.x;
-            listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
+            // Checks for player max size
+            if (listenerCurrentScale + scaleIncrease > maxPlayerSize)
+            {
+                ChangeScale(maxPlayerSize);
+                return;
+            }
+
+            ChangeScale(scaleIncrease);
         }
     }
 
@@ -75,11 +88,16 @@ public class PlayerCollisionListener : MonoBehaviour
         if (loserId == listenerId)
         {
             Vector3 scaleDecrease = new Vector3(loserScaleChange, loserScaleChange, loserScaleChange);
-            transform.localScale += scaleDecrease;
-
-            listenerCurrentScale = transform.localScale.x;
-            listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
+            ChangeScale(scaleDecrease);
         }
+    }
+
+    void ChangeScale(Vector3 scaleChange)
+    {
+        transform.localScale += scaleChange;
+
+        listenerCurrentScale = transform.localScale.x;
+        listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
     }
 
     Vector3 CalculateScaleChange(float listenerSpeed, float triggerSpeed, float listenerScale,
@@ -89,9 +107,6 @@ public class PlayerCollisionListener : MonoBehaviour
         float scaleChange = CalculateScaleChangeFactor(relativeSpeed);
         float newListenerScaleIncrease = 0;
         float newTriggerScaleIncrease = 0;
-
-        // Debug.Log("TriggerScale: " + triggerScale + " ListenerScale: " + listenerScale);
-        // Debug.Log("CalculateScaleChange: " + scaleChange);
 
         if (triggerSpeed <= listenerSpeed)
         {
@@ -110,14 +125,6 @@ public class PlayerCollisionListener : MonoBehaviour
         return scaleChange;
     }
 
-    float CalculateMassChange(float currentScale)
-    {
-        //float massChange = Mathf.Pow(currentScale, 0.15f);
-        //float massChange = Mathf.Pow(currentScale, (1f/3f));
-        float massChange = Mathf.Pow(currentScale, 3f);
-        return massChange;
-    }
-
     float CalculateRelativeVelocity(Vector3 triggerVelocity, Vector3 listenerVelocity)
     {
         // pythagoras for 3d
@@ -127,5 +134,12 @@ public class PlayerCollisionListener : MonoBehaviour
 
         float relativeSpeed = Mathf.Sqrt(relativeVelocityX + relativeVelocityY + relativeVelocityZ);
         return relativeSpeed;
+    }
+
+    float CalculateMassChange(float currentScale)
+    {
+        //float massChange = Mathf.Pow(currentScale, 3f);
+        float massChange = 4/3 * Mathf.PI * Mathf.Pow((currentScale/2), 3f);
+        return massChange;
     }
 }
