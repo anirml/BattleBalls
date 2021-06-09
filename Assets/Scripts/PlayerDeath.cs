@@ -14,6 +14,7 @@ public class PlayerDeath : MonoBehaviour
 
     void DestroyPlayer()
     {
+        Debug.Log("LOOK HERE YOU SILLY GEESE-------------");
         // TODO: FIX FOR MULTIPLAYER
         // PhotonNetwork.Destroy();
         Object.Destroy(this);
