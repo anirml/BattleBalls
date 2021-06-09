@@ -13,8 +13,8 @@ public class FoodOnSpawn : MonoBehaviour
     // Vector3 size = new Vector3(999,1,999);
     Vector3 size;
     
-    float minRandom = 0.25f;
-    float maxRandom = 1.5f;
+    float minRandom = 0.2f;
+    float maxRandom = 1f;
 
     // Possible feature?
     // public int foodSpawnRate;
@@ -26,8 +26,8 @@ public class FoodOnSpawn : MonoBehaviour
     void OnEnable()
     {
         RandomizeFoodScale();
+        RandomizeFoodColor();
         RandomizePositionRotation();
-
     }
 
     void RandomizeFoodScale()
@@ -49,5 +49,11 @@ public class FoodOnSpawn : MonoBehaviour
         Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(1, 1), Random.Range(-size.z / 2, size.z / 2));
         this.transform.localPosition = pos;
         
+    }
+
+    void RandomizeFoodColor()
+    {
+                                                        //   ColorHSV(minHue, maxHue, minSaturation, maxSaturation, minValue, maxValue, minAlpha, maxAlpha)
+        this.GetComponent<Renderer>().material.SetColor("_EmissionColor", Random.ColorHSV(0f, 1f, 1f, 1f, 0.75f, 1f) * 4f);
     }
 }
