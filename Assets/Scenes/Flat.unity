@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 106181721}
   - component: {fileID: 106181720}
   - component: {fileID: 106181719}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: West Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +419,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 183934877}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 291667335}
   - component: {fileID: 291667334}
   - component: {fileID: 291667333}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NW Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +552,7 @@ PrefabInstance:
       objectReference: {fileID: 1809781611946350793, guid: e418da6ae6616c74680ccc5f9c01f287, type: 3}
     - target: {fileID: 803184276869054903, guid: e02fe1981e7255040964aba862ef2e9b, type: 3}
       propertyPath: maxFoods
-      value: 250
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5671229466549228939, guid: e02fe1981e7255040964aba862ef2e9b, type: 3}
       propertyPath: m_Name
@@ -642,7 +642,7 @@ GameObject:
   - component: {fileID: 553644653}
   - component: {fileID: 553644652}
   - component: {fileID: 553644651}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: North Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -736,7 +736,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 573713652}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -771,7 +771,7 @@ GameObject:
   - component: {fileID: 612984239}
   - component: {fileID: 612984238}
   - component: {fileID: 612984237}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: South Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1029,7 +1029,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 623732321}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1161,7 +1161,7 @@ GameObject:
   - component: {fileID: 776285649}
   - component: {fileID: 776285648}
   - component: {fileID: 776285647}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'East Wall '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1258,7 +1258,7 @@ GameObject:
   - component: {fileID: 901167639}
   - component: {fileID: 901167638}
   - component: {fileID: 901167637}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NE Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1355,7 +1355,7 @@ GameObject:
   - component: {fileID: 904284684}
   - component: {fileID: 904284683}
   - component: {fileID: 904284682}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1398,7 +1398,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904284680}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -1452,7 +1452,7 @@ GameObject:
   - component: {fileID: 945350166}
   - component: {fileID: 945350165}
   - component: {fileID: 945350164}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1495,7 +1495,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 945350162}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -1548,7 +1548,7 @@ GameObject:
   - component: {fileID: 994777319}
   - component: {fileID: 994777318}
   - component: {fileID: 994777317}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1642,7 +1642,7 @@ GameObject:
   - component: {fileID: 1025428988}
   - component: {fileID: 1025428987}
   - component: {fileID: 1025428986}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SE Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1739,7 +1739,7 @@ GameObject:
   - component: {fileID: 1029225551}
   - component: {fileID: 1029225550}
   - component: {fileID: 1029225549}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: West Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1836,7 +1836,7 @@ GameObject:
   - component: {fileID: 1077770311}
   - component: {fileID: 1077770310}
   - component: {fileID: 1077770309}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: North Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1930,7 +1930,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1180785317}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2064,7 +2064,7 @@ GameObject:
   - component: {fileID: 1294041636}
   - component: {fileID: 1294041635}
   - component: {fileID: 1294041634}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2107,7 +2107,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294041632}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -2161,7 +2161,7 @@ GameObject:
   - component: {fileID: 1326434684}
   - component: {fileID: 1326434683}
   - component: {fileID: 1326434682}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: South Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2258,7 +2258,7 @@ GameObject:
   - component: {fileID: 1409894718}
   - component: {fileID: 1409894717}
   - component: {fileID: 1409894716}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2301,7 +2301,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1409894714}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -2394,7 +2394,7 @@ GameObject:
   - component: {fileID: 1494857225}
   - component: {fileID: 1494857224}
   - component: {fileID: 1494857223}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SE Corner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2491,7 +2491,7 @@ GameObject:
   - component: {fileID: 1525328067}
   - component: {fileID: 1525328066}
   - component: {fileID: 1525328065}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NW Corner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2782,7 +2782,7 @@ GameObject:
   - component: {fileID: 1652507160}
   - component: {fileID: 1652507159}
   - component: {fileID: 1652507158}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2825,7 +2825,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1652507156}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -2879,7 +2879,7 @@ GameObject:
   - component: {fileID: 1668112646}
   - component: {fileID: 1668112645}
   - component: {fileID: 1668112644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: East Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2976,7 +2976,7 @@ GameObject:
   - component: {fileID: 1686534237}
   - component: {fileID: 1686534236}
   - component: {fileID: 1686534235}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SW Corner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3267,7 +3267,7 @@ GameObject:
   - component: {fileID: 1770992894}
   - component: {fileID: 1770992893}
   - component: {fileID: 1770992892}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3310,7 +3310,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1770992890}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -3461,7 +3461,7 @@ GameObject:
   - component: {fileID: 1851994765}
   - component: {fileID: 1851994764}
   - component: {fileID: 1851994763}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3504,7 +3504,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1851994761}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -3555,7 +3555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1867511633}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3590,7 +3590,7 @@ GameObject:
   - component: {fileID: 1938809696}
   - component: {fileID: 1938809695}
   - component: {fileID: 1938809694}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SW Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3687,7 +3687,7 @@ GameObject:
   - component: {fileID: 1974258097}
   - component: {fileID: 1974258096}
   - component: {fileID: 1974258095}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NE Corner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3885,7 +3885,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1904921875916715991}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -3945,7 +3945,7 @@ GameObject:
   - component: {fileID: 1878308182129380933}
   - component: {fileID: 1890239424618105339}
   - component: {fileID: 1913784367319925281}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramp 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

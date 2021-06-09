@@ -12,7 +12,7 @@ public class FoodOnSpawn : MonoBehaviour
     Vector3 center;
     // Vector3 size = new Vector3(999,1,999);
     Vector3 size;
-    
+
     float minRandom = 0.2f;
     float maxRandom = 1f;
 
@@ -47,13 +47,27 @@ public class FoodOnSpawn : MonoBehaviour
         size = FoodManager.Instance.size;
 
         Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(1, 1), Random.Range(-size.z / 2, size.z / 2));
-        this.transform.localPosition = pos;
-        
+       
+        var foodColliders = Physics.OverlapSphere(pos, maxRandom);
+
+        Vector3 offset = new Vector3(0,15,0);
+        var objColliders = Physics.Raycast(pos + offset, Vector3.down, 15f);
+
+        if (foodColliders.Length <= 0 && !objColliders)
+        {
+            this.transform.localPosition = pos;
+            // Debug.Log("Spawn check passed!");
+        }
+        else
+        {
+            // Debug.Log("Spawn check did not pass, rechecking..");
+            RandomizePositionRotation();
+        }
     }
 
     void RandomizeFoodColor()
     {
-                                                        //   ColorHSV(minHue, maxHue, minSaturation, maxSaturation, minValue, maxValue, minAlpha, maxAlpha)
+        //   ColorHSV(minHue, maxHue, minSaturation, maxSaturation, minValue, maxValue, minAlpha, maxAlpha)
         this.GetComponent<Renderer>().material.SetColor("_EmissionColor", Random.ColorHSV(0f, 1f, 1f, 1f, 0.75f, 1f) * 4f);
     }
 }
