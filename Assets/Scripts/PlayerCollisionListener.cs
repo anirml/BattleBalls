@@ -66,7 +66,7 @@ public class PlayerCollisionListener : MonoBehaviour
             triggerScale, triggerVelocity, triggerId);
 
             // Checks for player death (no size)
-            if (listenerCurrentScale - scaleIncrease.x < 0.01)
+            if (listenerCurrentScale - scaleIncrease.x < 0.1f)
             {
                 PlayerEvents.instance.OnPlayerDeath();
                 return;
