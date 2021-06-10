@@ -10,9 +10,9 @@ public class PlayerCollisionListener : MonoBehaviour
     [SerializeField]
     private float scaleChangeThreshold = 0.4f; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
     [SerializeField]
-    private float speedModifier = 50; // changes the force applied to collision knockback
+    private float speedModifier = 50f; // changes the force applied to collision knockback
     [SerializeField]
-    private float maxPlayerSize = 10; // 3d scale in meters (diameter)
+    private int maxPlayerSize = FoodManager.maxPlayerSize;
     private float listenerCurrentScale;
     private float listenerSpeed;
     private Vector3 listenerVelocity;
@@ -62,7 +62,8 @@ public class PlayerCollisionListener : MonoBehaviour
         if (passedListenerId == listenerId)
         {
             float triggerScale = triggerTransform.localScale.x;
-            Vector3 scaleIncrease = CalculateScaleChange(listenerSpeed, triggerSpeed, listenerCurrentScale,
+            
+            Vector3 scaleIncrease = CalculateScaleChange(triggerSpeed, listenerCurrentScale,
             triggerScale, triggerVelocity, triggerId);
 
             // Checks for player death (no size)
@@ -73,6 +74,7 @@ public class PlayerCollisionListener : MonoBehaviour
                 return;
             }
 
+            Debug.Log("MaxSize check Player: " + listenerCurrentScale + scaleIncrease.x);
             // Checks for player max size
             if (listenerCurrentScale + scaleIncrease.x > maxPlayerSize)
             {
@@ -104,9 +106,12 @@ public class PlayerCollisionListener : MonoBehaviour
         listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
     }
 
-    Vector3 CalculateScaleChange(float listenerSpeed, float triggerSpeed, float listenerScale,
+    Vector3 CalculateScaleChange(float triggerSpeed, float listenerScale,
      float triggerScale, Vector3 triggerVelocity, int triggerId)
     {
+        listenerVelocity = GetComponent<Rigidbody>().velocity;
+        listenerSpeed = GetComponent<Rigidbody>().velocity.magnitude;
+
         float relativeSpeed = CalculateRelativeVelocity(triggerVelocity, listenerVelocity);
         float scaleChange = CalculateScaleChangeFactor(relativeSpeed);
         float newListenerScaleIncrease = 0;
