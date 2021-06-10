@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using System.IO;
 
-public class FoodManager : MonoBehaviour
+public class FoodManager : MonoBehaviourPun
 {
 
     [SerializeField]
@@ -39,7 +41,7 @@ public class FoodManager : MonoBehaviour
         {
             for (int i = 0; i < maxFoods; i++)
             {
-                Instantiate(food);
+                PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "Food"), Vector3.zero, Quaternion.identity);
             }
         }
      }
