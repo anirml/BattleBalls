@@ -7,10 +7,12 @@ public class Movement : MonoBehaviourPun
 {
     public Rigidbody rb;
 
-    public int mouseSensivity = 360;
+    public int mouseSensivityX = 360;
+    public int mouseSensivityY = 180;
 
     public Transform camPivot;
     float heading = 0;
+    float tilt = 15;
     public Transform cam;
 
     public float speed = 5.0f;
@@ -18,16 +20,8 @@ public class Movement : MonoBehaviourPun
     private Vector3 camF;
     private Vector3 camR;
 
-    bool isFollowing;
-
     Vector2 input;
     // Start is called before the first frame update
-
-    public void OnStartFollowing()
-    {
-        cam = Camera.main.transform;
-        isFollowing = true;
-    }
 
     void Start()
     {
@@ -46,9 +40,12 @@ public class Movement : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
-            heading += Input.GetAxis("Mouse X") * Time.deltaTime * mouseSensivity;
+            heading += Input.GetAxis("Mouse X") * Time.deltaTime * mouseSensivityX;
+            tilt += Input.GetAxis("Mouse Y") * Time.deltaTime * mouseSensivityY;
 
-            camPivot.rotation = Quaternion.Euler(0, heading, 0);
+            tilt = Mathf.Clamp(tilt, -10, 70);
+
+            camPivot.rotation = Quaternion.Euler(tilt, heading, 0);
             input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
             camF = cam.forward;
