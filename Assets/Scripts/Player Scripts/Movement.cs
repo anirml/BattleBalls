@@ -30,40 +30,36 @@ public class Movement : MonoBehaviourPun
     }
 
     void Start()
-    {    
+    {
+        var isMine = photonView.IsMine;
 
-        var isMine = photonView.IsMine;        
-
-        if(cam.gameObject.activeSelf == false){
+        if (cam.gameObject.activeSelf == false)
+        {
             camPivot.gameObject.SetActive(isMine);
             cam.gameObject.SetActive(isMine);
         }
-            rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
-        
-
         if (photonView.IsMine)
         {
-        heading += Input.GetAxis("Mouse X") * Time.deltaTime * mouseSensivity;
+            heading += Input.GetAxis("Mouse X") * Time.deltaTime * mouseSensivity;
 
-        camPivot.rotation = Quaternion.Euler(0, heading, 0);
-        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            camPivot.rotation = Quaternion.Euler(0, heading, 0);
+            input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        camF = cam.forward;
-        camR = cam.right;
+            camF = cam.forward;
+            camR = cam.right;
 
-        camF.y = 0;
-        camR.y = 0;
-        camF = camF.normalized;
-        camR = camR.normalized;
+            camF.y = 0;
+            camR.y = 0;
+            camF = camF.normalized;
+            camR = camR.normalized;
 
-        input = input.normalized;
+            input = input.normalized;
         }
     }
 
