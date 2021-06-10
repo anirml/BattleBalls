@@ -17,7 +17,7 @@ public class PlayerDeath : MonoBehaviour
         PhotonNetwork.Destroy();
     }
 
-    void private void OnDestroy()
+    private void OnDestroy()
     {
         PlayerEvents.instance.PlayerDeath -= DestroyPlayer();
     }
