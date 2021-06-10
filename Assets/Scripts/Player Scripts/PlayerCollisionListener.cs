@@ -10,12 +10,12 @@ public class PlayerCollisionListener : MonoBehaviour
     [SerializeField]
     private float scaleChangeThreshold = 0.4f; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
     [SerializeField]
-    private float speedModifier = 50; // changes the force applied to collision knockback
+    private float speedModifier = 50f; // changes the force applied to collision knockback
     [SerializeField]
-    private float maxPlayerSize = 10; // 3d scale in meters (diameter)
+    private int maxPlayerSize = FoodManager.maxPlayerSize;
     private float listenerCurrentScale;
     private float listenerSpeed;
-    private Vector3 listenerVelocity; 
+    private Vector3 listenerVelocity;
     private Rigidbody listenerRigidBody;
 
 
@@ -39,7 +39,7 @@ public class PlayerCollisionListener : MonoBehaviour
         listenerVelocity = GetComponent<Rigidbody>().velocity;
     }
 
-    void ApplyPushback(int passedListenerId, int triggerId, float triggerSpeed, Vector3 collisionDirection, 
+    void ApplyPushback(int passedListenerId, int triggerId, float triggerSpeed, Vector3 collisionDirection,
     Transform triggerTransform, Vector3 triggerVelocity)
     {
         //Debug.Log("ApplyPushback passedListenerId: " + passedListenerId + " listenerId: " + listenerId);
@@ -55,27 +55,33 @@ public class PlayerCollisionListener : MonoBehaviour
         }
     }
 
-    void ChangeSize(int passedListenerId, int triggerId, float triggerSpeed, Vector3 collisionDirection, 
+    void ChangeSize(int passedListenerId, int triggerId, float triggerSpeed, Vector3 collisionDirection,
     Transform triggerTransform, Vector3 triggerVelocity)
     {
         // Makes sure only relevant objects reacts to the invoke by checking ids
         if (passedListenerId == listenerId)
         {
             float triggerScale = triggerTransform.localScale.x;
-            Vector3 scaleIncrease = CalculateScaleChange(listenerSpeed, triggerSpeed, listenerCurrentScale, 
+            
+            Vector3 scaleIncrease = CalculateScaleChange(triggerSpeed, listenerCurrentScale,
             triggerScale, triggerVelocity, triggerId);
 
             // Checks for player death (no size)
-            if (listenerCurrentScale - scaleIncrease < 0.01)
+            if (listenerCurrentScale - scaleIncrease.x < 0.3f)
             {
+                Debug.Log("LISTENER HERE BOYYSSS---------");
                 PlayerEvents.instance.OnPlayerDeath();
                 return;
             }
 
+            Debug.Log("MaxSize check Player: " + listenerCurrentScale + scaleIncrease.x);
             // Checks for player max size
-            if (listenerCurrentScale + scaleIncrease > maxPlayerSize)
+            if (listenerCurrentScale + scaleIncrease.x > maxPlayerSize)
             {
-                ChangeScale(maxPlayerSize);
+                transform.localScale = new Vector3(maxPlayerSize, maxPlayerSize, maxPlayerSize);
+
+                listenerCurrentScale = maxPlayerSize;
+                listenerRigidBody.mass = CalculateMassChange(maxPlayerSize);
                 return;
             }
 
@@ -100,9 +106,12 @@ public class PlayerCollisionListener : MonoBehaviour
         listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
     }
 
-    Vector3 CalculateScaleChange(float listenerSpeed, float triggerSpeed, float listenerScale,
+    Vector3 CalculateScaleChange(float triggerSpeed, float listenerScale,
      float triggerScale, Vector3 triggerVelocity, int triggerId)
     {
+        listenerVelocity = GetComponent<Rigidbody>().velocity;
+        listenerSpeed = GetComponent<Rigidbody>().velocity.magnitude;
+
         float relativeSpeed = CalculateRelativeVelocity(triggerVelocity, listenerVelocity);
         float scaleChange = CalculateScaleChangeFactor(relativeSpeed);
         float newListenerScaleIncrease = 0;
@@ -121,7 +130,7 @@ public class PlayerCollisionListener : MonoBehaviour
     float CalculateScaleChangeFactor(float relativeSpeed)
     {
         // logistic growth of scale
-        float scaleChange = (2/(1+Mathf.Exp(-relativeSpeed/scaleModifier))-1)*scaleChangeThreshold;
+        float scaleChange = (2 / (1 + Mathf.Exp(-relativeSpeed / scaleModifier)) - 1) * scaleChangeThreshold;
         return scaleChange;
     }
 
@@ -139,7 +148,7 @@ public class PlayerCollisionListener : MonoBehaviour
     float CalculateMassChange(float currentScale)
     {
         //float massChange = Mathf.Pow(currentScale, 3f);
-        float massChange = 4/3 * Mathf.PI * Mathf.Pow((currentScale/2), 3f);
+        float massChange = 4 / 3 * Mathf.PI * Mathf.Pow((currentScale / 2), 3f);
         return massChange;
     }
 }

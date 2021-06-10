@@ -35,7 +35,7 @@ public class PlayerCollisionTrigger : MonoBehaviour
             //direction = -direction.normalized;
 
             // Alternatively make an "if" with a minimum velocity?
-            PlayerEvents.instance.OnPlayerCollision(otherId, ownId, ownSpeed, collisionDirection, ownTransform, ownVelocity);
+            PlayerEvents.instance.OnPlayerCollision(otherPlayerId, ownId, ownSpeed, direction, ownTransform, ownVelocity);
         }
     }
 

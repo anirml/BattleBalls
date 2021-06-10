@@ -20,7 +20,7 @@ public class FoodCollisionTrigger : MonoBehaviour
             scale = this.transform.localScale;
             scaleAverage = (scale.x * scale.y * scale.z)/3;
 
-            PlayerEvents.instance.OnFoodAbsorb(otherId, scaleAverage);
+            PlayerEvents.instance.OnFoodAbsorb(otherPlayerId, scaleAverage);
             DisableFood();
         }
     }

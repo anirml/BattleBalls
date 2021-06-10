@@ -6,6 +6,7 @@ public class FoodCollisionListener : MonoBehaviour
 {
     private int listenerId;
     private float listenerCurrentScale;
+    private int maxPlayerSize = FoodManager.maxPlayerSize;
     private Vector3 scaleIncrease;
 
     // Start is called before the first frame update
@@ -27,6 +28,17 @@ public class FoodCollisionListener : MonoBehaviour
             // Debug.Log("TriggerScale for food id: - " + triggerId + " = " + scaleAverage);
 
             scaleIncrease = new Vector3(scaleAverage, scaleAverage, scaleAverage);
+
+            Debug.Log("MaxSize check: " + listenerCurrentScale + scaleIncrease.x);
+            // Checks for player max size
+            if (listenerCurrentScale + scaleIncrease.x > maxPlayerSize)
+            {
+                transform.localScale = new Vector3(maxPlayerSize, maxPlayerSize, maxPlayerSize);
+
+                listenerCurrentScale = maxPlayerSize;
+                GetComponent<Rigidbody>().mass = CalculateMassChange(maxPlayerSize);
+                return;
+            }
 
             transform.localScale += scaleIncrease;
 
