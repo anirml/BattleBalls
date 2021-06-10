@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerEvents : MonoBehaviour
+public class PlayerEvents : MonoBehaviourPun
 {
 
     public static PlayerEvents instance;

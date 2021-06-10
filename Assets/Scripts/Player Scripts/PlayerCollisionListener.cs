@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerCollisionListener : MonoBehaviour
+public class PlayerCollisionListener : MonoBehaviourPun
 {
     private int listenerId;
     [SerializeField]
@@ -28,12 +29,12 @@ public class PlayerCollisionListener : MonoBehaviour
         listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
 
         // Calls Events from singleton (subscribe)
-        PlayerEvents.instance.PlayerCollision += ApplyPushback;
         PlayerEvents.instance.PlayerCollision += ChangeSize;
+        PlayerEvents.instance.PlayerCollision += ApplyPushback;
         PlayerEvents.instance.LoserCollision += ChangeCollisionLoserSize;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         listenerSpeed = GetComponent<Rigidbody>().velocity.magnitude;
         listenerVelocity = GetComponent<Rigidbody>().velocity;
@@ -66,17 +67,19 @@ public class PlayerCollisionListener : MonoBehaviour
             Vector3 scaleIncrease = CalculateScaleChange(triggerSpeed, listenerCurrentScale,
             triggerScale, triggerVelocity, triggerId);
 
+            Debug.Log(listenerCurrentScale);
+            Debug.Log(scaleIncrease.x);
             // Checks for player death (no size)
-            if (listenerCurrentScale - scaleIncrease.x < 0.3f)
+            if ((listenerCurrentScale - scaleIncrease.x) < 0.8f)
             {
                 Debug.Log("LISTENER HERE BOYYSSS---------");
                 PlayerEvents.instance.OnPlayerDeath();
                 return;
             }
 
-            Debug.Log("MaxSize check Player: " + listenerCurrentScale + scaleIncrease.x);
+            //Debug.Log("MaxSize check Player: " + listenerCurrentScale + scaleIncrease.x);
             // Checks for player max size
-            if (listenerCurrentScale + scaleIncrease.x > maxPlayerSize)
+            if ((listenerCurrentScale + scaleIncrease.x) > maxPlayerSize)
             {
                 transform.localScale = new Vector3(maxPlayerSize, maxPlayerSize, maxPlayerSize);
 

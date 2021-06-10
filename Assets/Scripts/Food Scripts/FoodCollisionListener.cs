@@ -29,7 +29,7 @@ public class FoodCollisionListener : MonoBehaviour
 
             scaleIncrease = new Vector3(scaleAverage, scaleAverage, scaleAverage);
 
-            Debug.Log("MaxSize check: " + listenerCurrentScale + scaleIncrease.x);
+            //Debug.Log("MaxSize check: " + listenerCurrentScale + scaleIncrease.x);
             // Checks for player max size
             if (listenerCurrentScale + scaleIncrease.x > maxPlayerSize)
             {

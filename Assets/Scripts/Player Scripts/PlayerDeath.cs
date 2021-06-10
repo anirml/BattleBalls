@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerDeath : MonoBehaviour
+public class PlayerDeath : MonoBehaviourPun
 {
     // Start is called before the first frame update
     void Start()
@@ -16,8 +16,9 @@ public class PlayerDeath : MonoBehaviour
     {
         Debug.Log("LOOK HERE YOU SILLY GEESE-------------");
         // TODO: FIX FOR MULTIPLAYER
-        // PhotonNetwork.Destroy();
-        Object.Destroy(this);
+        //PhotonNetwork.Destroy(this.gameObject);
+        //PhotonNetwork.JoinRoom("QuickStartMenuDemo");
+        Object.Destroy(this.gameObject);
     }
 
     void OnDestroy()

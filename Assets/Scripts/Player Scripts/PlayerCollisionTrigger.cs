@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerCollisionTrigger : MonoBehaviour
+public class PlayerCollisionTrigger : MonoBehaviourPun
 {
 
     private float otherPlayerVelocity;
