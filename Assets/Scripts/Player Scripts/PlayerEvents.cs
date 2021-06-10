@@ -26,9 +26,9 @@ public class PlayerEvents : MonoBehaviourPun
 
     public event Action<float, int> LoserCollision;
     //
-    public event Action PlayerDeath;
+    public event Action<int> PlayerDeath;
 
-    public event Action PlayerRespawn;
+    public event Action<int> PlayerRespawn;
 
 
     public void OnPlayerCollision(int otherId, int ownId, float triggerSpeed, Vector3 collisionDirection, 
@@ -49,10 +49,10 @@ public class PlayerEvents : MonoBehaviourPun
         LoserCollision?.Invoke(loserScaleChange, loserId);
     }
 
-    public void OnPlayerDeath()
+    public void OnPlayerDeath(int ownId)
     {
-        PlayerDeath?.Invoke();
-        PlayerRespawn?.Invoke();
+        PlayerDeath?.Invoke(ownId);
+        PlayerRespawn?.Invoke(ownId);
     }
 
 }

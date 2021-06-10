@@ -12,13 +12,16 @@ public class PlayerDeath : MonoBehaviourPun
         PlayerEvents.instance.PlayerDeath += DestroyPlayer;
     }
 
-    void DestroyPlayer()
+    void DestroyPlayer(int ownId)
     {
-        Debug.Log("LOOK HERE YOU SILLY GEESE-------------");
-        // TODO: FIX FOR MULTIPLAYER
-        //PhotonNetwork.Destroy(this.gameObject);
-        //PhotonNetwork.JoinRoom("QuickStartMenuDemo");
-        Object.Destroy(this.gameObject);
+        if (this.gameObject.GetInstanceID() == ownId)
+        {
+            // TODO: FIX FOR MULTIPLAYER
+            //PhotonNetwork.Destroy(this.gameObject);
+            //PhotonNetwork.JoinRoom("QuickStartMenuDemo");
+            Object.Destroy(this.gameObject);
+        }
+
     }
 
     void OnDestroy()

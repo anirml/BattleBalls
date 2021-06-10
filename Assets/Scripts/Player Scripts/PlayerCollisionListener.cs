@@ -73,7 +73,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
             if ((listenerCurrentScale - scaleIncrease.x) < 0.8f)
             {
                 Debug.Log("LISTENER HERE BOYYSSS---------");
-                PlayerEvents.instance.OnPlayerDeath();
+                PlayerEvents.instance.OnPlayerDeath(listenerId);
                 return;
             }
 
