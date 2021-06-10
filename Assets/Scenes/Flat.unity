@@ -552,7 +552,7 @@ PrefabInstance:
       objectReference: {fileID: 1809781611946350793, guid: e418da6ae6616c74680ccc5f9c01f287, type: 3}
     - target: {fileID: 803184276869054903, guid: e02fe1981e7255040964aba862ef2e9b, type: 3}
       propertyPath: maxFoods
-      value: 1000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 803184276869054903, guid: e02fe1981e7255040964aba862ef2e9b, type: 3}
       propertyPath: maxPlayerSize
