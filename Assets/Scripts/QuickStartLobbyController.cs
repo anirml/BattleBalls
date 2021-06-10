@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -12,6 +13,12 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
     private GameObject quickCancelButton;
     [SerializeField]
     private int RoomSize;
+    [SerializeField]
+    private InputField PlayerNameInput;
+    public string PlayerName;
+
+    
+
 
     public override void OnConnectedToMaster()
     {
@@ -21,6 +28,10 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
 
     public void QuickStart()
     {
+        PlayerName = PlayerNameInput.text;
+        PlayerNameUpdate(PlayerName);
+
+     if(PlayerName == ""){/*TODO add error and return*/}
         quickStartButton.SetActive(false);
         quickCancelButton.SetActive(true);
         PhotonNetwork.JoinRandomRoom();
@@ -53,6 +64,11 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
         quickCancelButton.SetActive(false);
         quickStartButton.SetActive(true);
         PhotonNetwork.LeaveRoom();
+    }
+
+    public void PlayerNameUpdate(string nameInput){
+        PhotonNetwork.NickName =  nameInput;
+        PlayerPrefs.SetString("NickName", nameInput);
     }
     // Start is called before the first frame update
     void Start()

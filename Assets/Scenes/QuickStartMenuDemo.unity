@@ -911,6 +911,8 @@ MonoBehaviour:
   quickStartButton: {fileID: 2016907665}
   quickCancelButton: {fileID: 105004695}
   RoomSize: 20
+  PlayerNameInput: {fileID: 1005830339}
+  PlayerName: 
 --- !u!4 &1694916469
 Transform:
   m_ObjectHideFlags: 0
