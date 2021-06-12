@@ -53,6 +53,8 @@ public class PlayerCollisionListener : MonoBehaviourPun
             GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * (30 + speedModifier));
             // Adds vertical force
             GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * relativeSpeed * listenerRigidBody.mass * 10);
+
+            GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
         }
     }
 

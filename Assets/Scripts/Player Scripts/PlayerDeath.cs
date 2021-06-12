@@ -21,13 +21,13 @@ public class PlayerDeath : MonoBehaviourPun
             //PhotonNetwork.Destroy(this.gameObject);
             //PhotonNetwork.JoinRoom("QuickStartMenuDemo");
             //PhotonNetwork.JoinRoom("QuickStartMenuDemo");
+            Debug.Log("er vi her?");
             PhotonNetwork.Destroy(this.gameObject);
             //PhotonNetwork.Disconnect();
             //PhotonNetwork.Reconnect();
             //PhotonNetwork.Destroy(this.gameObject);
             //PhotonNetwork.ConnectUsingSettings();
             //PhotonNetwork.LeaveRoom(this.gameObject);
-            Debug.Log("er vi her?");
             //PhotonNetwork.Disconnect();
             //RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)20 };
             //PhotonNetwork.JoinOrCreateRoom("QuickStartMenuDemo",roomOps, null);		
