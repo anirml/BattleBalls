@@ -20,31 +20,32 @@ public class FoodManager : MonoBehaviourPun
 
     // Singleton that actually works KEK
     public static FoodManager Instance
-     {
-         get
-         {
-             if (instance == null)
-                 instance = FindObjectOfType(typeof(FoodManager)) as FoodManager;
- 
-             return instance;
-         }
-         set
-         {
-             instance = value;
-         }
-     }
-     private static FoodManager instance;
+    {
+        get
+        {
+            if (instance == null)
+                instance = FindObjectOfType(typeof(FoodManager)) as FoodManager;
 
-     private void Start() 
-     {
-         if (currentNumberOfFoods <= maxFoods) 
+            return instance;
+        }
+        set
+        {
+            instance = value;
+        }
+    }
+
+    private static FoodManager instance;
+
+    private void Start()
+    {
+        if (currentNumberOfFoods <= maxFoods)
         {
             for (int i = 0; i < maxFoods; i++)
             {
                 PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "Food"), Vector3.zero, Quaternion.identity);
             }
         }
-     }
+    }
 
     void OnDrawGizmosSelected()
     {

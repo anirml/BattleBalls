@@ -5,22 +5,21 @@ using Photon.Pun;
 
 public class PlayerCollisionListener : MonoBehaviourPun
 {
-    private int listenerId;
     [SerializeField]
     private int scaleModifier = 30; // higher means more speed needed to steal mass
     [SerializeField]
     private float scaleChangeThreshold = 0.4f; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
     [SerializeField]
     private float speedModifier = 50f; // changes the force applied to collision knockback
-    [SerializeField]
+    
     private int maxPlayerSize = FoodManager.maxPlayerSize;
+    
+    private int listenerId;
     private float listenerCurrentScale;
+    private Rigidbody listenerRigidBody;
     private float listenerSpeed;
     private Vector3 listenerVelocity;
-    private Rigidbody listenerRigidBody;
-    private AudioSource audio;
-
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +27,6 @@ public class PlayerCollisionListener : MonoBehaviourPun
         listenerCurrentScale = transform.localScale.x;
         listenerRigidBody = GetComponent<Rigidbody>();
         listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
-        audio = GetComponent<AudioSource>();
 
         // Calls Events from singleton (subscribe)
         PlayerEvents.instance.PlayerCollision += ChangeSize;
@@ -55,7 +53,6 @@ public class PlayerCollisionListener : MonoBehaviourPun
             GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * (30 + speedModifier));
             // Adds vertical force
             GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * relativeSpeed * listenerRigidBody.mass * 10);
-            audio.Play();
         }
     }
 
@@ -66,14 +63,14 @@ public class PlayerCollisionListener : MonoBehaviourPun
         if (passedListenerId == listenerId)
         {
             float triggerScale = triggerTransform.localScale.x;
-            
+
             Vector3 scaleIncrease = CalculateScaleChange(triggerSpeed, listenerCurrentScale,
             triggerScale, triggerVelocity, triggerId);
 
             Debug.Log(listenerCurrentScale);
             Debug.Log(scaleIncrease.x);
             // Checks for player death (no size)
-            if ((listenerCurrentScale - scaleIncrease.x) < 0.8f)
+            if ((listenerCurrentScale - scaleIncrease.x) < 0.2f)
             {
                 Debug.Log("LISTENER HERE BOYYSSS---------");
                 PlayerEvents.instance.OnPlayerDeath(listenerId);

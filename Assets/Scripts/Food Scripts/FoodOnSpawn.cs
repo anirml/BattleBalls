@@ -16,13 +16,6 @@ public class FoodOnSpawn : MonoBehaviour
     float minRandom = 0.2f;
     float maxRandom = 1f;
 
-    // Possible feature?
-    // public int foodSpawnRate;
-
-    // Start is called before the first frame update, onEnable when the script is enabled for future object pooling implementation
-    //void Awake()
-
-
     void OnEnable()
     {
         RandomizeFoodScale();

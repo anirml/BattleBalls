@@ -26,9 +26,9 @@ public class PlayerDeath : MonoBehaviourPun
             //PhotonNetwork.Reconnect();
             //PhotonNetwork.Destroy(this.gameObject);
             //PhotonNetwork.ConnectUsingSettings();
-            PhotonNetwork.LeaveRoom(this.gameObject);
+            //PhotonNetwork.LeaveRoom(this.gameObject);
             Debug.Log("er vi her?");
-            PhotonNetwork.Disconnect();
+            //PhotonNetwork.Disconnect();
             //RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)20 };
             //PhotonNetwork.JoinOrCreateRoom("QuickStartMenuDemo",roomOps, null);		
             
