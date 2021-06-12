@@ -12,12 +12,11 @@ public class PlayerCollisionTrigger : MonoBehaviourPun
     private Vector3 ownVelocity;
     private Transform ownTransform;
 
-    void FixedUpdate()
+    void Update()
     {
         ownSpeed = GetComponent<Rigidbody>().velocity.magnitude;
         ownVelocity = GetComponent<Rigidbody>().velocity;
         ownTransform = transform;
-
     }
 
     private void OnCollisionEnter(Collision other)

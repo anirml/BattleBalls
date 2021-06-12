@@ -19,7 +19,6 @@ public class Movement : MonoBehaviourPun
 
     private Vector3 camF;
     private Vector3 camR;
-
     Vector2 input;
     // Start is called before the first frame update
 
@@ -62,6 +61,7 @@ public class Movement : MonoBehaviourPun
 
     private void FixedUpdate()
     {
-        rb.AddForce((camF * input.y + camR * input.x) * Time.deltaTime * speed * 100 * rb.mass);
+            rb.AddForce((camF * input.y + camR * input.x) * Time.deltaTime * speed * 100 * rb.mass);
     }
+
 }

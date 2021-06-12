@@ -18,7 +18,7 @@ public class PlayerDeath : MonoBehaviourPun
         // TODO: FIX FOR MULTIPLAYER
         //PhotonNetwork.Destroy(this.gameObject);
         //PhotonNetwork.JoinRoom("QuickStartMenuDemo");
-        Object.Destroy(this.gameObject);
+        //Object.Destroy(this.gameObject);
     }
 
     void OnDestroy()
