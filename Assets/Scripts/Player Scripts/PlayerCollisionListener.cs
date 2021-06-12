@@ -18,6 +18,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
     private float listenerSpeed;
     private Vector3 listenerVelocity;
     private Rigidbody listenerRigidBody;
+    private AudioSource audio;
 
 
     // Start is called before the first frame update
@@ -27,6 +28,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
         listenerCurrentScale = transform.localScale.x;
         listenerRigidBody = GetComponent<Rigidbody>();
         listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
+        audio = GetComponent<AudioSource>();
 
         // Calls Events from singleton (subscribe)
         PlayerEvents.instance.PlayerCollision += ChangeSize;
@@ -53,6 +55,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
             GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * (30 + speedModifier));
             // Adds vertical force
             GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * relativeSpeed * listenerRigidBody.mass * 10);
+            audio.Play();
         }
     }
 
