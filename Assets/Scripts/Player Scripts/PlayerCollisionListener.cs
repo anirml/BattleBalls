@@ -61,6 +61,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
         // Makes sure only relevant objects reacts to the invoke by checking ids
         if (passedListenerId == listenerId)
         {
+            listenerCurrentScale = transform.localScale.x;
             float triggerScale = triggerTransform.localScale.x;
 
             Vector3 scaleIncrease = CalculateScaleChange(triggerSpeed, listenerCurrentScale,
