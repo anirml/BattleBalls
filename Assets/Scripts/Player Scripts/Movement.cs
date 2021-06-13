@@ -43,9 +43,9 @@ public class Movement : MonoBehaviourPun
             heading += Input.GetAxis("Mouse X") * Time.deltaTime * mouseSensivityX;
             tilt += Input.GetAxis("Mouse Y") * Time.deltaTime * mouseSensivityY;
 
-            tilt = Mathf.Clamp(tilt, -10, 70);
+            tilt = Mathf.Clamp(tilt, -70, 10);
 
-            camPivot.rotation = Quaternion.Euler(tilt, heading, 0);
+            camPivot.rotation = Quaternion.Euler(-tilt, heading, 0);
             input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
             camF = cam.forward;
