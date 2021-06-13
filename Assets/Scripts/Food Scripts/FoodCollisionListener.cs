@@ -41,6 +41,7 @@ public class FoodCollisionListener : MonoBehaviourPun
 
                 listenerCurrentScale = maxPlayerSize;
                 GetComponent<Rigidbody>().mass = CalculateMassChange(maxPlayerSize);
+                FoodPickupEffects();
                 return;
             }
 

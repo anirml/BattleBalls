@@ -69,8 +69,6 @@ public class PlayerCollisionListener : MonoBehaviourPun
             Vector3 scaleIncrease = CalculateScaleChange(triggerSpeed, listenerCurrentScale,
             triggerScale, triggerVelocity, triggerId);
 
-            CollisionEffects(this.transform);
-
             //CameraShake.Shake(0.8f, 1f); //Camera shake for a later date
 
             // Checks for player max size
@@ -164,9 +162,6 @@ public class PlayerCollisionListener : MonoBehaviourPun
     void CollisionEffects(Transform listenerTransform)
     {
         GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
-        if (photonView.IsMine)
-        {
-            Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
-        }
+        Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
     }
 }
