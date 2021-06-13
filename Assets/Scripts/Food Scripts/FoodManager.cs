@@ -18,7 +18,7 @@ public class FoodManager : MonoBehaviourPun
     public float foodRespawnDelay;
     public GameObject food;
 
-    // Singleton that actually works KEK
+    // Singleton
     public static FoodManager Instance
     {
         get
