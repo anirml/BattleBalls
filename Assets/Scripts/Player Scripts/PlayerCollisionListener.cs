@@ -163,7 +163,10 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
     void CollisionEffects(Transform listenerTransform)
     {
-            GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
+        GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
+        if (photonView.IsMine)
+        {
             Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
+        }
     }
 }
