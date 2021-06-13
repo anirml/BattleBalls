@@ -22,7 +22,7 @@ public class PlayerDeath : MonoBehaviourPun
             //PhotonNetwork.JoinRoom("QuickStartMenuDemo");
             //PhotonNetwork.JoinRoom("QuickStartMenuDemo");
             Debug.Log("er vi her?");
-            PhotonNetwork.Destroy(this.gameObject);
+            //PhotonNetwork.Destroy(this.gameObject);
             //PhotonNetwork.Disconnect();
             //PhotonNetwork.Reconnect();
             //PhotonNetwork.Destroy(this.gameObject);

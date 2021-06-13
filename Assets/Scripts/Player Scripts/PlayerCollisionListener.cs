@@ -70,7 +70,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
             Instantiate(collisionEffect, this.transform.localPosition, this.transform.rotation);
 
             // Checks for player max size
-            if ((listenerCurrentScale + scaleIncrease.x) > maxPlayerSize)
+            if ((listenerCurrentScale - scaleIncrease.x) > maxPlayerSize)
             {
                 transform.localScale = new Vector3(maxPlayerSize, maxPlayerSize, maxPlayerSize);
 
@@ -89,8 +89,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
         {
             Vector3 scaleDecrease = new Vector3(loserScaleChange, loserScaleChange, loserScaleChange);
 
-            Debug.Log(listenerCurrentScale);
-            Debug.Log(scaleDecrease.x);
+            Debug.Log("new scale for player: " + listenerId + " = " + (listenerCurrentScale+scaleDecrease.x));
             // Checks for player death (no size)
             if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
             {
