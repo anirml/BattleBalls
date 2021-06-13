@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class FoodCollisionListener : MonoBehaviour
+public class FoodCollisionListener : MonoBehaviourPun
 {
     private int listenerId;
     private float listenerCurrentScale;
@@ -12,6 +13,8 @@ public class FoodCollisionListener : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var isMine = photonView.IsMine;
+
         //Debug.Log("Start in PlayerCollisionListener");
         listenerCurrentScale = this.gameObject.transform.localScale.x;
         listenerId = this.gameObject.GetInstanceID();
@@ -23,8 +26,9 @@ public class FoodCollisionListener : MonoBehaviour
     void Grow(int triggerId, float scaleAverage)
     {
         // Makes sure only relevant objects reacts to the invoke by checking ids
-        if(triggerId == listenerId)
+        if (triggerId == listenerId)
         {
+            listenerCurrentScale = transform.localScale.x;
             // Debug.Log("TriggerScale for food id: - " + triggerId + " = " + scaleAverage);
 
             scaleIncrease = new Vector3(scaleAverage, scaleAverage, scaleAverage);
@@ -44,15 +48,24 @@ public class FoodCollisionListener : MonoBehaviour
 
             listenerCurrentScale = transform.localScale.x;
             GetComponent<Rigidbody>().mass = CalculateMassChange(listenerCurrentScale);
-            
+
+            FoodPickupEffects();
         }
     }
 
     float CalculateMassChange(float currentScale)
     {
         //float massChange = Mathf.Pow(currentScale, 3f);
-        float massChange = 4/3 * Mathf.PI * Mathf.Pow((currentScale/2), 3f);
+        float massChange = 4 / 3 * Mathf.PI * Mathf.Pow((currentScale / 2), 3f);
         return massChange;
+    }
+
+    void FoodPickupEffects()
+    {
+        if (photonView.IsMine)
+        {
+            GetComponent<PlayerCollisionSounds>().PlayPickUpFoodSound();
+        }
     }
 
 }

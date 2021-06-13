@@ -426,6 +426,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cb261abd1107aff4cbd1a37c70a2c9dd, type: 3}
   - {fileID: 8300000, guid: 7908f16abe34f9048b44edca6ba65bd9, type: 3}
   - {fileID: 8300000, guid: 607e004785739c648af51ba8e54941f5, type: 3}
+  foodClip: {fileID: 8300000, guid: 23e45b18bd130374fa92fdb37ec5a217, type: 3}
   source: {fileID: 1887145850070283690}
 --- !u!114 &-3772798352217017286
 MonoBehaviour:
@@ -460,9 +461,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 100
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
