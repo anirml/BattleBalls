@@ -84,7 +84,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
         }
     }
 
-    void ChangeCollisionLoserSize(float loserScaleChange, int loserId)
+void ChangeCollisionLoserSize(float loserScaleChange, int loserId)
     {
         if (loserId == listenerId)
         {

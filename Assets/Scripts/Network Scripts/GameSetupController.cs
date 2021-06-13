@@ -19,14 +19,19 @@ public class GameSetupController : MonoBehaviour
         Vector3 center = FoodManager.Instance.center;
         Vector3 size = FoodManager.Instance.size;
         //Debug.Log("Creating Player");
+        // Randomizing and checking player spawn point on map
         Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(1, 1), Random.Range(-size.z / 2, size.z / 2));
         Vector3 offset = new Vector3(0,15,0);
         bool objColliders = Physics.Raycast(pos + offset, Vector3.down, 15f);
 
         if (!objColliders)
         {
+            // Randomizing ball material color of player
+            // GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonPlayer"), pos, Quaternion.identity);
             // Debug.Log("Spawn check passed!");
+            
         }
         else
         {

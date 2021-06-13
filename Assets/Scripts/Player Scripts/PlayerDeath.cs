@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviourPun
 {
+    private Scene lobbyScene;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,37 +18,24 @@ public class PlayerDeath : MonoBehaviourPun
     {
         if (this.gameObject.GetInstanceID() == ownId)
         {
-            // TODO: FIX FOR MULTIPLAYER
-            //PhotonNetwork.Destroy(this.gameObject);
-            //PhotonNetwork.JoinRoom("QuickStartMenuDemo");
-            //PhotonNetwork.JoinRoom("QuickStartMenuDemo");
-            Debug.Log("er vi her?");
-            //PhotonNetwork.Destroy(this.gameObject);
-            //PhotonNetwork.Disconnect();
-            //PhotonNetwork.Reconnect();
-            //PhotonNetwork.Destroy(this.gameObject);
-            //PhotonNetwork.ConnectUsingSettings();
-            //PhotonNetwork.LeaveRoom(this.gameObject);
-            //PhotonNetwork.Disconnect();
-            //RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)20 };
-            //PhotonNetwork.JoinOrCreateRoom("QuickStartMenuDemo",roomOps, null);		
-            
+            Debug.Log("Player Death ID: " + ownId);
+            if (photonView.IsMine)
+            {
+                PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
+                SceneManager.LoadScene("QuickStartMenuDemo");             
+                PhotonNetwork.Disconnect();
+            }
         }
-
     }
 
-
-    void OnDisconnected(){
-        Debug.Log("Player Left Rooom");
-        PhotonNetwork.ConnectUsingSettings();
-    }
-    void OnLeftRoom(){
-        Debug.Log("Player Left Rooom");
-    }
-
-    void OnDestroy()
+    /*void OnDisconnectedFromPhoton()
     {
+        Debug.Log("Player Left Room");
         PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
     }
-
+    void OnLeftRoom()
+    {
+        Debug.Log("Player Left Room");
+        PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
+    }*/
 }
