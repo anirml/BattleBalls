@@ -25,9 +25,11 @@ public class PauseMenu : MonoBehaviour
             if (GameIsPaused)
             {
                 Resume();
+                MusicManager.Instance.PlayBackgroundMusic();
             } else
             {
                 Pause();
+                MusicManager.Instance.PauseBackgroundMusic();
             }
         }
     }

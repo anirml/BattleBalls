@@ -46,6 +46,7 @@ public class FoodCollisionListener : MonoBehaviour
             listenerCurrentScale = transform.localScale.x;
             GetComponent<Rigidbody>().mass = CalculateMassChange(listenerCurrentScale);
 
+            FoodPickupEffects();
         }
     }
 
@@ -54,6 +55,11 @@ public class FoodCollisionListener : MonoBehaviour
         //float massChange = Mathf.Pow(currentScale, 3f);
         float massChange = 4 / 3 * Mathf.PI * Mathf.Pow((currentScale / 2), 3f);
         return massChange;
+    }
+
+    void FoodPickupEffects()
+    {
+        GetComponent<PlayerCollisionSounds>().PlayPickUpFoodSound();
     }
 
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCollisionSounds : MonoBehaviour
 {
     public List<AudioClip> audioClips;
+    public AudioClip foodClip;
     public AudioSource source;
 
     private void Start()
@@ -15,5 +16,10 @@ public class PlayerCollisionSounds : MonoBehaviour
     public void PlayRandomCollisionSound()
     {
         source.PlayOneShot(audioClips[Random.Range(0, audioClips.Count)]);
+    }
+
+    public void PlayPickUpFoodSound()
+    {
+        source.PlayOneShot(foodClip);
     }
 }
