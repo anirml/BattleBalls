@@ -53,8 +53,6 @@ public class PlayerCollisionListener : MonoBehaviourPun
             GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * (30 + speedModifier));
             // Adds vertical force
             GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * relativeSpeed * listenerRigidBody.mass * 10);
-
-            GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
         }
     }
 
@@ -69,15 +67,9 @@ public class PlayerCollisionListener : MonoBehaviourPun
             Vector3 scaleIncrease = CalculateScaleChange(triggerSpeed, listenerCurrentScale,
             triggerScale, triggerVelocity, triggerId);
 
-            Debug.Log(listenerCurrentScale);
-            Debug.Log(scaleIncrease.x);
-            // Checks for player death (no size)
-            if ((listenerCurrentScale - scaleIncrease.x) < 0.2f)
-            {
-                Debug.Log("LISTENER HERE BOYYSSS---------");
-                PlayerEvents.instance.OnPlayerDeath(listenerId);
-                return;
-            }
+            GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
+
+            
 
             //Debug.Log("MaxSize check Player: " + listenerCurrentScale + scaleIncrease.x);
             // Checks for player max size
@@ -99,6 +91,17 @@ public class PlayerCollisionListener : MonoBehaviourPun
         if (loserId == listenerId)
         {
             Vector3 scaleDecrease = new Vector3(loserScaleChange, loserScaleChange, loserScaleChange);
+
+            Debug.Log(listenerCurrentScale);
+            Debug.Log(scaleDecrease.x);
+            // Checks for player death (no size)
+            if ((listenerCurrentScale + scaleDecrease.x) < 0.2f)
+            {
+                Debug.Log("LISTENER HERE BOYYSSS---------");
+                PlayerEvents.instance.OnPlayerDeath(listenerId);
+                return;
+            }
+
             ChangeScale(scaleDecrease);
         }
     }
