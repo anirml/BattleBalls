@@ -8,6 +8,7 @@ public class PlayerOnSpawn : MonoBehaviourPun
     // Start is called before the first frame update
     void Start()
     {
+        var isMine = photonView.IsMine;
         RandomizePlayerColor();
     }
 
