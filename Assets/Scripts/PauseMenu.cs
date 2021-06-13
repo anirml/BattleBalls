@@ -6,7 +6,7 @@ using Photon.Pun;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
+    public bool gameIsPaused = false;
 
     public GameObject pauseMenuUI;
 
@@ -22,7 +22,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameIsPaused)
+            if (gameIsPaused)
             {
                 Resume();
                 MusicManager.Instance.PlayBackgroundMusic();
@@ -37,12 +37,12 @@ public class PauseMenu : MonoBehaviour
     public void Resume ()
     {
         pauseMenuUI.SetActive(false);
-        GameIsPaused = false;
+        gameIsPaused = false;
     }
     void Pause ()
     {
         pauseMenuUI.SetActive(true);
-        GameIsPaused = true;
+        gameIsPaused = true;
     }
 
     public void LoadMenu()
