@@ -133,6 +133,7 @@ MonoBehaviour:
   scaleModifier: 30
   scaleChangeThreshold: 0.4
   speedModifier: 10
+  collisionEffect: {fileID: 7300011337934362807, guid: 2e6129b46bc5d4840b57d47ca78fcbb6, type: 3}
 --- !u!114 &2598652904123011099
 MonoBehaviour:
   m_ObjectHideFlags: 0

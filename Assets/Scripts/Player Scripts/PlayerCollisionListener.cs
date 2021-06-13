@@ -11,15 +11,16 @@ public class PlayerCollisionListener : MonoBehaviourPun
     private float scaleChangeThreshold = 0.4f; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
     [SerializeField]
     private float speedModifier = 50f; // changes the force applied to collision knockback
-    
+
     private int maxPlayerSize = FoodManager.maxPlayerSize;
-    
+    public GameObject collisionEffect;
+
     private int listenerId;
     private float listenerCurrentScale;
     private Rigidbody listenerRigidBody;
     private float listenerSpeed;
     private Vector3 listenerVelocity;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,12 +44,10 @@ public class PlayerCollisionListener : MonoBehaviourPun
     void ApplyPushback(int passedListenerId, int triggerId, float triggerSpeed, Vector3 collisionDirection,
     Transform triggerTransform, Vector3 triggerVelocity)
     {
-        //Debug.Log("ApplyPushback passedListenerId: " + passedListenerId + " listenerId: " + listenerId);
         // Makes sure only relevant objects reacts to the invoke by checking ids
         if (passedListenerId == listenerId)
         {
             float relativeSpeed = CalculateRelativeVelocity(triggerVelocity, GetComponent<Rigidbody>().velocity);
-            //Debug.Log("RelativeSpeed manual: " + relativeSpeed);
 
             GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * (30 + speedModifier));
             // Adds vertical force
@@ -68,10 +67,8 @@ public class PlayerCollisionListener : MonoBehaviourPun
             triggerScale, triggerVelocity, triggerId);
 
             GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
+            Instantiate(collisionEffect, this.transform.localPosition, this.transform.rotation);
 
-            
-
-            //Debug.Log("MaxSize check Player: " + listenerCurrentScale + scaleIncrease.x);
             // Checks for player max size
             if ((listenerCurrentScale + scaleIncrease.x) > maxPlayerSize)
             {
@@ -97,7 +94,6 @@ public class PlayerCollisionListener : MonoBehaviourPun
             // Checks for player death (no size)
             if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
             {
-                Debug.Log("LISTENER HERE BOYYSSS---------");
                 PlayerEvents.instance.OnPlayerDeath(listenerId);
                 return;
             }
