@@ -5,21 +5,21 @@ using Photon.Pun;
 
 public class PlayerCollisionListener : MonoBehaviourPun
 {
-    private int listenerId;
     [SerializeField]
     private int scaleModifier = 30; // higher means more speed needed to steal mass
     [SerializeField]
     private float scaleChangeThreshold = 0.4f; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
     [SerializeField]
     private float speedModifier = 50f; // changes the force applied to collision knockback
-    [SerializeField]
+    
     private int maxPlayerSize = FoodManager.maxPlayerSize;
+    
+    private int listenerId;
     private float listenerCurrentScale;
+    private Rigidbody listenerRigidBody;
     private float listenerSpeed;
     private Vector3 listenerVelocity;
-    private Rigidbody listenerRigidBody;
-
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -63,22 +63,13 @@ public class PlayerCollisionListener : MonoBehaviourPun
         if (passedListenerId == listenerId)
         {
             float triggerScale = triggerTransform.localScale.x;
-            
+
             Vector3 scaleIncrease = CalculateScaleChange(triggerSpeed, listenerCurrentScale,
             triggerScale, triggerVelocity, triggerId);
 
-            Debug.Log(listenerCurrentScale);
-            Debug.Log(scaleIncrease.x);
+            GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
 
-            float scaleSum = listenerCurrentScale + scaleIncrease.x;
-            //Debug.Log("ScaleSum " + scaleSum);
-            Debug.Log("ListenerID " + listenerId + " scalesum " + scaleSum);
-            // Checks for player death (no size)
-           // if (scaleSum < 0.8f)
-           // {
-           //     PlayerEvents.instance.OnPlayerDeath(listenerId);
-           //     return;
-           // }
+            
 
             //Debug.Log("MaxSize check Player: " + listenerCurrentScale + scaleIncrease.x);
             // Checks for player max size

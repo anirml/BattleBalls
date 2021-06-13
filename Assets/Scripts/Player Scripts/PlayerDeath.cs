@@ -23,8 +23,6 @@ public class PlayerDeath : MonoBehaviourPun
         }
 
     }
-
-
    /* void OnPhotonPlayerDisconnected(){
         Debug.Log("Player Left Rooom");
         PhotonNetwork.Reconnect();
@@ -33,10 +31,6 @@ public class PlayerDeath : MonoBehaviourPun
     } */
     void OnLeftRoom(){
         Debug.Log("Player Left Rooom");
-    }
-
-    void OnDestroy()
-    {
         PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
     }
 
