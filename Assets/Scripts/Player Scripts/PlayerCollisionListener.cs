@@ -92,8 +92,7 @@ void ChangeCollisionLoserSize(float loserScaleChange, int loserId)
         {
             Vector3 scaleDecrease = new Vector3(loserScaleChange, loserScaleChange, loserScaleChange);
 
-            Debug.Log(listenerCurrentScale);
-            Debug.Log(scaleDecrease.x);
+            Debug.Log("new scale for player: " + listenerId + " = " + (listenerCurrentScale+scaleDecrease.x));
             // Checks for player death (no size)
             if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
             {
