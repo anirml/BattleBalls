@@ -23,9 +23,9 @@ public class PlayerDeath : MonoBehaviourPun
         }
 
     }
-    void OnPhotonPlayerDisconnected(){
+    void OnDisconnected(){
         Debug.Log("Player Left Rooom");
-        PhotonNetwork.Reconnect();
+        //PhotonNetwork.Reconnect();
         //PhotonNetwork.LoadLevel(0);
         PhotonNetwork.ConnectUsingSettings();
     }
