@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class FoodOnSpawn : MonoBehaviour
 {
-    public GameObject foodPrefab;
-
     Vector3 newScale;
 
     // Vector3 center = new Vector3(0,0.5f,0);
