@@ -17,30 +17,20 @@ public class PlayerDeath : MonoBehaviourPun
     {
         if (this.gameObject.GetInstanceID() == ownId)
         {
-            // TODO: FIX FOR MULTIPLAYER
-            //PhotonNetwork.Destroy(this.gameObject);
-            //PhotonNetwork.JoinRoom("QuickStartMenuDemo");
-            //PhotonNetwork.JoinRoom("QuickStartMenuDemo");
-            PhotonNetwork.Destroy(this.gameObject);
+            Debug.Log(ownId);
             //PhotonNetwork.Disconnect();
-            //PhotonNetwork.Reconnect();
-            //PhotonNetwork.Destroy(this.gameObject);
-            //PhotonNetwork.ConnectUsingSettings();
-            PhotonNetwork.LeaveRoom(this.gameObject);
-            Debug.Log("er vi her?");
-            PhotonNetwork.Disconnect();
-            //RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)20 };
-            //PhotonNetwork.JoinOrCreateRoom("QuickStartMenuDemo",roomOps, null);		
-            
+            PhotonNetwork.LoadLevel(0);	       
         }
 
     }
 
 
-    void OnDisconnected(){
+   /* void OnPhotonPlayerDisconnected(){
         Debug.Log("Player Left Rooom");
-        PhotonNetwork.ConnectUsingSettings();
-    }
+        PhotonNetwork.Reconnect();
+        //PhotonNetwork.LoadLevel(0);
+        //PhotonNetwork.ConnectUsingSettings();
+    } */
     void OnLeftRoom(){
         Debug.Log("Player Left Rooom");
     }

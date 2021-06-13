@@ -69,13 +69,16 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
             Debug.Log(listenerCurrentScale);
             Debug.Log(scaleIncrease.x);
+
+            float scaleSum = listenerCurrentScale + scaleIncrease.x;
+            //Debug.Log("ScaleSum " + scaleSum);
+            Debug.Log("ListenerID " + listenerId + " scalesum " + scaleSum);
             // Checks for player death (no size)
-            if ((listenerCurrentScale - scaleIncrease.x) < 0.8f)
-            {
-                Debug.Log("LISTENER HERE BOYYSSS---------");
-                PlayerEvents.instance.OnPlayerDeath(listenerId);
-                return;
-            }
+           // if (scaleSum < 0.8f)
+           // {
+           //     PlayerEvents.instance.OnPlayerDeath(listenerId);
+           //     return;
+           // }
 
             //Debug.Log("MaxSize check Player: " + listenerCurrentScale + scaleIncrease.x);
             // Checks for player max size
@@ -92,11 +95,22 @@ public class PlayerCollisionListener : MonoBehaviourPun
         }
     }
 
-    void ChangeCollisionLoserSize(float loserScaleChange, int loserId)
+void ChangeCollisionLoserSize(float loserScaleChange, int loserId)
     {
         if (loserId == listenerId)
         {
             Vector3 scaleDecrease = new Vector3(loserScaleChange, loserScaleChange, loserScaleChange);
+
+            Debug.Log(listenerCurrentScale);
+            Debug.Log(scaleDecrease.x);
+            // Checks for player death (no size)
+            if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
+            {
+                Debug.Log("LISTENER HERE BOYYSSS---------");
+                PlayerEvents.instance.OnPlayerDeath(listenerId);
+                return;
+            }
+
             ChangeScale(scaleDecrease);
         }
     }
