@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviourPun
 {
+    private Scene lobbyScene;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,20 +19,24 @@ public class PlayerDeath : MonoBehaviourPun
         if (this.gameObject.GetInstanceID() == ownId)
         {
             Debug.Log("Player Death ID: " + ownId);
-            PhotonNetwork.Disconnect();
-            //PhotonNetwork.LoadLevel(0);	       
+            // TODO: Don't do it like this below...
+            if (photonView.IsMine)
+            {
+                PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
+                SceneManager.LoadScene("QuickStartMenuDemo");             
+                PhotonNetwork.Disconnect();
+            }
         }
-
     }
-    void OnDisconnected(){
-        Debug.Log("Player Left Rooom");
-        //PhotonNetwork.Reconnect();
-        //PhotonNetwork.LoadLevel(0);
-        PhotonNetwork.ConnectUsingSettings();
-    }
-    void OnLeftRoom(){
-        Debug.Log("Player Left Rooom");
+    /*void OnDisconnectedFromPhoton()
+    {
+        Debug.Log("Player Left Room");
         PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
     }
+    void OnLeftRoom()
+    {
+        Debug.Log("Player Left Room");
+        PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
+    }*/
 
 }

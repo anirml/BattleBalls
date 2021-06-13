@@ -45,12 +45,11 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu()
     {
-        // SceneManager.LoadScene(lobbyScene.name);
-        
-        PhotonNetwork.Disconnect();
+        // SceneManager.LoadScene(lobbyScene.name);  
+
         // TODO: Don't do it like this below...
         SceneManager.LoadScene("QuickStartMenuDemo");
-
+        PhotonNetwork.Disconnect();
     }
 
     public void QuitGame()

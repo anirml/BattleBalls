@@ -96,7 +96,7 @@ void ChangeCollisionLoserSize(float loserScaleChange, int loserId)
             // Checks for player death (no size)
             if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
             {
-                Debug.Log("LISTENER HERE BOYYSSS---------");
+                Debug.Log("LISTENER HERE BOYYSSS---------");               
                 PlayerEvents.instance.OnPlayerDeath(listenerId);
                 return;
             }
