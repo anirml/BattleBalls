@@ -10,7 +10,8 @@ public class PlayerOnSpawn : MonoBehaviourPun
     {
         var isMine = photonView.IsMine;
         // RandomizePlayerColor();
-        GetComponent<PhotonView>().RPC("RandomizePlayerColor", RpcTarget.AllBuffered);
+        //GetComponent<PhotonView>().RPC("RandomizePlayerColor", RpcTarget.AllBuffered);
+        this.photonView.RPC("RandomizePlayerColor", RpcTarget.All);
     }
 
     [PunRPC]
