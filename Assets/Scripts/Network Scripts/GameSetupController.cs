@@ -8,6 +8,7 @@ using System.IO;
 public class GameSetupController : MonoBehaviour
 {
     // Start is called before the first frame update
+    private GameObject player;
     void Start()
     {
         CreatePlayer();
@@ -26,12 +27,8 @@ public class GameSetupController : MonoBehaviour
 
         if (!objColliders)
         {
-            // Randomizing ball material color of player
-            // GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonPlayer"), pos, Quaternion.identity);
             // Debug.Log("Spawn check passed!");
-            
         }
         else
         {
