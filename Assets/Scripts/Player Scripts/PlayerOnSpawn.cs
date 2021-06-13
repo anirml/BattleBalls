@@ -15,6 +15,9 @@ public class PlayerOnSpawn : MonoBehaviourPun
     [PunRPC]
     void RandomizePlayerColor()
     {
+        if (photonView.IsMine)
+        {
         this.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        }
     }
 }
