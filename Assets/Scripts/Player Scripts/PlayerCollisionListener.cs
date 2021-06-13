@@ -24,6 +24,8 @@ public class PlayerCollisionListener : MonoBehaviourPun
     // Start is called before the first frame update
     void Start()
     {
+        var isMine = photonView.IsMine;
+
         listenerId = this.gameObject.GetInstanceID();
         listenerCurrentScale = transform.localScale.x;
         listenerRigidBody = GetComponent<Rigidbody>();
@@ -85,13 +87,13 @@ public class PlayerCollisionListener : MonoBehaviourPun
         }
     }
 
-void ChangeCollisionLoserSize(float loserScaleChange, int loserId)
+    void ChangeCollisionLoserSize(float loserScaleChange, int loserId)
     {
         if (loserId == listenerId)
         {
             Vector3 scaleDecrease = new Vector3(loserScaleChange, loserScaleChange, loserScaleChange);
 
-            Debug.Log("new scale for player: " + listenerId + " = " + (listenerCurrentScale+scaleDecrease.x));
+            Debug.Log("new scale for player: " + listenerId + " = " + (listenerCurrentScale + scaleDecrease.x));
             // Checks for player death (no size)
             if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
             {
@@ -159,7 +161,10 @@ void ChangeCollisionLoserSize(float loserScaleChange, int loserId)
 
     void CollisionEffects(Transform listenerTransform)
     {
-        GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
-        Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
+        if (photonView.IsMine)
+        {
+            GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
+            Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
+        }
     }
 }

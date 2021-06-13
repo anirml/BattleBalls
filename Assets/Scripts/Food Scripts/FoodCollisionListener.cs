@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class FoodCollisionListener : MonoBehaviour
+public class FoodCollisionListener : MonoBehaviourPun
 {
     private int listenerId;
     private float listenerCurrentScale;
@@ -12,6 +13,8 @@ public class FoodCollisionListener : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var isMine = photonView.IsMine;
+
         //Debug.Log("Start in PlayerCollisionListener");
         listenerCurrentScale = this.gameObject.transform.localScale.x;
         listenerId = this.gameObject.GetInstanceID();
@@ -59,7 +62,10 @@ public class FoodCollisionListener : MonoBehaviour
 
     void FoodPickupEffects()
     {
-        GetComponent<PlayerCollisionSounds>().PlayPickUpFoodSound();
+        if (photonView.IsMine)
+        {
+            GetComponent<PlayerCollisionSounds>().PlayPickUpFoodSound();
+        }
     }
 
 }
