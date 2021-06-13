@@ -17,18 +17,18 @@ public class PlayerDeath : MonoBehaviourPun
     {
         if (this.gameObject.GetInstanceID() == ownId)
         {
-            Debug.Log(ownId);
-            //PhotonNetwork.Disconnect();
-            PhotonNetwork.LoadLevel(0);	       
+            Debug.Log("Player Death ID: " + ownId);
+            PhotonNetwork.Disconnect();
+            //PhotonNetwork.LoadLevel(0);	       
         }
 
     }
-   /* void OnPhotonPlayerDisconnected(){
+    void OnPhotonPlayerDisconnected(){
         Debug.Log("Player Left Rooom");
         PhotonNetwork.Reconnect();
         //PhotonNetwork.LoadLevel(0);
-        //PhotonNetwork.ConnectUsingSettings();
-    } */
+        PhotonNetwork.ConnectUsingSettings();
+    }
     void OnLeftRoom(){
         Debug.Log("Player Left Rooom");
         PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
