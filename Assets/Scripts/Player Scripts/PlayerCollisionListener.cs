@@ -93,6 +93,8 @@ public class PlayerCollisionListener : MonoBehaviourPun
         {
             Vector3 scaleDecrease = new Vector3(loserScaleChange, loserScaleChange, loserScaleChange);
 
+            CollisionEffects(this.transform);
+
             Debug.Log("new scale for player: " + listenerId + " = " + (listenerCurrentScale + scaleDecrease.x));
             // Checks for player death (no size)
             if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
