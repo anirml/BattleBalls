@@ -95,7 +95,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
             Debug.Log(listenerCurrentScale);
             Debug.Log(scaleDecrease.x);
             // Checks for player death (no size)
-            if ((listenerCurrentScale + scaleDecrease.x) < 0.2f)
+            if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
             {
                 Debug.Log("LISTENER HERE BOYYSSS---------");
                 PlayerEvents.instance.OnPlayerDeath(listenerId);

@@ -40,20 +40,18 @@ public class FoodOnSpawn : MonoBehaviour
         size = FoodManager.Instance.size;
 
         Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(1, 1), Random.Range(-size.z / 2, size.z / 2));
-       
+
         var foodColliders = Physics.OverlapSphere(pos, maxRandom);
 
-        Vector3 offset = new Vector3(0,15,0);
+        Vector3 offset = new Vector3(0, 15, 0);
         bool objColliders = Physics.Raycast(pos + offset, Vector3.down, 15f);
 
         if (foodColliders.Length <= 0 && !objColliders)
         {
             this.transform.localPosition = pos;
-            // Debug.Log("Spawn check passed!");
         }
         else
         {
-            // Debug.Log("Spawn check did not pass, rechecking..");
             RandomizePositionRotation();
         }
     }
