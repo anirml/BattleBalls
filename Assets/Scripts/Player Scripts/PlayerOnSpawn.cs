@@ -18,7 +18,6 @@ public class PlayerOnSpawn : MonoBehaviourPun
         GetComponent<PhotonView>().RPC("RandomizePlayerColor", RpcTarget.AllBuffered, values);
     }
 
-    // Feature: everybody changes color when somebody joins
     [PunRPC]
     void RandomizePlayerColor(float[] colorValues)
     {
