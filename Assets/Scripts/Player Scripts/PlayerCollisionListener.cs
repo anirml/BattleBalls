@@ -78,9 +78,11 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
                 listenerCurrentScale = maxPlayerSize;
                 listenerRigidBody.mass = CalculateMassChange(maxPlayerSize);
+                CollisionEffects(this.transform);
                 return;
             }
 
+            CollisionEffects(this.transform);
             ChangeScale(scaleIncrease);
         }
     }
@@ -91,16 +93,17 @@ public class PlayerCollisionListener : MonoBehaviourPun
         {
             Vector3 scaleDecrease = new Vector3(loserScaleChange, loserScaleChange, loserScaleChange);
 
-            CollisionEffects(this.transform);
 
             Debug.Log("new scale for player: " + listenerId + " = " + (listenerCurrentScale + scaleDecrease.x));
             // Checks for player death (no size)
             if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
             {
                 PlayerEvents.instance.OnPlayerDeath(listenerId);
+                CollisionEffects(this.transform);
                 return;
             }
 
+            CollisionEffects(this.transform);
             ChangeScale(scaleDecrease);
         }
     }
