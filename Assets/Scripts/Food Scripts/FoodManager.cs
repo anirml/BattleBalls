@@ -12,7 +12,7 @@ public class FoodManager : MonoBehaviourPun
     [SerializeField]
     public Vector3 size;
     [SerializeField]
-    public static int maxPlayerSize = 10; // 3d scale in meters (diameter)
+    public static int maxPlayerSize = 20; // 3d scale in meters (diameter)
     public float maxFoods;
     private float currentNumberOfFoods;
     public float foodRespawnDelay;
