@@ -1110,6 +1110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quickStartButton: {fileID: 2016907665}
   quickCancelButton: {fileID: 105004695}
+  quickLoadingButton: {fileID: 1994069764}
   RoomSize: 20
   PlayerNameInput: {fileID: 1005830339}
   PlayerName: 
