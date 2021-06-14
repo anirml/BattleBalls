@@ -10,7 +10,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
     [SerializeField]
     private float scaleChangeThreshold = 0.4f; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
     [SerializeField]
-    private float speedModifier = 50f; // changes the force applied to collision knockback
+    private float speedModifier = 10f; // changes the force applied to collision knockback
 
     private int maxPlayerSize = FoodManager.maxPlayerSize;
     public GameObject collisionEffect;
@@ -164,7 +164,10 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
     void CollisionEffects(Transform listenerTransform)
     {
-        GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
-        Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
+        // if (photonView.IsMine)
+        // {
+            GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
+            Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
+        // }
     }
 }
