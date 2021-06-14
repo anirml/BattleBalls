@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class PlayerOnSpawn : MonoBehaviourPun
 {
-    // private Color ballColor;
+    private bool hasChanged = false;
     private float[] values = new float[3];
 
     // Start is called before the first frame update
@@ -28,9 +28,10 @@ public class PlayerOnSpawn : MonoBehaviourPun
         color[2] = colorValues[2];
         color[3] = 1f;
 
-        if (this.GetComponent<Renderer>().material.color == Color.red)
+        if (!hasChanged)
         {
             this.GetComponent<Renderer>().material.color = color;
+            hasChanged = true;
         }
     }
 }
