@@ -17,10 +17,7 @@ public class PlayerOnSpawn : MonoBehaviourPun
         values[1] = Random.Range(0f, 1f);
         values[2] = Random.Range(0f, 1f);
 
-        if (photonView.IsMine)
-        {
-            GetComponent<PhotonView>().RPC("RandomizePlayerColor", RpcTarget.AllBuffered, values);
-        }
+        GetComponent<PhotonView>().RPC("RandomizePlayerColor", RpcTarget.AllBuffered, values);
     }
 
     [PunRPC]
@@ -32,6 +29,9 @@ public class PlayerOnSpawn : MonoBehaviourPun
         color[2] = colorValues[2];
         color[3] = 1f;
 
-        this.GetComponent<Renderer>().material.color = color;
+        if (photonView.IsMine)
+        {
+            this.GetComponent<Renderer>().material.color = color;
+        }
     }
 }
