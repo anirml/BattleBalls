@@ -11,8 +11,6 @@ public class PlayerOnSpawn : MonoBehaviourPun
     // Start is called before the first frame update
     void Start()
     {
-        var isMine = photonView.IsMine;
-        // ballColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         values[0] = Random.Range(0f, 1f);
         values[1] = Random.Range(0f, 1f);
         values[2] = Random.Range(0f, 1f);
@@ -20,6 +18,7 @@ public class PlayerOnSpawn : MonoBehaviourPun
         GetComponent<PhotonView>().RPC("RandomizePlayerColor", RpcTarget.AllBuffered, values);
     }
 
+    // Feature: everybody changes color when somebody joins
     [PunRPC]
     void RandomizePlayerColor(float[] colorValues)
     {
@@ -29,7 +28,7 @@ public class PlayerOnSpawn : MonoBehaviourPun
         color[2] = colorValues[2];
         color[3] = 1f;
 
-        if (photonView.IsMine)
+        if (this.GetComponent<Renderer>().material.color == Color.red)
         {
             this.GetComponent<Renderer>().material.color = color;
         }
