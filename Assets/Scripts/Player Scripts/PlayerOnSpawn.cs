@@ -28,9 +28,6 @@ public class PlayerOnSpawn : MonoBehaviourPun
         color[2] = colorValues[2];
         color[3] = 1f;
 
-        if (this.GetComponent<Renderer>().material.color == Color.red)
-        {
-            this.GetComponent<Renderer>().material.color = color;
-        }
+        this.GetComponent<Renderer>().material.color = color;
     }
 }
