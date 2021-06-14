@@ -130,8 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7defd7fc1d6d372409828064bdf86c8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleModifier: 30
-  scaleChangeThreshold: 0.4
+  scaleModifier: 40
+  scaleChangeThreshold: 0.5
   speedModifier: 10
   collisionEffect: {fileID: 7300011337934362807, guid: 2e6129b46bc5d4840b57d47ca78fcbb6, type: 3}
 --- !u!114 &2598652904123011099
@@ -175,6 +175,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cb261abd1107aff4cbd1a37c70a2c9dd, type: 3}
   - {fileID: 8300000, guid: 7908f16abe34f9048b44edca6ba65bd9, type: 3}
   - {fileID: 8300000, guid: 607e004785739c648af51ba8e54941f5, type: 3}
+  foodClip: {fileID: 0}
   source: {fileID: 8558677385186776445}
 --- !u!82 &8558677385186776445
 AudioSource:
