@@ -99,11 +99,9 @@ public class PlayerCollisionListener : MonoBehaviourPun
             if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
             {
                 PlayerEvents.instance.OnPlayerDeath(listenerId);
-                CollisionEffects(this.transform);
                 return;
             }
 
-            CollisionEffects(this.transform);
             ChangeScale(scaleDecrease);
         }
     }
@@ -164,10 +162,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
     void CollisionEffects(Transform listenerTransform)
     {
-        // if (photonView.IsMine)
-        // {
-            GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
-            Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
-        // }
+        GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
+        Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
     }
 }
