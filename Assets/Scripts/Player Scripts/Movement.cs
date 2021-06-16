@@ -20,20 +20,18 @@ public class Movement : MonoBehaviourPun
     private Vector3 camF;
     private Vector3 camR;
     Vector2 input;
-    // Start is called before the first frame update
 
+    // Start is called before the first frame update
     void Start()
     {
         var isMine = photonView.IsMine;
 
-        if (cam.gameObject.activeSelf == false)
-        {
-            camPivot.gameObject.SetActive(isMine);
-            cam.gameObject.SetActive(isMine);
-        }
+        //camPivot.gameObject.SetActive(isMine);
+        camPivot.gameObject.SetActive(true);
+        cam.gameObject.SetActive(isMine);
+
         rb = GetComponent<Rigidbody>();
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -61,7 +59,7 @@ public class Movement : MonoBehaviourPun
 
     private void FixedUpdate()
     {
-            rb.AddForce((camF * input.y + camR * input.x) * Time.deltaTime * speed * 100 * rb.mass);
+        rb.AddForce((camF * input.y + camR * input.x) * Time.deltaTime * speed * 100 * rb.mass);
     }
 
 }
