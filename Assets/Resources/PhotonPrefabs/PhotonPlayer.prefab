@@ -370,7 +370,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 1
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleModifier: 30
-  scaleChangeThreshold: 0.4
+  scaleChangeThreshold: 0.6
   speedModifier: 10
   collisionEffect: {fileID: 7300011337934362807, guid: 2e6129b46bc5d4840b57d47ca78fcbb6, type: 3}
 --- !u!114 &890293372655048551
@@ -581,7 +581,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
