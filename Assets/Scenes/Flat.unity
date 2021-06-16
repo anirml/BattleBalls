@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 170908273}
   - component: {fileID: 170908272}
   - component: {fileID: 170908271}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1296,7 +1296,7 @@ GameObject:
   - component: {fileID: 704458350}
   - component: {fileID: 704458349}
   - component: {fileID: 704458348}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NW Corner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2343,7 +2343,7 @@ GameObject:
   - component: {fileID: 1257984068}
   - component: {fileID: 1257984067}
   - component: {fileID: 1257984066}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NE Corner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2728,7 +2728,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1417442019}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3059,7 +3059,7 @@ GameObject:
   - component: {fileID: 1619994324}
   - component: {fileID: 1619994323}
   - component: {fileID: 1619994322}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: West Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3156,7 +3156,7 @@ GameObject:
   - component: {fileID: 1634836864}
   - component: {fileID: 1634836863}
   - component: {fileID: 1634836862}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SE Corner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3677,7 +3677,7 @@ GameObject:
   - component: {fileID: 1724389702}
   - component: {fileID: 1724389701}
   - component: {fileID: 1724389700}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: South Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3774,7 +3774,7 @@ GameObject:
   - component: {fileID: 1767645540}
   - component: {fileID: 1767645539}
   - component: {fileID: 1767645538}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: North Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3968,7 +3968,7 @@ GameObject:
   - component: {fileID: 1811879623}
   - component: {fileID: 1811879622}
   - component: {fileID: 1811879621}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'East Wall '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4214,6 +4214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61afa54c4d45b404c90a80159a0699e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameIsPaused: 0
   pauseMenuUI: {fileID: 1205076430}
 --- !u!114 &1937257591
 MonoBehaviour:
@@ -4597,7 +4598,7 @@ GameObject:
   - component: {fileID: 2062792213}
   - component: {fileID: 2062792212}
   - component: {fileID: 2062792211}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SW Corner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
