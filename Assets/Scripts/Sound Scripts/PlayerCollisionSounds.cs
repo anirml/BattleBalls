@@ -23,8 +23,9 @@ public class PlayerCollisionSounds : MonoBehaviour
         source.PlayOneShot(foodClip);
     }
 
-    public void PlayBounceSound()
+    public void PlayBounceSound(float volume)
     {
-        
+        // argument not implemented, just ignore
+
     }
 }

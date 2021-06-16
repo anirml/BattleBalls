@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerBounceSounds : MonoBehaviour
 {
     public bool isGrounded = false;
-    public float listenerSpeed;
+    public float verticalVelocity;
 
-    private void Start()
+    void Update()
     {
-        listenerSpeed = GetComponent<Rigidbody>().velocity.magnitude;
+        verticalVelocity = GetComponent<Rigidbody>().velocity.magnitude;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -17,10 +17,12 @@ public class PlayerBounceSounds : MonoBehaviour
         if ((other.gameObject.layer == 6 || other.gameObject.layer == 8) && !isGrounded)
         {
             isGrounded = true;
-            if (listenerSpeed > 1)
-            {
-                GetComponent<PlayerCollisionSounds>().PlayBounceSound();
-            }
+            // Maybe for future implementation on volume control based on velocity
+            // if (verticalVelocity > 1)
+            // {
+            //Debug.Log("Velocity.y = " + verticalVelocity);
+            GetComponent<PlayerCollisionSounds>().PlayBounceSound(verticalVelocity);
+            // }
         }
     }
 

@@ -508,6 +508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGrounded: 0
+  verticalVelocity: 0
 --- !u!114 &1670371531847564652
 MonoBehaviour:
   m_ObjectHideFlags: 0
