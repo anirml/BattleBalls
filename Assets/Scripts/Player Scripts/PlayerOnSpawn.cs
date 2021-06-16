@@ -5,21 +5,32 @@ using Photon.Pun;
 
 public class PlayerOnSpawn : MonoBehaviourPun
 {
+    private bool hasChanged = false;
+    private float[] values = new float[3];
+
     // Start is called before the first frame update
     void Start()
     {
-        var isMine = photonView.IsMine;
-        // RandomizePlayerColor();
-        //GetComponent<PhotonView>().RPC("RandomizePlayerColor", RpcTarget.AllBuffered);
-        this.photonView.RPC("RandomizePlayerColor", RpcTarget.All);
+        values[0] = Random.Range(0f, 1f);
+        values[1] = Random.Range(0f, 1f);
+        values[2] = Random.Range(0f, 1f);
+
+        GetComponent<PhotonView>().RPC("RandomizePlayerColor", RpcTarget.AllBuffered, values);
     }
 
     [PunRPC]
-    void RandomizePlayerColor()
+    void RandomizePlayerColor(float[] colorValues)
     {
-        if (photonView.IsMine)
+        Color color = Color.clear;
+        color[0] = colorValues[0];
+        color[1] = colorValues[1];
+        color[2] = colorValues[2];
+        color[3] = 1f;
+
+        if (!hasChanged)
         {
-        this.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            this.GetComponent<Renderer>().material.color = color;
+            hasChanged = true;
         }
     }
 }
