@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 1972654373602452474}
   - component: {fileID: 890293372655048551}
   - component: {fileID: 1972654373602452472}
-  - component: {fileID: 3946375210012040966}
+  - component: {fileID: 1932298021062260570}
   - component: {fileID: 1670371531847564652}
   - component: {fileID: 1025630532114183424}
   - component: {fileID: 6894988271669195920}
@@ -495,7 +495,7 @@ MonoBehaviour:
   camPivot: {fileID: 1972654373602452445}
   cam: {fileID: 1972654373602452444}
   speed: 15
---- !u!114 &3946375210012040966
+--- !u!114 &1932298021062260570
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -507,6 +507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523e8b3a32aa18545ae5dce283b443e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGrounded: 0
 --- !u!114 &1670371531847564652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,7 +551,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.35
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0

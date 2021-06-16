@@ -22,4 +22,9 @@ public class PlayerCollisionSounds : MonoBehaviour
     {
         source.PlayOneShot(foodClip);
     }
+
+    public void PlayBounceSound()
+    {
+        
+    }
 }
