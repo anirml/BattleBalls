@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Terrain
   - Surface
+  - Text_Nametag
   layers:
   - Default
   - TransparentFX
