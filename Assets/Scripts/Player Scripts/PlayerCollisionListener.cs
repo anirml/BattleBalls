@@ -79,11 +79,11 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
                 listenerCurrentScale = maxPlayerSize;
                 listenerRigidBody.mass = CalculateMassChange(maxPlayerSize);
-                CollisionEffects(this.transform);
+                CollisionEffects(this.transform, scaleIncrease);
                 return;
             }
 
-            ChangeScale(new Vector3(scaleIncrease, scaleIncrease ,scaleIncrease));
+            ChangeScale(new Vector3(scaleIncrease, scaleIncrease, scaleIncrease));
         }
     }
 
@@ -132,8 +132,8 @@ public class PlayerCollisionListener : MonoBehaviourPun
             newTriggerScaleIncrease = (listenerScale * -scaleChange);
             PlayerEvents.instance.OnLoserCollision(newTriggerScaleIncrease, triggerId);
         }
-        
-        CollisionEffects(this.transform);
+
+        CollisionEffects(this.transform, newTriggerScaleIncrease);
         return newListenerScaleIncrease;
     }
 
@@ -162,9 +162,12 @@ public class PlayerCollisionListener : MonoBehaviourPun
         return massChange;
     }
 
-    void CollisionEffects(Transform listenerTransform)
+    void CollisionEffects(Transform listenerTransform, float scaleDecrease)
     {
-        GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
+        if ((listenerCurrentScale + scaleDecrease) < 0.8f)
+        {
+            GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
+        }
 
         if (photonView.IsMine)
         {
