@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class PlayerOnSpawn : MonoBehaviourPun
 {
@@ -30,7 +31,9 @@ public class PlayerOnSpawn : MonoBehaviourPun
         if (!hasChanged)
         {
             this.GetComponent<Renderer>().material.color = color;
+
             hasChanged = true;
         }
+
     }
 }
