@@ -225,14 +225,14 @@ public class ScoreHandler : MonoBehaviour
 
             if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
             {
-                if (i == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[0]; pName1.color = pColorList[0]; }
-                if (i == 2) { nText2.text = pScaleList[1].ToString("F2") + "  " + pNames[1]; pName2.color = pColorList[1]; }
+                if (i == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[1]; pName1.color = pColorList[0]; }
+                if (i == 2) { nText2.text = pScaleList[1].ToString("F2") + "  " + pNames[0]; pName2.color = pColorList[1]; }
             }
             if (PhotonNetwork.CurrentRoom.PlayerCount == 3)
             {
-                if (i == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[0]; pName1.color = pColorList[0]; }
+                if (i == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[2]; pName1.color = pColorList[0]; }
                 if (i == 2) { nText2.text = pScaleList[1].ToString("F2") + "  " + pNames[1]; pName2.color = pColorList[1]; }
-                if (i == 3) { nText3.text = pScaleList[2].ToString("F2") + "  " + pNames[2]; pName3.color = pColorList[2]; }
+                if (i == 3) { nText3.text = pScaleList[2].ToString("F2") + "  " + pNames[0]; pName3.color = pColorList[2]; }
 
             }
             if (PhotonNetwork.CurrentRoom.PlayerCount == 4)
