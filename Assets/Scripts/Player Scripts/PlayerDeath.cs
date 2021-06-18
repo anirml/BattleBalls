@@ -19,7 +19,7 @@ public class PlayerDeath : MonoBehaviourPun
     {
         if (this.gameObject.GetInstanceID() == ownId)
         {
-            Debug.Log("Player Death ID: " + ownId);
+            // Debug.Log("Player Death ID: " + ownId);
             if (photonView.IsMine)
             {
                 PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
