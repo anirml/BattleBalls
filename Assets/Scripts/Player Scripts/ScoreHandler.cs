@@ -203,7 +203,7 @@ public class ScoreHandler : MonoBehaviour
             pColor = plr.GetComponent<MeshRenderer>().material.color;
 
             namePlateText = plr.transform.GetChild(0).GetChild(1).GetChild(0).gameObject;
-            TextMeshProUGUI namePlayerText = namePlateText.GetComponent<TextMeshProUGUI>();
+            Text namePlayerText = namePlateText.GetComponent<Text>();
 
             //Sets transparency, value 255 is no transparency
             pColor.a = (byte)100;
