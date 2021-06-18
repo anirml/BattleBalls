@@ -83,7 +83,6 @@ public class PlayerCollisionListener : MonoBehaviourPun
                 return;
             }
 
-            CollisionEffects(this.transform);
             ChangeScale(new Vector3(scaleIncrease, scaleIncrease ,scaleIncrease));
         }
     }
@@ -99,7 +98,6 @@ public class PlayerCollisionListener : MonoBehaviourPun
             // Checks for player death (no size)
             if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
             {
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Splatter"), playerPos, Quaternion.identity);
                 PlayerEvents.instance.OnPlayerDeath(listenerId);
                 return;
             }
@@ -133,7 +131,8 @@ public class PlayerCollisionListener : MonoBehaviourPun
             newTriggerScaleIncrease = (listenerScale * -scaleChange);
             PlayerEvents.instance.OnLoserCollision(newTriggerScaleIncrease, triggerId);
         }
-
+        
+        CollisionEffects(this.transform);
         return newListenerScaleIncrease;
     }
 
