@@ -52,7 +52,6 @@ public class PlayerEvents : MonoBehaviourPun
     public void OnPlayerDeath(int ownId)
     {
         PlayerDeath?.Invoke(ownId);
-        PlayerRespawn?.Invoke(ownId);
     }
 
 }
