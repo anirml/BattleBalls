@@ -26,6 +26,6 @@ public class PlayerCollisionSounds : MonoBehaviour
 
     public void PlayBounceSound(float volume)
     {
-        source.PlayOneShot(bounceClip, 0.2f);
+        source.PlayOneShot(bounceClip, Random.Range(0.05f, 0.15f));
     }
 }
