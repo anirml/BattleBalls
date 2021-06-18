@@ -6,6 +6,7 @@ public class PlayerCollisionSounds : MonoBehaviour
 {
     public List<AudioClip> audioClips;
     public AudioClip foodClip;
+    public AudioClip bounceClip;
     public AudioSource source;
 
     private void Start()
@@ -25,7 +26,6 @@ public class PlayerCollisionSounds : MonoBehaviour
 
     public void PlayBounceSound(float volume)
     {
-        // argument not implemented, just ignore
-
+        source.PlayOneShot(bounceClip, 0.2f);
     }
 }

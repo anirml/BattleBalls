@@ -527,6 +527,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7908f16abe34f9048b44edca6ba65bd9, type: 3}
   - {fileID: 8300000, guid: 607e004785739c648af51ba8e54941f5, type: 3}
   foodClip: {fileID: 8300000, guid: 23e45b18bd130374fa92fdb37ec5a217, type: 3}
+  bounceClip: {fileID: 8300000, guid: e541dc13526805b46b0875b483590b70, type: 3}
   source: {fileID: 6894988271669195920}
 --- !u!114 &1025630532114183424
 MonoBehaviour:
