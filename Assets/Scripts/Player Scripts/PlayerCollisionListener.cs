@@ -22,7 +22,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
     private float listenerSpeed;
     private Vector3 listenerVelocity;
 
-    private bool isWinner = false;
+    private bool isWinner = true;
 
     // Start is called before the first frame update
     void Start()
