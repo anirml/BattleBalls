@@ -54,6 +54,8 @@ public class PauseMenu : MonoBehaviour
         // SceneManager.LoadScene(lobbyScene.name);  
 
         // TODO: Don't do it like this below...
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
         SceneManager.LoadScene("QuickStartMenuDemo");
         PhotonNetwork.Disconnect();
     }

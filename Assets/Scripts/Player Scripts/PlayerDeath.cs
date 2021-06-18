@@ -23,6 +23,8 @@ public class PlayerDeath : MonoBehaviourPun
             if (photonView.IsMine)
             {
                 PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Confined;
                 SceneManager.LoadScene("QuickStartMenuDemo");
                 PhotonNetwork.Disconnect();
             }
