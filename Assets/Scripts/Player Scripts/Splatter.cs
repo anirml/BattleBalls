@@ -38,7 +38,7 @@ public class Splatter : MonoBehaviour
         {//when the other script has power to assign the color , this code is used
             spriteRenderer.color = splatColor;
         }
-        transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+        transform.rotation = Quaternion.Euler(90, 0, Random.Range(0, 360));
     }
 
     public void PlayDeathSound()

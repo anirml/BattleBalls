@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System.IO;
 
 public class PlayerCollisionListener : MonoBehaviourPun
 {
@@ -21,6 +22,8 @@ public class PlayerCollisionListener : MonoBehaviourPun
     private float listenerSpeed;
     private Vector3 listenerVelocity;
 
+    private bool isWinner = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +35,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
         listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
 
         // Calls Events from singleton (subscribe)
-        PlayerEvents.instance.PlayerCollision += ChangeSize;
+        PlayerEvents.instance.PlayerCollision += ChangeCollisionWinnerSize;
         PlayerEvents.instance.PlayerCollision += ApplyPushback;
         PlayerEvents.instance.LoserCollision += ChangeCollisionLoserSize;
     }
@@ -57,64 +60,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
         }
     }
 
-    void ChangeSize(int passedListenerId, int triggerId, float triggerSpeed, Vector3 collisionDirection,
-    Transform triggerTransform, Vector3 triggerVelocity)
-    {
-        // Makes sure only relevant objects reacts to the invoke by checking ids
-        if (passedListenerId == listenerId)
-        {
-            listenerCurrentScale = transform.localScale.x;
-            float triggerScale = triggerTransform.localScale.x;
-
-            Vector3 scaleIncrease = CalculateScaleChange(triggerSpeed, listenerCurrentScale,
-            triggerScale, triggerVelocity, triggerId);
-
-            //CameraShake.Shake(0.8f, 1f); //Camera shake for a later date
-
-            // Checks for player max size
-            if ((listenerCurrentScale - scaleIncrease.x) > maxPlayerSize)
-            {
-                transform.localScale = new Vector3(maxPlayerSize, maxPlayerSize, maxPlayerSize);
-
-                listenerCurrentScale = maxPlayerSize;
-                listenerRigidBody.mass = CalculateMassChange(maxPlayerSize);
-                CollisionEffects(this.transform);
-                return;
-            }
-
-            CollisionEffects(this.transform);
-            ChangeScale(scaleIncrease);
-        }
-    }
-
-    void ChangeCollisionLoserSize(float loserScaleChange, int loserId)
-    {
-        if (loserId == listenerId)
-        {
-            Vector3 scaleDecrease = new Vector3(loserScaleChange, loserScaleChange, loserScaleChange);
-
-
-            Debug.Log("new scale for player: " + listenerId + " = " + (listenerCurrentScale + scaleDecrease.x));
-            // Checks for player death (no size)
-            if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
-            {
-                PlayerEvents.instance.OnPlayerDeath(listenerId);
-                return;
-            }
-
-            ChangeScale(scaleDecrease);
-        }
-    }
-
-    void ChangeScale(Vector3 scaleChange)
-    {
-        transform.localScale += scaleChange;
-
-        listenerCurrentScale = transform.localScale.x;
-        listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
-    }
-
-    Vector3 CalculateScaleChange(float triggerSpeed, float listenerScale,
+    float CalculateScaleChange(float triggerSpeed, float listenerScale,
      float triggerScale, Vector3 triggerVelocity, int triggerId)
     {
         listenerVelocity = GetComponent<Rigidbody>().velocity;
@@ -132,7 +78,65 @@ public class PlayerCollisionListener : MonoBehaviourPun
             PlayerEvents.instance.OnLoserCollision(newTriggerScaleIncrease, triggerId);
         }
 
-        return new Vector3(newListenerScaleIncrease, newListenerScaleIncrease, newListenerScaleIncrease);
+        CollisionEffects(this.transform);
+        return newListenerScaleIncrease;
+    }
+
+    void ChangeCollisionWinnerSize(int passedListenerId, int triggerId, float triggerSpeed, Vector3 collisionDirection,
+    Transform triggerTransform, Vector3 triggerVelocity)
+    {
+        // Makes sure only relevant objects reacts to the invoke by checking ids
+        if (passedListenerId == listenerId)
+        {
+            listenerCurrentScale = transform.localScale.x;
+            float triggerScale = triggerTransform.localScale.x;
+
+            float scaleIncrease = CalculateScaleChange(triggerSpeed, listenerCurrentScale,
+            triggerScale, triggerVelocity, triggerId);
+
+            //CameraShake.Shake(0.8f, 1f); //Camera shake for a later date
+
+            // Checks for player max size
+            if ((listenerCurrentScale + scaleIncrease) > maxPlayerSize)
+            {
+                transform.localScale = new Vector3(maxPlayerSize, maxPlayerSize, maxPlayerSize);
+
+                listenerCurrentScale = maxPlayerSize;
+                listenerRigidBody.mass = CalculateMassChange(maxPlayerSize);
+                CollisionEffects(this.transform);
+                return;
+            }
+
+            ChangeScale(new Vector3(scaleIncrease, scaleIncrease, scaleIncrease));
+        }
+    }
+
+    void ChangeCollisionLoserSize(float loserScaleChange, int loserId)
+    {
+        if (loserId == listenerId)
+        {
+            isWinner = false;
+            Vector3 scaleDecrease = new Vector3(loserScaleChange, loserScaleChange, loserScaleChange);
+            // Vector3 playerPos = transform.localPosition;
+
+            // Debug.Log("new scale for player: " + listenerId + " = " + (listenerCurrentScale + scaleDecrease.x));
+            // Checks for player death (no size)
+            if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
+            {
+                // PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Splatter"), playerPos, Quaternion.identity);
+                PlayerEvents.instance.OnPlayerDeath(listenerId);
+                return;
+            }
+            ChangeScale(scaleDecrease);
+        }
+    }
+
+    void ChangeScale(Vector3 scaleChange)
+    {
+        transform.localScale += scaleChange;
+
+        listenerCurrentScale = transform.localScale.x;
+        listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
     }
 
     float CalculateScaleChangeFactor(float relativeSpeed)
@@ -162,9 +166,13 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
     void CollisionEffects(Transform listenerTransform)
     {
-        GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
+        if (isWinner)
+        {
+            GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
+            isWinner = true;
+        }
 
-        if (photonView.IsMine)
+        if (photonView.IsMine && isWinner)
         {
             Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
         }

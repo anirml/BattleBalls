@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4296855853882299849}
   - component: {fileID: 3905711163205838201}
   - component: {fileID: 8558677385186776445}
+  - component: {fileID: 5661698270669902219}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Player
@@ -176,6 +177,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7908f16abe34f9048b44edca6ba65bd9, type: 3}
   - {fileID: 8300000, guid: 607e004785739c648af51ba8e54941f5, type: 3}
   foodClip: {fileID: 0}
+  bounceClip: {fileID: 0}
   source: {fileID: 8558677385186776445}
 --- !u!82 &8558677385186776445
 AudioSource:
@@ -273,3 +275,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5661698270669902219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2598652904123011098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9bc443a363c28941b78b60d6b225cb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -462,7 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleModifier: 30
-  scaleChangeThreshold: 0.6
+  scaleChangeThreshold: 0.8
   speedModifier: 10
   collisionEffect: {fileID: 7300011337934362807, guid: 2e6129b46bc5d4840b57d47ca78fcbb6, type: 3}
 --- !u!114 &890293372655048551
@@ -576,6 +576,15 @@ AudioSource:
       value: 1
       inSlope: 0
       outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.24378711
+      value: 0.4133404
+      inSlope: -1.4597279
+      outSlope: -1.4597279
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334

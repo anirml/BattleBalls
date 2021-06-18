@@ -28,9 +28,6 @@ public class PlayerEvents : MonoBehaviourPun
     //
     public event Action<int> PlayerDeath;
 
-    public event Action<int> PlayerRespawn;
-
-
     public void OnPlayerCollision(int otherId, int ownId, float triggerSpeed, Vector3 collisionDirection, 
     Transform triggerTransform, Vector3 triggerVelocity)
     {
@@ -52,7 +49,6 @@ public class PlayerEvents : MonoBehaviourPun
     public void OnPlayerDeath(int ownId)
     {
         PlayerDeath?.Invoke(ownId);
-        PlayerRespawn?.Invoke(ownId);
     }
 
 }
