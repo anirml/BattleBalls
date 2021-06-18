@@ -99,7 +99,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
             // Checks for player death (no size)
             if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
             {
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Splatter"), playerPos, Quaternion.identity); 
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Splatter"), playerPos, Quaternion.identity);
                 PlayerEvents.instance.OnPlayerDeath(listenerId);
                 return;
             }
@@ -165,6 +165,10 @@ public class PlayerCollisionListener : MonoBehaviourPun
     void CollisionEffects(Transform listenerTransform)
     {
         GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
-        Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
+
+        if (photonView.IsMine)
+        {
+            Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
+        }
     }
 }
