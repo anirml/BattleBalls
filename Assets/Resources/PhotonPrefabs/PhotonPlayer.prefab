@@ -348,9 +348,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1972654373602452440}
   serializedVersion: 2
-  m_Mass: 1.5
-  m_Drag: 0.1
-  m_AngularDrag: 1
+  m_Mass: 0.015
+  m_Drag: 0.5
+  m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -462,8 +462,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleModifier: 30
-  scaleChangeThreshold: 0.8
-  speedModifier: 10
+  scaleChangeThreshold: 0.6
+  speedModifier: 40
+  minSize: 0.08
+  maxPlayerSize: 2
   collisionEffect: {fileID: 7300011337934362807, guid: 2e6129b46bc5d4840b57d47ca78fcbb6, type: 3}
 --- !u!114 &890293372655048551
 MonoBehaviour:
@@ -494,7 +496,7 @@ MonoBehaviour:
   mouseSensivityY: 150
   camPivot: {fileID: 1972654373602452445}
   cam: {fileID: 1972654373602452444}
-  speed: 15
+  speed: 3
 --- !u!114 &1932298021062260570
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class Movement : MonoBehaviourPun
     float tilt = 15;
     public Transform cam;
 
-    public float speed = 0.5f;
+    public float speed;
 
     private Vector3 camF;
     private Vector3 camR;
@@ -31,8 +31,6 @@ public class Movement : MonoBehaviourPun
         //camPivot.gameObject.SetActive(isMine);
         camPivot.gameObject.SetActive(true);
         cam.gameObject.SetActive(isMine);
-
-        rb = GetComponent<Rigidbody>();
 
         pauseMenu = GameObject.Find("CanvasMenu");
     }
@@ -61,6 +59,8 @@ public class Movement : MonoBehaviourPun
             camR = camR.normalized;
 
             input = input.normalized;
+
+            rb = GetComponent<Rigidbody>();
         }
     }
 

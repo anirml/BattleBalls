@@ -6,14 +6,12 @@ using System.IO;
 
 public class PlayerCollisionListener : MonoBehaviourPun
 {
-    [SerializeField]
-    private int scaleModifier = 30; // higher means more speed needed to steal mass
-    [SerializeField]
-    private float scaleChangeThreshold = 0.4f; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
-    [SerializeField]
-    private float speedModifier = 1f; // changes the force applied to collision knockback
+    public int scaleModifier; // higher means more speed needed to steal mass
+    public float scaleChangeThreshold; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
+    public float speedModifier; // changes the force applied to collision knockback
+    public float minSize;
+    public int maxPlayerSize; // 3d scale in meters (diameter)
 
-    private int maxPlayerSize = FoodManager.maxPlayerSize;
     public GameObject collisionEffect;
 
     private int listenerId;
@@ -54,7 +52,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
         {
             float relativeSpeed = CalculateRelativeVelocity(triggerVelocity, GetComponent<Rigidbody>().velocity);
 
-            GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * (3 + speedModifier));
+            GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * (speedModifier));
             // Adds vertical force
             GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * relativeSpeed * listenerRigidBody.mass * 10);
         }
@@ -121,7 +119,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
             // Debug.Log("new scale for player: " + listenerId + " = " + (listenerCurrentScale + scaleDecrease.x));
             // Checks for player death (no size)
-            if ((listenerCurrentScale + scaleDecrease.x) < 0.08f)
+            if ((listenerCurrentScale + scaleDecrease.x) < minSize)
             {
                 // PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Splatter"), playerPos, Quaternion.identity);
                 PlayerEvents.instance.OnPlayerDeath(listenerId);
@@ -159,7 +157,6 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
     float CalculateMassChange(float currentScale)
     {
-        //float massChange = Mathf.Pow(currentScale, 3f);
         float massChange = 4 / 3 * Mathf.PI * Mathf.Pow((currentScale / 2), 3f);
         return massChange;
     }
