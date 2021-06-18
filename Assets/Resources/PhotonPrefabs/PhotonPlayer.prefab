@@ -462,7 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleModifier: 30
-  scaleChangeThreshold: 0.6
+  scaleChangeThreshold: 0.8
   speedModifier: 40
   minSize: 0.08
   maxPlayerSize: 2
