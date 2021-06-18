@@ -466,6 +466,7 @@ MonoBehaviour:
   speedModifier: 4
   minSize: 0.08
   maxPlayerSize: 2
+  knockbackModifier: 10
   collisionEffect: {fileID: 7300011337934362807, guid: 2e6129b46bc5d4840b57d47ca78fcbb6, type: 3}
 --- !u!114 &890293372655048551
 MonoBehaviour:
