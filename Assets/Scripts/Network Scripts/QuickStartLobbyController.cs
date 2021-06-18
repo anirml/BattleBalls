@@ -37,6 +37,8 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
         quickStartButton.SetActive(false);
         quickCancelButton.SetActive(true);
         quickLoadingButton.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         PhotonNetwork.JoinRandomRoom();
         Debug.Log("Quick start");
     }

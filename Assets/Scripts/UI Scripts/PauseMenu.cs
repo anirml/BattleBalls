@@ -36,12 +36,16 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         gameIsPaused = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         MusicManager.Instance.PlayBackgroundMusic();
     }
     void Pause ()
     {
         pauseMenuUI.SetActive(true);
         gameIsPaused = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
         MusicManager.Instance.PauseBackgroundMusic();
     }
 
