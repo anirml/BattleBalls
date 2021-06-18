@@ -67,13 +67,13 @@ public class PlayerCollisionListener : MonoBehaviourPun
             listenerCurrentScale = transform.localScale.x;
             float triggerScale = triggerTransform.localScale.x;
 
-            Vector3 scaleIncrease = CalculateScaleChange(triggerSpeed, listenerCurrentScale,
+            float scaleIncrease = CalculateScaleChange(triggerSpeed, listenerCurrentScale,
             triggerScale, triggerVelocity, triggerId);
 
             //CameraShake.Shake(0.8f, 1f); //Camera shake for a later date
 
             // Checks for player max size
-            if ((listenerCurrentScale - scaleIncrease.x) > maxPlayerSize)
+            if ((listenerCurrentScale - scaleIncrease) > maxPlayerSize)
             {
                 transform.localScale = new Vector3(maxPlayerSize, maxPlayerSize, maxPlayerSize);
 
@@ -84,7 +84,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
             }
 
             CollisionEffects(this.transform);
-            ChangeScale(scaleIncrease);
+            ChangeScale(new Vector3(scaleIncrease, scaleIncrease ,scaleIncrease));
         }
     }
 
@@ -95,7 +95,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
             Vector3 scaleDecrease = new Vector3(loserScaleChange, loserScaleChange, loserScaleChange);
             Vector3 playerPos = transform.localPosition;
 
-            Debug.Log("new scale for player: " + listenerId + " = " + (listenerCurrentScale + scaleDecrease.x));
+            // Debug.Log("new scale for player: " + listenerId + " = " + (listenerCurrentScale + scaleDecrease.x));
             // Checks for player death (no size)
             if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
             {
@@ -116,7 +116,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
         listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
     }
 
-    Vector3 CalculateScaleChange(float triggerSpeed, float listenerScale,
+    float CalculateScaleChange(float triggerSpeed, float listenerScale,
      float triggerScale, Vector3 triggerVelocity, int triggerId)
     {
         listenerVelocity = GetComponent<Rigidbody>().velocity;
@@ -134,7 +134,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
             PlayerEvents.instance.OnLoserCollision(newTriggerScaleIncrease, triggerId);
         }
 
-        return new Vector3(newListenerScaleIncrease, newListenerScaleIncrease, newListenerScaleIncrease);
+        return newListenerScaleIncrease;
     }
 
     float CalculateScaleChangeFactor(float relativeSpeed)
