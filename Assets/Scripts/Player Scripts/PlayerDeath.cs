@@ -19,7 +19,6 @@ public class PlayerDeath : MonoBehaviourPun
     {
         if (this.gameObject.GetInstanceID() == ownId)
         {
-            Debug.Log("Player Death ID: " + ownId);
             if (photonView.IsMine)
             {
                 PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
@@ -31,6 +30,7 @@ public class PlayerDeath : MonoBehaviourPun
 
     private void OnDestroy()
     {
+        Debug.Log("Player Death ID: " + ownId);
         Vector3 playerPos = this.gameObject.transform.localPosition;
         PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Splatter"), playerPos, Quaternion.identity);
         PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
