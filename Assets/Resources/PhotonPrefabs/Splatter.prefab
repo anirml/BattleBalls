@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5671229466549228939
+--- !u!1 &136784
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,76 +8,136 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5671229466549228941}
-  - component: {fileID: 5671229466549228940}
-  - component: {fileID: 803184276869054903}
-  - component: {fileID: -3707799632274481566}
-  - component: {fileID: 7802231325206254360}
+  - component: {fileID: 457098}
+  - component: {fileID: 21224092}
+  - component: {fileID: 11466376}
+  - component: {fileID: 8342488917443633439}
+  - component: {fileID: 2346327571911707260}
   m_Layer: 0
-  m_Name: EventHandler
+  m_Name: Splatter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5671229466549228941
+--- !u!4 &457098
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5671229466549228939}
+  m_GameObject: {fileID: 136784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.341568, y: -2.1022809, z: 2.5874531}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5671229466549228940
+--- !u!212 &21224092
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136784}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 3ba73ab92ecade740afa0c62a9eac5fb, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -167245067
+  m_SortingLayer: 1
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 7efb895ff64a79443a104716971519da, type: 3}
+  m_Color: {r: 0.27742815, g: 0.2794118, b: 0.25886682, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &11466376
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5671229466549228939}
+  m_GameObject: {fileID: 136784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c1640ba4720acd4dace8ec929cd6dbb, type: 3}
+  m_Script: {fileID: 11500000, guid: 493af0421e4e84e4296bff7b9775fb89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &803184276869054903
+  sprites:
+  - {fileID: 21300000, guid: fc79ff27b96f9004daf1eb7eff387158, type: 3}
+  - {fileID: 21300000, guid: d8b1d6eb1a26dab4bbc4c4394a0a6098, type: 3}
+  - {fileID: 21300000, guid: 3d7f0e255bdf32b4e8e001443c0d9e15, type: 3}
+  - {fileID: 21300000, guid: 234400bd3a4aa954cbb2c2a0225d2b79, type: 3}
+  - {fileID: 21300000, guid: 9dad6916cb6dcab49a0404ebbcdd7595, type: 3}
+  - {fileID: 21300000, guid: d5adc05d4113d7448a75637bb998396c, type: 3}
+  randomColor: 1
+  splatColor:
+    serializedVersion: 2
+    rgba: 0
+--- !u!114 &8342488917443633439
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5671229466549228939}
+  m_GameObject: {fileID: 136784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f198c9e4a2f0f9418be3c702a643975, type: 3}
+  m_Script: {fileID: 11500000, guid: ae3d6a04743e906469bb103a9da53e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {x: 0, y: 0.5, z: 0}
-  size: {x: 999, y: 1, z: 999}
-  maxFoods: 500
-  foodRespawnDelay: 5
-  food: {fileID: 3283491534265499202, guid: df3d41a786aa13e43aceef1e87a5f083, type: 3}
---- !u!82 &-3707799632274481566
+  deathClip: {fileID: 8300000, guid: 23e45b18bd130374fa92fdb37ec5a217, type: 3}
+  source: {fileID: 2346327571911707260}
+--- !u!82 &2346327571911707260
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5671229466549228939}
+  m_GameObject: {fileID: 136784}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ad403fe5cb1141c4db962f01954ad170, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.05
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -119,7 +179,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -159,16 +219,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7802231325206254360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5671229466549228939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abbf2ee4b7cdf9643bf8466cd33f713e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 0}

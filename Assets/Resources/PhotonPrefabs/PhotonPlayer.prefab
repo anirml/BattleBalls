@@ -251,6 +251,7 @@ GameObject:
   - component: {fileID: 1972654373602452474}
   - component: {fileID: 890293372655048551}
   - component: {fileID: 1972654373602452472}
+  - component: {fileID: 1932298021062260570}
   - component: {fileID: 1670371531847564652}
   - component: {fileID: 1025630532114183424}
   - component: {fileID: 6894988271669195920}
@@ -461,7 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleModifier: 30
-  scaleChangeThreshold: 0.4
+  scaleChangeThreshold: 0.6
   speedModifier: 10
   collisionEffect: {fileID: 7300011337934362807, guid: 2e6129b46bc5d4840b57d47ca78fcbb6, type: 3}
 --- !u!114 &890293372655048551
@@ -494,6 +495,20 @@ MonoBehaviour:
   camPivot: {fileID: 1972654373602452445}
   cam: {fileID: 1972654373602452444}
   speed: 15
+--- !u!114 &1932298021062260570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972654373602452440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523e8b3a32aa18545ae5dce283b443e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrounded: 0
+  verticalVelocity: 0
 --- !u!114 &1670371531847564652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,6 +527,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7908f16abe34f9048b44edca6ba65bd9, type: 3}
   - {fileID: 8300000, guid: 607e004785739c648af51ba8e54941f5, type: 3}
   foodClip: {fileID: 8300000, guid: 23e45b18bd130374fa92fdb37ec5a217, type: 3}
+  bounceClip: {fileID: 8300000, guid: e541dc13526805b46b0875b483590b70, type: 3}
   source: {fileID: 6894988271669195920}
 --- !u!114 &1025630532114183424
 MonoBehaviour:
@@ -537,7 +553,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -548,7 +564,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -566,7 +582,7 @@ AudioSource:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 0.28222656
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -581,7 +597,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
