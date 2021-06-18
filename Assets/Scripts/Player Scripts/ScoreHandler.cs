@@ -221,18 +221,18 @@ public class ScoreHandler : MonoBehaviour
 
 
 
-            if (pName1.isActiveAndEnabled && PhotonNetwork.CurrentRoom.PlayerCount == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + p.NickName; pName1.color = pColorList[0]; }
+            if (pName1.isActiveAndEnabled && PhotonNetwork.CurrentRoom.PlayerCount == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[0]; pName1.color = pColorList[0]; }
 
             if (pName2.isActiveAndEnabled && PhotonNetwork.CurrentRoom.PlayerCount == 2)
             {
-                if (i == 1) { nText1.text = pScaleList[1].ToString("F2") + "  " + p.NickName; pName1.color = pColorList[1]; }
-                if (i == 2) { nText2.text = pScaleList[0].ToString("F2") + "  " + p.NickName; pName2.color = pColorList[0]; }
+                if (i == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[0]; pName1.color = pColorList[1]; }
+                if (i == 2) { nText2.text = pScaleList[1].ToString("F2") + "  " + pNames[1]; pName2.color = pColorList[0]; }
             }
             if (pName3.isActiveAndEnabled && PhotonNetwork.CurrentRoom.PlayerCount == 3)
             {
-                if (i == 1) { nText1.text = pScaleList[2].ToString("F2") + "  " + p.NickName; pName1.color = pColorList[2]; }
-                if (i == 2) { nText2.text = pScaleList[1].ToString("F2") + "  " + p.NickName; pName2.color = pColorList[1]; }
-                if (i == 3) { nText3.text = pScaleList[0].ToString("F2") + "  " + p.NickName; pName3.color = pColorList[0]; }
+                if (i == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[0]; pName1.color = pColorList[2]; }
+                if (i == 2) { nText2.text = pScaleList[1].ToString("F2") + "  " + pNames[1]; pName2.color = pColorList[1]; }
+                if (i == 3) { nText3.text = pScaleList[2].ToString("F2") + "  " + pNames[2]; pName3.color = pColorList[0]; }
 
             }
             if (pName4.isActiveAndEnabled && PhotonNetwork.CurrentRoom.PlayerCount == 4)
