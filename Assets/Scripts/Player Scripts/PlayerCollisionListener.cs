@@ -174,7 +174,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
             isWinner = true;
         }
 
-        if (photonView.IsMine)
+        if (photonView.IsMine && isWinner)
         {
             Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
         }
