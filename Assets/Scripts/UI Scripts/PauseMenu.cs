@@ -25,11 +25,9 @@ public class PauseMenu : MonoBehaviour
             if (gameIsPaused)
             {
                 Resume();
-                MusicManager.Instance.PlayBackgroundMusic();
             } else
             {
-                Pause();
-                MusicManager.Instance.PauseBackgroundMusic();
+                Pause(); 
             }
         }
     }
@@ -38,11 +36,17 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         gameIsPaused = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        MusicManager.Instance.PlayBackgroundMusic();
     }
     void Pause ()
     {
         pauseMenuUI.SetActive(true);
         gameIsPaused = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        MusicManager.Instance.PauseBackgroundMusic();
     }
 
     public void LoadMenu()
@@ -50,6 +54,8 @@ public class PauseMenu : MonoBehaviour
         // SceneManager.LoadScene(lobbyScene.name);  
 
         // TODO: Don't do it like this below...
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
         SceneManager.LoadScene("QuickStartMenuDemo");
         PhotonNetwork.Disconnect();
     }
@@ -59,4 +65,5 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Quitting game...");
         Application.Quit();
     }
+
 }

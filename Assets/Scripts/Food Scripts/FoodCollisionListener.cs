@@ -7,7 +7,7 @@ public class FoodCollisionListener : MonoBehaviourPun
 {
     private int listenerId;
     private float listenerCurrentScale;
-    private int maxPlayerSize = FoodManager.maxPlayerSize;
+    private int maxPlayerSize;
     private Vector3 scaleIncrease;
 
     // Start is called before the first frame update
@@ -15,7 +15,7 @@ public class FoodCollisionListener : MonoBehaviourPun
     {
         var isMine = photonView.IsMine;
 
-        //Debug.Log("Start in PlayerCollisionListener");
+        maxPlayerSize = GetComponent<PlayerCollisionListener>().maxPlayerSize;
         listenerCurrentScale = this.gameObject.transform.localScale.x;
         listenerId = this.gameObject.GetInstanceID();
 

@@ -19,16 +19,26 @@ public class PlayerDeath : MonoBehaviourPun
     {
         if (this.gameObject.GetInstanceID() == ownId)
         {
-            Vector3 playerPos = this.gameObject.transform.position;
-            Debug.Log("Player Death ID: " + ownId);
+            // Debug.Log("Player Death ID: " + ownId);
             if (photonView.IsMine)
             {
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Splatter"), playerPos, Quaternion.identity);
                 PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
-                SceneManager.LoadScene("QuickStartMenuDemo");             
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Confined;
+                SceneManager.LoadScene("QuickStartMenuDemo");
                 PhotonNetwork.Disconnect();
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("Player Death ID: " + this.gameObject.GetInstanceID());
+        // Instantiating splatter prefab on player's x and z position.
+        Vector3 playerPos = this.gameObject.transform.localPosition;
+        playerPos.y = 0.01f;
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Splatter"), playerPos, Quaternion.identity);
+        PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
     }
 
     /*void OnDisconnectedFromPhoton()

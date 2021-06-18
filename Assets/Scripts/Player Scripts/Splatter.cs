@@ -22,11 +22,19 @@ public class Splatter : MonoBehaviour
         //at start we randomly select the sprites
         spriteRenderer.sprite = sprites[Random.Range(0, sprites.Count)];
         //checks if randomColor is true and then randomly apply the colors
-        if (randomColor)
-        {
-            ApplyStyle();
-        }
+        
+        // GameObject[] playerIds = GameObject.FindGameObjectsWithTag("Player");
+
+        // for (int i = 0; i < playerIds.Length; i++)
+        // {
+        //     if (i == this.gameObject.GetInstanceID())
+        //     {
+                
+        //     }
+        // }
+        ApplyStyle();
     }
+
     //this methode assign the color to the splatter
     public void ApplyStyle()
     {
@@ -38,7 +46,7 @@ public class Splatter : MonoBehaviour
         {//when the other script has power to assign the color , this code is used
             spriteRenderer.color = splatColor;
         }
-        transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+        transform.rotation = Quaternion.Euler(90, 0, Random.Range(0, 360));
     }
 
     public void PlayDeathSound()

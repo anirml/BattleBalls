@@ -15,11 +15,13 @@ public class Movement : MonoBehaviourPun
     float tilt = 15;
     public Transform cam;
 
-    public float speed = 5.0f;
+    public float speed;
 
     private Vector3 camF;
     private Vector3 camR;
     Vector2 input;
+    private bool gameIsPaused;
+    private GameObject pauseMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -30,12 +32,15 @@ public class Movement : MonoBehaviourPun
         camPivot.gameObject.SetActive(true);
         cam.gameObject.SetActive(isMine);
 
-        rb = GetComponent<Rigidbody>();
+        pauseMenu = GameObject.Find("CanvasMenu");
     }
+
     // Update is called once per frame
     void Update()
     {
-        if (photonView.IsMine)
+        gameIsPaused = pauseMenu.GetComponent<PauseMenu>().gameIsPaused;
+
+        if (photonView.IsMine && !gameIsPaused)
         {
             heading += Input.GetAxis("Mouse X") * Time.deltaTime * mouseSensivityX;
             tilt += Input.GetAxis("Mouse Y") * Time.deltaTime * mouseSensivityY;
@@ -54,12 +59,17 @@ public class Movement : MonoBehaviourPun
             camR = camR.normalized;
 
             input = input.normalized;
+
+            rb = GetComponent<Rigidbody>();
         }
     }
 
     private void FixedUpdate()
     {
-        rb.AddForce((camF * input.y + camR * input.x) * Time.deltaTime * speed * 100 * rb.mass);
+        if (!gameIsPaused)
+        {
+            rb.AddForce((camF * input.y + camR * input.x) * Time.deltaTime * speed * 100 * rb.mass);
+        }
     }
 
 }
