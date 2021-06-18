@@ -11,6 +11,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
     public float speedModifier; // changes the force applied to collision knockback
     public float minSize;
     public int maxPlayerSize; // 3d scale in meters (diameter)
+    public int knockbackModifier;
 
     public GameObject collisionEffect;
 
@@ -52,9 +53,9 @@ public class PlayerCollisionListener : MonoBehaviourPun
         {
             float relativeSpeed = CalculateRelativeVelocity(triggerVelocity, GetComponent<Rigidbody>().velocity);
 
-            GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * (speedModifier));
+            GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * (speedModifier)*knockbackModifier);
             // Adds vertical force
-            GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * relativeSpeed * listenerRigidBody.mass * 10);
+            GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * relativeSpeed * listenerRigidBody.mass * 2*knockbackModifier);
         }
     }
 
