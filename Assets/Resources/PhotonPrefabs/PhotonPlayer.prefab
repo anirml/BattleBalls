@@ -463,7 +463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleModifier: 30
   scaleChangeThreshold: 0.8
-  speedModifier: 40
+  speedModifier: 4
   minSize: 0.08
   maxPlayerSize: 2
   collisionEffect: {fileID: 7300011337934362807, guid: 2e6129b46bc5d4840b57d47ca78fcbb6, type: 3}

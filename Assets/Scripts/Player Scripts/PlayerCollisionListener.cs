@@ -171,7 +171,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
             isWinner = true;
         }
 
-        if (photonView.IsMine && isWinner)
+        if (photonView.IsMine)
         {
             GameObject CollisionEffect = Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
             collisionEffect.transform.localScale = new Vector3(listenerCurrentScale, listenerCurrentScale, listenerCurrentScale);
