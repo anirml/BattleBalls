@@ -189,7 +189,27 @@ public class ScoreHandler : MonoBehaviour
                 if (i == 1) { nText1.text = p.NickName; }
                 if (i == 2) { nText2.text = p.NickName; }
             }
-
+            if (pName3.isActiveAndEnabled && PhotonNetwork.CurrentRoom.PlayerCount == 3)
+            {
+                if (i == 1) { nText1.text = p.NickName; }
+                if (i == 2) { nText2.text = p.NickName; }
+                if (i == 3) { nText3.text = p.NickName; }
+            }
+            if (pName4.isActiveAndEnabled && PhotonNetwork.CurrentRoom.PlayerCount == 4)
+            {
+                if (i == 1) { nText1.text = p.NickName; }
+                if (i == 2) { nText2.text = p.NickName; }
+                if (i == 3) { nText3.text = p.NickName; }
+                if (i == 4) { nText4.text = p.NickName; }
+            }
+            if (pName5.isActiveAndEnabled && PhotonNetwork.CurrentRoom.PlayerCount == 5)
+            {
+                if (i == 1) { nText1.text = p.NickName; }
+                if (i == 2) { nText2.text = p.NickName; }
+                if (i == 3) { nText3.text = p.NickName; }
+                if (i == 4) { nText4.text = p.NickName; }
+                if (i == 5) { nText5.text = p.NickName; }
+            }
         }
     }
 

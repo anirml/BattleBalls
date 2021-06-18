@@ -3371,12 +3371,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1257984065}
-  - component: {fileID: 1257984068}
-  - component: {fileID: 1257984067}
-  - component: {fileID: 1257984066}
+  - component: {fileID: 1210704362}
+  - component: {fileID: 1210704364}
+  - component: {fileID: 1210704363}
   m_Layer: 6
-  m_Name: NE Corner
+  m_Name: Player1Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
