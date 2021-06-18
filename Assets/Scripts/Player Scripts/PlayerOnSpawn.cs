@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class PlayerOnSpawn : MonoBehaviourPun
 {
@@ -39,5 +40,6 @@ public class PlayerOnSpawn : MonoBehaviourPun
             playerColor = color;
             hasChanged = true;
         }
+
     }
 }
