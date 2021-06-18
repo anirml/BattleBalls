@@ -83,7 +83,6 @@ public class PlayerCollisionListener : MonoBehaviourPun
                 return;
             }
 
-            CollisionEffects(this.transform);
             ChangeScale(new Vector3(scaleIncrease, scaleIncrease ,scaleIncrease));
         }
     }
@@ -133,7 +132,8 @@ public class PlayerCollisionListener : MonoBehaviourPun
             newTriggerScaleIncrease = (listenerScale * -scaleChange);
             PlayerEvents.instance.OnLoserCollision(newTriggerScaleIncrease, triggerId);
         }
-
+        
+        CollisionEffects(this.transform);
         return newListenerScaleIncrease;
     }
 
