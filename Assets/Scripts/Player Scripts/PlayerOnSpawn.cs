@@ -8,6 +8,11 @@ public class PlayerOnSpawn : MonoBehaviourPun
     private bool hasChanged = false;
     private float[] values = new float[3];
 
+    [HideInInspector]
+    public int playerId;
+    [HideInInspector]
+    public Color playerColor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +20,7 @@ public class PlayerOnSpawn : MonoBehaviourPun
         values[1] = Random.Range(0f, 1f);
         values[2] = Random.Range(0f, 1f);
 
+        playerId = this.gameObject.GetInstanceID();
         GetComponent<PhotonView>().RPC("RandomizePlayerColor", RpcTarget.AllBuffered, values);
     }
 
@@ -30,6 +36,7 @@ public class PlayerOnSpawn : MonoBehaviourPun
         if (!hasChanged)
         {
             this.GetComponent<Renderer>().material.color = color;
+            playerColor = color;
             hasChanged = true;
         }
     }

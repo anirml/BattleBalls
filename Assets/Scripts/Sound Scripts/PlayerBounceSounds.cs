@@ -5,7 +5,9 @@ using Photon.Pun;
 
 public class PlayerBounceSounds : MonoBehaviourPun
 {
+    [HideInInspector]
     public bool isGrounded = false;
+    [HideInInspector]
     public float verticalVelocity;
 
     private void Start()
