@@ -77,6 +77,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
         }
 
         CollisionEffects(this.transform);
+        isWinner = true;
         return newListenerScaleIncrease;
     }
 
@@ -102,6 +103,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
                 listenerCurrentScale = maxPlayerSize;
                 listenerRigidBody.mass = CalculateMassChange(maxPlayerSize);
                 CollisionEffects(this.transform);
+                isWinner = true;
                 return;
             }
 
@@ -171,7 +173,8 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
         if (photonView.IsMine && isWinner)
         {
-            Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
+            GameObject CollisionEffect = Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
+            collisionEffect.transform.localScale = new Vector3(listenerCurrentScale, listenerCurrentScale, listenerCurrentScale);
         }
     }
 }

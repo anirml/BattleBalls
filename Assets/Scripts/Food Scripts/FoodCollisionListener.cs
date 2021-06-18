@@ -16,8 +16,6 @@ public class FoodCollisionListener : MonoBehaviourPun
         var isMine = photonView.IsMine;
 
         maxPlayerSize = GetComponent<PlayerCollisionListener>().maxPlayerSize;
-
-        //Debug.Log("Start in PlayerCollisionListener");
         listenerCurrentScale = this.gameObject.transform.localScale.x;
         listenerId = this.gameObject.GetInstanceID();
 
