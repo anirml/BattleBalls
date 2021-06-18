@@ -25,11 +25,9 @@ public class PauseMenu : MonoBehaviour
             if (gameIsPaused)
             {
                 Resume();
-                MusicManager.Instance.PlayBackgroundMusic();
             } else
             {
-                Pause();
-                MusicManager.Instance.PauseBackgroundMusic();
+                Pause(); 
             }
         }
     }
@@ -38,11 +36,13 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         gameIsPaused = false;
+        MusicManager.Instance.PlayBackgroundMusic();
     }
     void Pause ()
     {
         pauseMenuUI.SetActive(true);
         gameIsPaused = true;
+        MusicManager.Instance.PauseBackgroundMusic();
     }
 
     public void LoadMenu()

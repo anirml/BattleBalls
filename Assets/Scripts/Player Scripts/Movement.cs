@@ -34,15 +34,6 @@ public class Movement : MonoBehaviourPun
 
         rb = GetComponent<Rigidbody>();
 
-        // GameObject[] playerIds = GameObject.FindGameObjectsWithTag("Player");
-
-        // for (int i = 0; i < playerIds.Length; i++)
-        // {
-        //     if (playerIds. = this.gameObject.GetInstanceID())
-        //     {
-
-        //     }
-        // }
         pauseMenu = GameObject.Find("CanvasMenu");
     }
 
