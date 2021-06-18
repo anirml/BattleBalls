@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System.IO;
 
 public class PlayerCollisionListener : MonoBehaviourPun
 {
@@ -92,12 +93,13 @@ public class PlayerCollisionListener : MonoBehaviourPun
         if (loserId == listenerId)
         {
             Vector3 scaleDecrease = new Vector3(loserScaleChange, loserScaleChange, loserScaleChange);
-
+            // Vector3 playerPos = transform.localPosition;
 
             Debug.Log("new scale for player: " + listenerId + " = " + (listenerCurrentScale + scaleDecrease.x));
             // Checks for player death (no size)
             if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
             {
+                // 
                 PlayerEvents.instance.OnPlayerDeath(listenerId);
                 return;
             }

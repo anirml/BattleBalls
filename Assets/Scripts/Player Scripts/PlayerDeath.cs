@@ -19,7 +19,7 @@ public class PlayerDeath : MonoBehaviourPun
     {
         if (this.gameObject.GetInstanceID() == ownId)
         {
-            Vector3 playerPos = this.gameObject.transform.position;
+            Vector3 playerPos = this.gameObject.transform.localPosition;
             Debug.Log("Player Death ID: " + ownId);
             if (photonView.IsMine)
             {
