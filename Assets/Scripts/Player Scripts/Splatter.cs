@@ -22,11 +22,19 @@ public class Splatter : MonoBehaviour
         //at start we randomly select the sprites
         spriteRenderer.sprite = sprites[Random.Range(0, sprites.Count)];
         //checks if randomColor is true and then randomly apply the colors
-        if (randomColor)
-        {
-            ApplyStyle();
-        }
+        
+        // GameObject[] playerIds = GameObject.FindGameObjectsWithTag("Player");
+
+        // for (int i = 0; i < playerIds.Length; i++)
+        // {
+        //     if (i == this.gameObject.GetInstanceID())
+        //     {
+                
+        //     }
+        // }
+        ApplyStyle();
     }
+
     //this methode assign the color to the splatter
     public void ApplyStyle()
     {
