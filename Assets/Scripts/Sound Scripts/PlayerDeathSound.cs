@@ -14,6 +14,6 @@ public class PlayerDeathSound : MonoBehaviour
 
     public void PlayDeathSound()
     {
-        source.PlayOneShot(deathClip);
+        source.PlayOneShot(deathClip, 0.3f);
     }
 }

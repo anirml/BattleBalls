@@ -22,6 +22,8 @@ public class PlayerCollisionListener : MonoBehaviourPun
     private float listenerSpeed;
     private Vector3 listenerVelocity;
 
+    private bool isWinner = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +59,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
             GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * relativeSpeed * listenerRigidBody.mass * 10);
         }
     }
-    
+
     float CalculateScaleChange(float triggerSpeed, float listenerScale,
      float triggerScale, Vector3 triggerVelocity, int triggerId)
     {
@@ -76,7 +78,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
             PlayerEvents.instance.OnLoserCollision(newTriggerScaleIncrease, triggerId);
         }
 
-        CollisionEffects(this.transform, newTriggerScaleIncrease);
+        CollisionEffects(this.transform);
         return newListenerScaleIncrease;
     }
 
@@ -101,7 +103,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
                 listenerCurrentScale = maxPlayerSize;
                 listenerRigidBody.mass = CalculateMassChange(maxPlayerSize);
-                CollisionEffects(this.transform, scaleIncrease);
+                CollisionEffects(this.transform);
                 return;
             }
 
@@ -113,6 +115,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
     {
         if (loserId == listenerId)
         {
+            isWinner = false;
             Vector3 scaleDecrease = new Vector3(loserScaleChange, loserScaleChange, loserScaleChange);
             // Vector3 playerPos = transform.localPosition;
 
@@ -124,7 +127,6 @@ public class PlayerCollisionListener : MonoBehaviourPun
                 PlayerEvents.instance.OnPlayerDeath(listenerId);
                 return;
             }
-
             ChangeScale(scaleDecrease);
         }
     }
@@ -164,11 +166,12 @@ public class PlayerCollisionListener : MonoBehaviourPun
         return massChange;
     }
 
-    void CollisionEffects(Transform listenerTransform, float scaleChange)
+    void CollisionEffects(Transform listenerTransform)
     {
-        if ((listenerCurrentScale - scaleChange) < 0.8f)
+        if (isWinner)
         {
             GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
+            isWinner = true;
         }
 
         if (photonView.IsMine)
