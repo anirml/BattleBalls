@@ -180,7 +180,7 @@ public class ScoreHandler : MonoBehaviour
         {
             i++;
             //Debug.Log(p.NickName);//DELETE LATER
-            Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
+            //Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
             //Debug.Log(p.CustomProperties.GetObjectData(info,context));
 
             if (pName1.isActiveAndEnabled && PhotonNetwork.CurrentRoom.PlayerCount == 1) { nText1.text = p.NickName; }
