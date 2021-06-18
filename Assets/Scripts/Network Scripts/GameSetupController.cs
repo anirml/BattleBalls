@@ -4,11 +4,11 @@ using UnityEngine;
 using Photon.Pun;
 using System.IO;
 
-
-public class GameSetupController : MonoBehaviour
+public class GameSetupController : MonoBehaviourPun
 {
     // Start is called before the first frame update
     private GameObject player;
+
     void Start()
     {
         CreatePlayer();
@@ -22,7 +22,7 @@ public class GameSetupController : MonoBehaviour
         //Debug.Log("Creating Player");
         // Randomizing and checking player spawn point on map
         Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(1, 1), Random.Range(-size.z / 2, size.z / 2));
-        Vector3 offset = new Vector3(0,15,0);
+        Vector3 offset = new Vector3(0, 15, 0);
         bool objColliders = Physics.Raycast(pos + offset, Vector3.down, 15f);
 
         if (!objColliders)
@@ -35,11 +35,12 @@ public class GameSetupController : MonoBehaviour
             // Debug.Log("Spawn check did not pass, rechecking..");
             CreatePlayer();
         }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

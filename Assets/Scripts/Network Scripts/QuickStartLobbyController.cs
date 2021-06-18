@@ -19,8 +19,6 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
     private InputField PlayerNameInput;
     public string PlayerName;
 
-    
-
 
     public override void OnConnectedToMaster()
     {
@@ -34,7 +32,8 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
         PlayerName = PlayerNameInput.text;
         PlayerNameUpdate(PlayerName);
 
-     if(PlayerName == ""){/*TODO add error and return*/}
+        if (PlayerName == "") {/*TODO add error and return*/}
+
         quickStartButton.SetActive(false);
         quickCancelButton.SetActive(true);
         quickLoadingButton.SetActive(false);
@@ -71,18 +70,20 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
     }
 
-    public void PlayerNameUpdate(string nameInput){
-        PhotonNetwork.NickName =  nameInput;
+    public void PlayerNameUpdate(string nameInput)
+    {
+        PhotonNetwork.NickName = nameInput;
         PlayerPrefs.SetString("NickName", nameInput);
     }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
