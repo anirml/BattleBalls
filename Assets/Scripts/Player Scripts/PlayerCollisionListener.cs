@@ -93,13 +93,13 @@ public class PlayerCollisionListener : MonoBehaviourPun
         if (loserId == listenerId)
         {
             Vector3 scaleDecrease = new Vector3(loserScaleChange, loserScaleChange, loserScaleChange);
-            Vector3 playerPos = transform.localPosition;
+            // Vector3 playerPos = transform.localPosition;
 
             // Debug.Log("new scale for player: " + listenerId + " = " + (listenerCurrentScale + scaleDecrease.x));
             // Checks for player death (no size)
             if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
             {
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Splatter"), playerPos, Quaternion.identity);
+                // PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Splatter"), playerPos, Quaternion.identity);
                 PlayerEvents.instance.OnPlayerDeath(listenerId);
                 return;
             }
