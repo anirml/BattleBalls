@@ -11,7 +11,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
     [SerializeField]
     private float scaleChangeThreshold = 0.4f; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
     [SerializeField]
-    private float speedModifier = 10f; // changes the force applied to collision knockback
+    private float speedModifier = 1f; // changes the force applied to collision knockback
 
     private int maxPlayerSize = FoodManager.maxPlayerSize;
     public GameObject collisionEffect;
@@ -54,7 +54,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
         {
             float relativeSpeed = CalculateRelativeVelocity(triggerVelocity, GetComponent<Rigidbody>().velocity);
 
-            GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * (30 + speedModifier));
+            GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * (3 + speedModifier));
             // Adds vertical force
             GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * relativeSpeed * listenerRigidBody.mass * 10);
         }
@@ -121,7 +121,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
             // Debug.Log("new scale for player: " + listenerId + " = " + (listenerCurrentScale + scaleDecrease.x));
             // Checks for player death (no size)
-            if ((listenerCurrentScale + scaleDecrease.x) < 0.8f)
+            if ((listenerCurrentScale + scaleDecrease.x) < 0.08f)
             {
                 // PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Splatter"), playerPos, Quaternion.identity);
                 PlayerEvents.instance.OnPlayerDeath(listenerId);

@@ -202,12 +202,12 @@ public class ScoreHandler : MonoBehaviour
             //Sets transparency, value 255 is no transparency
             pColor.a = (byte)100;
 
-            Debug.Log(pScale);
+            // Debug.Log(pScale);
 
             pScaleList.Add(pScale);
             pColorList.Add(pColor);
 
-            Debug.Log(pColor.r + " " + pColor.g + " " + pColor.b + " " + pColor.a + " ");
+            // Debug.Log(pColor.r + " " + pColor.g + " " + pColor.b + " " + pColor.a + " ");
         }
 
         foreach (Player p in PhotonNetwork.PlayerList)
@@ -216,7 +216,7 @@ public class ScoreHandler : MonoBehaviour
 
             pNames.Add(p.NickName);
 
-            Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
+            // Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
 
 
 

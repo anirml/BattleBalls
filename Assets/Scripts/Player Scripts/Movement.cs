@@ -15,7 +15,7 @@ public class Movement : MonoBehaviourPun
     float tilt = 15;
     public Transform cam;
 
-    public float speed = 5.0f;
+    public float speed = 0.5f;
 
     private Vector3 camF;
     private Vector3 camR;
