@@ -139,8 +139,6 @@ public class PlayerCollisionListener : MonoBehaviourPun
         listenerRigidBody.mass = CalculateMassChange(listenerCurrentScale);
     }
 
-
-
     float CalculateScaleChangeFactor(float relativeSpeed)
     {
         // logistic growth of scale
