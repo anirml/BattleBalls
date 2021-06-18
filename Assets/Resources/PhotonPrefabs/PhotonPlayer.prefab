@@ -461,10 +461,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7defd7fc1d6d372409828064bdf86c8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleModifier: 30
+  scaleModifier: 20
   scaleChangeThreshold: 0.8
-  speedModifier: 4
-  minSize: 0.08
+  speedModifier: 5
+  minSize: 0.05
   maxPlayerSize: 2
   knockbackModifier: 10
   collisionEffect: {fileID: 7300011337934362807, guid: 2e6129b46bc5d4840b57d47ca78fcbb6, type: 3}
@@ -497,7 +497,7 @@ MonoBehaviour:
   mouseSensivityY: 150
   camPivot: {fileID: 1972654373602452445}
   cam: {fileID: 1972654373602452444}
-  speed: 3
+  speed: 4
 --- !u!114 &1932298021062260570
 MonoBehaviour:
   m_ObjectHideFlags: 0
