@@ -14,6 +14,7 @@ public class Splatter : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        PlayDeathSound();
     }
 
     private void Start()
@@ -38,5 +39,10 @@ public class Splatter : MonoBehaviour
             spriteRenderer.color = splatColor;
         }
         transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+    }
+
+    public void PlayDeathSound()
+    {
+        GetComponent<PlayerDeathSound>().PlayDeathSound();
     }
 }
