@@ -162,9 +162,9 @@ public class PlayerCollisionListener : MonoBehaviourPun
         return massChange;
     }
 
-    void CollisionEffects(Transform listenerTransform, float scaleDecrease)
+    void CollisionEffects(Transform listenerTransform, float scaleChange)
     {
-        if ((listenerCurrentScale + scaleDecrease) < 0.8f)
+        if ((listenerCurrentScale - scaleChange) < 0.8f)
         {
             GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
         }
