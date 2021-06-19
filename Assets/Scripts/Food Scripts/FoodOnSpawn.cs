@@ -41,8 +41,8 @@ public class FoodOnSpawn : MonoBehaviour
 
         var foodColliders = Physics.OverlapSphere(pos, maxRandom);
 
-        Vector3 offset = new Vector3(0f, 1.5f, 0f);
-        bool objColliders = Physics.Raycast(pos + offset, Vector3.down, 1.5f);
+        Vector3 offset = new Vector3(0f, 0.5f, 0f);
+        bool objColliders = Physics.Raycast(pos + offset, Vector3.down, 2f);
 
         if (foodColliders.Length <= 0 && !objColliders)
         {
