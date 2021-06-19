@@ -166,13 +166,14 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
     void CollisionEffects(Transform listenerTransform)
     {
-        if (isWinner)
-        {
-            GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
-            isWinner = true;
-        }
+        // if (isWinner)
+        // {
+        //     GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
+        //     isWinner = true;
+        // }
+        GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
 
-        if (photonView.IsMine && isWinner)
+        if (photonView.IsMine)
         {
             Instantiate(collisionEffect, listenerTransform.localPosition, listenerTransform.rotation);
         }
