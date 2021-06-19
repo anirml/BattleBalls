@@ -6,12 +6,12 @@ using System.IO;
 
 public class PlayerCollisionListener : MonoBehaviourPun
 {
-    public int scaleModifier; // higher means more speed needed to steal mass
-    public float scaleChangeThreshold; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
-    public float speedModifier; // changes the force applied to collision knockback
-    public float minSize;
-    public int maxPlayerSize; // 3d scale in meters (diameter)
-    public int knockbackModifier;
+    public int scaleModifier = 15; // higher means more speed needed to steal mass
+    public float scaleChangeThreshold = 0.8f; // 0-1 equals percentage of max scale transfer 1 is for testing purposes
+    public float speedModifier = 5; // changes the force applied to collision knockback
+    public float minSize = 0.1f;
+    public int maxPlayerSize = 2; // 3d scale in meters (diameter)
+    public int knockbackModifier = 10;
 
     public GameObject collisionEffect;
 
