@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bafb39ce903836149a695709abf54b5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eatingMultiplier: 3
+  eatingMultiplier: 2
 --- !u!114 &2573797162221917573
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -412,6 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerId: 0
   playerColor: {r: 0, g: 0, b: 0, a: 0}
+  finalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!82 &6894988271669195920
 AudioSource:
   m_ObjectHideFlags: 0

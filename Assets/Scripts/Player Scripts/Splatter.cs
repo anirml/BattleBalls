@@ -6,7 +6,7 @@ public class Splatter : MonoBehaviour
 {
     public List<Sprite> sprites; //ref to the sprites which will be used by sprites renderer
     [HideInInspector]
-    public bool randomColor = true; //set to false when the target gives the color
+    public bool randomColor = false; //set to false when the target gives the color
     [HideInInspector]
     public Color32 splatColor; //color values which can be assigned by another script
     private SpriteRenderer spriteRenderer;//ref to sprite renderer component

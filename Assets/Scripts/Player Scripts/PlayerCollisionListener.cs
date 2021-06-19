@@ -166,11 +166,11 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
     void CollisionEffects(Transform listenerTransform)
     {
-        if (isWinner)
-        {
+        //if (isWinner)
+        //{
             GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
             isWinner = true;
-        }
+        //}
 
         if (photonView.IsMine)
         {
