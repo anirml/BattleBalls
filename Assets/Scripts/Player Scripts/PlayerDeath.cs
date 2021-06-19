@@ -36,14 +36,14 @@ public class PlayerDeath : MonoBehaviourPun
         // Debug.Log("Player Death ID: " + this.gameObject.GetInstanceID());
         // Instantiating splatter prefab on player's x and z position.
         Vector3 playerPos = this.gameObject.transform.localPosition;
-        Vector3 playerScale = transform.localScale;
+        float playerScale = transform.localScale.x*1.25f;
         playerPos.y = 0.01f;
         Color32 color = GetComponent<PlayerOnSpawn>().finalColor;
         
         GameObject splat = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Splatter"), playerPos, Quaternion.identity);
         
         splat.GetComponent<Splatter>().splatColor = color;
-        splat.transform.localScale = playerScale;
+        splat.transform.localScale = new Vector3(playerScale, playerScale, playerScale);
         
         PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
     }
