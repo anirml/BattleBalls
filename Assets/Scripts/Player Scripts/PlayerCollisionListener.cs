@@ -53,9 +53,9 @@ public class PlayerCollisionListener : MonoBehaviourPun
         {
             float relativeSpeed = CalculateRelativeVelocity(triggerVelocity, GetComponent<Rigidbody>().velocity);
 
-            GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * (speedModifier)*knockbackModifier);
+            GetComponent<Rigidbody>().AddForce(collisionDirection * relativeSpeed * listenerRigidBody.mass * (speedModifier) * knockbackModifier);
             // Adds vertical force
-            GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * relativeSpeed * listenerRigidBody.mass * 2*knockbackModifier);
+            GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * relativeSpeed * listenerRigidBody.mass * 2 * knockbackModifier);
         }
     }
 
@@ -166,11 +166,13 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
     void CollisionEffects(Transform listenerTransform)
     {
-        //if (isWinner)
-        //{
-            GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
-            isWinner = true;
-        //}
+        if (isWinner)
+        {
+            // not working properly
+        }
+
+        GetComponent<PlayerCollisionSounds>().PlayRandomCollisionSound();
+        isWinner = true;
 
         if (photonView.IsMine)
         {
