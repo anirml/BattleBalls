@@ -177,7 +177,6 @@ public class ScoreHandler : MonoBehaviour
         }
 
         LoopPlayerNames();
-
     }
 
     void LoopPlayerNames()
@@ -186,39 +185,34 @@ public class ScoreHandler : MonoBehaviour
 
         float pScale;
         Color32 pColor;
+
+        GameObject namePlateText;
+
         List<float> pScaleList = new List<float>();
         List<Color32> pColorList = new List<Color32>();
         List<string> pNames = new List<string>();
-
         playersArray = GameObject.FindGameObjectsWithTag("Player");
 
-        if(playersArray == null){return;}
+        // if (playersArray == null) { return; }
 
         foreach (GameObject plr in playersArray)
         {
+            i++;
+
             pScale = plr.GetComponent<Transform>().lossyScale.x;
             pColor = plr.GetComponent<MeshRenderer>().material.color;
+
+            namePlateText = plr.transform.GetChild(0).GetChild(1).GetChild(0).gameObject;
+            Text namePlayerText = namePlateText.GetComponent<Text>();
 
             //Sets transparency, value 255 is no transparency
             pColor.a = (byte)100;
 
-            // Debug.Log(pScale);
-
             pScaleList.Add(pScale);
             pColorList.Add(pColor);
+            pNames.Add(namePlayerText.text);
 
-            // Debug.Log(pColor.r + " " + pColor.g + " " + pColor.b + " " + pColor.a + " ");
-        }
-
-        foreach (Player p in PhotonNetwork.PlayerList)
-        {
-            i++;
-
-            pNames.Add(p.NickName);
-
-            // Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
-
-
+            //Debug.Log(namePlayerText.text);
 
 
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[0]; pName1.color = pColorList[0]; }
@@ -232,33 +226,91 @@ public class ScoreHandler : MonoBehaviour
             {
                 if (i == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[0]; pName1.color = pColorList[0]; }
                 if (i == 2) { nText2.text = pScaleList[1].ToString("F2") + "  " + pNames[1]; pName2.color = pColorList[1]; }
-                if (i == 3) { nText3.text = pScaleList[2].ToString("F2") + "  " + pNames[2]; pName3.color = pColorList[2]; }
-
+                if (i == 3) { nText3.text = pScaleList[2].ToString("F2") + "  " + pNames[2]; pName3.color = pColorList[0]; }
             }
             if (PhotonNetwork.CurrentRoom.PlayerCount == 4)
             {
-                if (i == 1) { nText1.text = p.NickName; }
-                if (i == 2) { nText2.text = p.NickName; }
-                if (i == 3) { nText3.text = p.NickName; }
-                if (i == 4) { nText4.text = p.NickName; }
-
+                if (i == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[0]; pName1.color = pColorList[0]; }
+                if (i == 2) { nText2.text = pScaleList[1].ToString("F2") + "  " + pNames[1]; pName2.color = pColorList[1]; }
+                if (i == 3) { nText3.text = pScaleList[2].ToString("F2") + "  " + pNames[2]; pName3.color = pColorList[2]; }
+                if (i == 4) { nText4.text = pScaleList[3].ToString("F2") + "  " + pNames[3]; pName4.color = pColorList[3]; }
             }
-            if (pName5.isActiveAndEnabled && PhotonNetwork.CurrentRoom.PlayerCount == 5)
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 5)
             {
-                if (i == 1) { nText1.text = p.NickName; }
-                if (i == 2) { nText2.text = p.NickName; }
-                if (i == 3) { nText3.text = p.NickName; }
-                if (i == 4) { nText4.text = p.NickName; }
-                if (i == 5) { nText4.text = p.NickName; }
+                if (i == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[0]; pName1.color = pColorList[0]; }
+                if (i == 2) { nText2.text = pScaleList[1].ToString("F2") + "  " + pNames[1]; pName2.color = pColorList[1]; }
+                if (i == 3) { nText3.text = pScaleList[2].ToString("F2") + "  " + pNames[2]; pName3.color = pColorList[2]; }
+                if (i == 4) { nText4.text = pScaleList[3].ToString("F2") + "  " + pNames[3]; pName4.color = pColorList[3]; }
+                if (i == 5) { nText5.text = pScaleList[4].ToString("F2") + "  " + pNames[4]; pName5.color = pColorList[4]; }
 
             }
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 6)
+            {
+                if (i == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[0]; pName1.color = pColorList[0]; }
+                if (i == 2) { nText2.text = pScaleList[1].ToString("F2") + "  " + pNames[1]; pName2.color = pColorList[1]; }
+                if (i == 3) { nText3.text = pScaleList[2].ToString("F2") + "  " + pNames[2]; pName3.color = pColorList[2]; }
+                if (i == 4) { nText4.text = pScaleList[3].ToString("F2") + "  " + pNames[3]; pName4.color = pColorList[3]; }
+                if (i == 5) { nText5.text = pScaleList[4].ToString("F2") + "  " + pNames[4]; pName5.color = pColorList[4]; }
+                if (i == 6) { nText6.text = pScaleList[5].ToString("F2") + "  " + pNames[5]; pName6.color = pColorList[5]; }
+
+            }
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 7)
+            {
+                if (i == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[0]; pName1.color = pColorList[0]; }
+                if (i == 2) { nText2.text = pScaleList[1].ToString("F2") + "  " + pNames[1]; pName2.color = pColorList[1]; }
+                if (i == 3) { nText3.text = pScaleList[2].ToString("F2") + "  " + pNames[2]; pName3.color = pColorList[2]; }
+                if (i == 4) { nText4.text = pScaleList[3].ToString("F2") + "  " + pNames[3]; pName4.color = pColorList[3]; }
+                if (i == 5) { nText5.text = pScaleList[4].ToString("F2") + "  " + pNames[4]; pName5.color = pColorList[4]; }
+                if (i == 6) { nText6.text = pScaleList[5].ToString("F2") + "  " + pNames[5]; pName6.color = pColorList[5]; }
+                if (i == 7) { nText7.text = pScaleList[6].ToString("F2") + "  " + pNames[6]; pName7.color = pColorList[6]; }
+
+            }
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 8)
+            {
+                if (i == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[0]; pName1.color = pColorList[0]; }
+                if (i == 2) { nText2.text = pScaleList[1].ToString("F2") + "  " + pNames[1]; pName2.color = pColorList[1]; }
+                if (i == 3) { nText3.text = pScaleList[2].ToString("F2") + "  " + pNames[2]; pName3.color = pColorList[2]; }
+                if (i == 4) { nText4.text = pScaleList[3].ToString("F2") + "  " + pNames[3]; pName4.color = pColorList[3]; }
+                if (i == 5) { nText5.text = pScaleList[4].ToString("F2") + "  " + pNames[4]; pName5.color = pColorList[4]; }
+                if (i == 6) { nText6.text = pScaleList[5].ToString("F2") + "  " + pNames[5]; pName6.color = pColorList[5]; }
+                if (i == 7) { nText7.text = pScaleList[6].ToString("F2") + "  " + pNames[6]; pName7.color = pColorList[6]; }
+                if (i == 8) { nText8.text = pScaleList[7].ToString("F2") + "  " + pNames[7]; pName8.color = pColorList[7]; }
+            }
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 9)
+            {
+                if (i == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[0]; pName1.color = pColorList[0]; }
+                if (i == 2) { nText2.text = pScaleList[1].ToString("F2") + "  " + pNames[1]; pName2.color = pColorList[1]; }
+                if (i == 3) { nText3.text = pScaleList[2].ToString("F2") + "  " + pNames[2]; pName3.color = pColorList[2]; }
+                if (i == 4) { nText4.text = pScaleList[3].ToString("F2") + "  " + pNames[3]; pName4.color = pColorList[3]; }
+                if (i == 5) { nText5.text = pScaleList[4].ToString("F2") + "  " + pNames[4]; pName5.color = pColorList[4]; }
+                if (i == 6) { nText6.text = pScaleList[5].ToString("F2") + "  " + pNames[5]; pName6.color = pColorList[5]; }
+                if (i == 7) { nText7.text = pScaleList[6].ToString("F2") + "  " + pNames[6]; pName7.color = pColorList[6]; }
+                if (i == 8) { nText8.text = pScaleList[7].ToString("F2") + "  " + pNames[7]; pName8.color = pColorList[7]; }
+                if (i == 9) { nText9.text = pScaleList[8].ToString("F2") + "  " + pNames[8]; pName9.color = pColorList[8]; }
+            }
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 10)
+            {
+                if (i == 1) { nText1.text = pScaleList[0].ToString("F2") + "  " + pNames[0]; pName1.color = pColorList[0]; }
+                if (i == 2) { nText2.text = pScaleList[1].ToString("F2") + "  " + pNames[1]; pName2.color = pColorList[1]; }
+                if (i == 3) { nText3.text = pScaleList[2].ToString("F2") + "  " + pNames[2]; pName3.color = pColorList[2]; }
+                if (i == 4) { nText4.text = pScaleList[3].ToString("F2") + "  " + pNames[3]; pName4.color = pColorList[3]; }
+                if (i == 5) { nText5.text = pScaleList[4].ToString("F2") + "  " + pNames[4]; pName5.color = pColorList[4]; }
+                if (i == 6) { nText6.text = pScaleList[5].ToString("F2") + "  " + pNames[5]; pName6.color = pColorList[5]; }
+                if (i == 7) { nText7.text = pScaleList[6].ToString("F2") + "  " + pNames[6]; pName7.color = pColorList[6]; }
+                if (i == 8) { nText8.text = pScaleList[7].ToString("F2") + "  " + pNames[7]; pName8.color = pColorList[7]; }
+                if (i == 9) { nText9.text = pScaleList[8].ToString("F2") + "  " + pNames[8]; pName9.color = pColorList[8]; }
+                if (i == 10) { nText10.text = pScaleList[9].ToString("F2") + "  " + pNames[9]; pName10.color = pColorList[9]; }
+            }
+
         }
+
         pScaleList = null;
 
         pColorList = null;
 
         playersArray = null;
-    }
 
+        pNames = null;
+    }
 
 }
