@@ -18,7 +18,7 @@ TagManager:
   - Food
   - Obstacle
   - Splatter
-  - 
+  - Nameplate
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Nameplate
+    uniqueID: 3683267827
     locked: 0
   - name: Splatter
     uniqueID: 4127722229

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1972654373602452420}
   - component: {fileID: 1972654373602452477}
   - component: {fileID: 1972654373602452476}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Canvas_NameplateDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 8441366674218279245}
   - component: {fileID: 3950586660515876940}
   - component: {fileID: 2422614051739780179}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Text_Nametag
   m_TagString: Text_Nametag
   m_Icon: {fileID: 0}
