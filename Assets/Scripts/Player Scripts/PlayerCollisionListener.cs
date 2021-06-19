@@ -67,11 +67,12 @@ public class PlayerCollisionListener : MonoBehaviourPun
 
         float relativeSpeed = CalculateRelativeVelocity(triggerVelocity, listenerVelocity);
         float scaleChange = CalculateScaleChangeFactor(relativeSpeed);
-        float newListenerScaleIncrease = (triggerScale * scaleChange)*2;
-        float newTriggerScaleIncrease = (listenerScale * -scaleChange)*2;
+        float newListenerScaleIncrease = (triggerScale * scaleChange);
+        float newTriggerScaleIncrease = (listenerScale * -scaleChange);
 
         if (triggerSpeed <= listenerSpeed)
         {
+            newListenerScaleIncrease = 0;
             PlayerEvents.instance.OnLoserCollision(newTriggerScaleIncrease, triggerId);
             isWinner = false;
         }
