@@ -38,11 +38,11 @@ public class PlayerDeath : MonoBehaviourPun
         Vector3 playerPos = this.gameObject.transform.localPosition;
         Vector3 playerScale = transform.localScale;
         playerPos.y = 0.01f;
-        Color color = GetComponent<PlayerOnSpawn>().finalColor;
+        Color32 color = GetComponent<PlayerOnSpawn>().finalColor;
         
         GameObject splat = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Splatter"), playerPos, Quaternion.identity);
         
-        splat.GetComponent<SpriteRenderer>().material.color = color;
+        splat.GetComponent<Splatter>().splatColor = color;
         splat.transform.localScale = playerScale;
         
         PlayerEvents.instance.PlayerDeath -= DestroyPlayer;
