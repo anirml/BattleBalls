@@ -13,6 +13,7 @@ public class PlayerOnSpawn : MonoBehaviourPun
     public int playerId;
     [HideInInspector]
     public Color playerColor;
+    public Color finalColor = Color.clear;
 
     // Start is called before the first frame update
     void Start()
@@ -28,16 +29,15 @@ public class PlayerOnSpawn : MonoBehaviourPun
     [PunRPC]
     void RandomizePlayerColor(float[] colorValues)
     {
-        Color color = Color.clear;
-        color[0] = colorValues[0];
-        color[1] = colorValues[1];
-        color[2] = colorValues[2];
-        color[3] = 1f;
+        finalColor[0] = colorValues[0];
+        finalColor[1] = colorValues[1];
+        finalColor[2] = colorValues[2];
+        finalColor[3] = 1f;
 
         if (!hasChanged)
         {
-            this.GetComponent<Renderer>().material.color = color;
-            playerColor = color;
+            this.GetComponent<Renderer>().material.color = finalColor;
+            playerColor = finalColor;
             hasChanged = true;
         }
 
