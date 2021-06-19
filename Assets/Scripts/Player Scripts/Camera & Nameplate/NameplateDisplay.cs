@@ -1,10 +1,11 @@
 using TMPro;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NameplateDisplay : MonoBehaviourPun
 {
-    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private Text nameText;
 
     Quaternion rotation;
     private int randInt;
