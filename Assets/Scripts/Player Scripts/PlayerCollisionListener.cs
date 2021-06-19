@@ -74,6 +74,7 @@ public class PlayerCollisionListener : MonoBehaviourPun
         {
             newListenerScaleIncrease = (triggerScale * scaleChange);
             newTriggerScaleIncrease = (listenerScale * -scaleChange);
+            Debug.Log("newListenerScale = " + newListenerScaleIncrease + " newTriggerScaleDecrease = " + newTriggerScaleIncrease);
             PlayerEvents.instance.OnLoserCollision(newTriggerScaleIncrease, triggerId);
         }
 
