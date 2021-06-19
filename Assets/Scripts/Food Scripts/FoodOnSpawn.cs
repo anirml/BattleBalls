@@ -41,6 +41,7 @@ public class FoodOnSpawn : MonoBehaviour
 
         var foodColliders = Physics.OverlapSphere(pos, maxRandom);
 
+        // IMPORTAN: Changing the values on the next two lines can crash the game! Specifically referring to the two values that are set to '1.5f' right now.
         Vector3 offset = new Vector3(0f, 1.5f, 0f);
         bool objColliders = Physics.Raycast(pos + offset, Vector3.down, 1.5f);
 
