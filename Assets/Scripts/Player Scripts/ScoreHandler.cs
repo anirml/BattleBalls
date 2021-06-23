@@ -38,7 +38,7 @@ public class ScoreHandler : MonoBehaviour
 
     void FindPlayerNames()
     {
-
+        
         if (PhotonNetwork.CurrentRoom.PlayerCount == 10)
         {
             pName1.gameObject.SetActive(true);

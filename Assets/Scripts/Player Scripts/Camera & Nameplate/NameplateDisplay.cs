@@ -17,31 +17,8 @@ public class NameplateDisplay : MonoBehaviourPun
         //THIS RUNS ON ALL CLIENTS EVERYTIME A CLIENT JOINS!"!"   
 
         nameText.text = photonView.Owner.NickName;
-        // if (photonView.IsMine)
-        // {
-        // foreach (Player p in PhotonNetwork.PlayerListOthers)
-        // {
-        //     string nickName = p.NickName;
-        //     Debug.Log("Nickname in foreach loop: " + nickName);
-
-        //    Debug.Log("nameText: " + nameText.text + " NICKNAME: " + nickName);
-        //    if (nickName == nameText.text)
-        //     {
-        //PhotonNetwork.NickName = nameText.text;
-        //PlayerPrefs.SetString("NickName", nameText.text);
-        //Debug.Log(PhotonNetwork.NickName);//DELETE LATER
-
-        //         randInt = Random.Range(1, 1000);
-        //          Debug.Log("do something to name!");
-        //         break;
-        //     }//TODO add error already a player name that!
-        //  }
 
         SetName(randInt);
-
-        //Destroy the script so it dont run on other clients
-        //Destroy(GetComponent<NameplateDisplay>);
-
     }
 
     void Awake()
